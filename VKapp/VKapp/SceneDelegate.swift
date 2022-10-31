@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Define fitst screen
+/// Define fitst screen 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
