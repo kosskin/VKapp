@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AB290FD0750032AB8C /* AppDelegate.swift */; };
 		BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */; };
-		BB22B4B0290FD0750032AB8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AF290FD0750032AB8C /* ViewController.swift */; };
+		BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AF290FD0750032AB8C /* LoginViewController.swift */; };
 		BB22B4B3290FD0750032AB8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B1290FD0750032AB8C /* Main.storyboard */; };
 		BB22B4B5290FD0790032AB8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B4290FD0790032AB8C /* Assets.xcassets */; };
 		BB22B4B8290FD0790032AB8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B6290FD0790032AB8C /* LaunchScreen.storyboard */; };
+		BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4EA2910631C0032AB8C /* Color.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB22B4A8290FD0750032AB8C /* VKapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB22B4AB290FD0750032AB8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BB22B4AF290FD0750032AB8C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BB22B4AF290FD0750032AB8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BB22B4B2290FD0750032AB8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB22B4B4290FD0790032AB8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB22B4B7290FD0790032AB8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB22B4B9290FD0790032AB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB22B4EA2910631C0032AB8C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +60,10 @@
 			children = (
 				BB22B4AB290FD0750032AB8C /* AppDelegate.swift */,
 				BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */,
-				BB22B4AF290FD0750032AB8C /* ViewController.swift */,
+				BB22B4AF290FD0750032AB8C /* LoginViewController.swift */,
 				BB22B4B1290FD0750032AB8C /* Main.storyboard */,
 				BB22B4B4290FD0790032AB8C /* Assets.xcassets */,
+				BB22B4EA2910631C0032AB8C /* Color.xcassets */,
 				BB22B4B6290FD0790032AB8C /* LaunchScreen.storyboard */,
 				BB22B4B9290FD0790032AB8C /* Info.plist */,
 			);
@@ -74,10 +77,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB22B4BC290FD0790032AB8C /* Build configuration list for PBXNativeTarget "VKapp" */;
 			buildPhases = (
-				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 				BB22B4A4290FD0750032AB8C /* Sources */,
 				BB22B4A5290FD0750032AB8C /* Frameworks */,
 				BB22B4A6290FD0750032AB8C /* Resources */,
+				BB3A53582911BD1300DDC2AB /* SwiftFormat */,
+				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -126,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB22B4B8290FD0790032AB8C /* LaunchScreen.storyboard in Resources */,
+				BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */,
 				BB22B4B5290FD0790032AB8C /* Assets.xcassets in Resources */,
 				BB22B4B3290FD0750032AB8C /* Main.storyboard in Resources */,
 			);
@@ -152,6 +157,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		BB3A53582911BD1300DDC2AB /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -159,7 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB22B4B0290FD0750032AB8C /* ViewController.swift in Sources */,
+				BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */,
 				BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */,
 				BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */,
 			);
