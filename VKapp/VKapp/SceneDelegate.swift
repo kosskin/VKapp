@@ -4,7 +4,7 @@
 import UIKit
 
 /// Define fitst screen
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(

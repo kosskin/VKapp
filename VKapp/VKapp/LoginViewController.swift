@@ -1,8 +1,6 @@
 // LoginViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-//
-//  ViewController.swift
 //  VKapp
 //
 //  Created by Валентин Коскин on 31.10.2022.
@@ -36,21 +34,21 @@ final class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillShown(notification:)),
+            selector: #selector(keyboardWillShownAction(notification:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide(notification:)),
+            selector: #selector(keyboardWillHideAction(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
 
         let tapGesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(hideKeyboard)
+            action: #selector(hideKeyboardAction)
         )
         loginScrollView.addGestureRecognizer(tapGesture)
     }
@@ -64,19 +62,17 @@ final class LoginViewController: UIViewController {
     // MARK: - Private Methods
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == Constants.segueShowTabBarText {
-            guard let loginText = loginTextField.text, let passwordText = passwordTextField.text else { return false }
-            if loginText == Constants.loginText, passwordText == Constants.passwordText {
-                return true
-            } else {
-                showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
-                return false
-            }
+        guard identifier == Constants.segueShowTabBarText else { return false }
+        guard let loginText = loginTextField.text, let passwordText = passwordTextField.text else { return false }
+        if loginText == Constants.loginText, passwordText == Constants.passwordText {
+            return true
+        } else {
+            showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
+            return false
         }
-        return false
     }
 
-    @objc private func keyboardWillShown(notification: Notification) {
+    @objc private func keyboardWillShownAction(notification: Notification) {
         guard let info = notification.userInfo as NSDictionary? else { return }
         guard let kbSize = (
             info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey)
@@ -87,12 +83,12 @@ final class LoginViewController: UIViewController {
         loginScrollView.scrollIndicatorInsets = contentInset
     }
 
-    @objc private func keyboardWillHide(notification: Notification) {
+    @objc private func keyboardWillHideAction(notification: Notification) {
         loginScrollView.contentInset = UIEdgeInsets.zero
         loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
 
-    @objc private func hideKeyboard() {
+    @objc private func hideKeyboardAction() {
         loginScrollView.endEditing(true)
     }
 }

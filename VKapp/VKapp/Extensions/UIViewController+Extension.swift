@@ -3,8 +3,8 @@
 
 import UIKit
 
-/// extension for unuversal alert
-extension LoginViewController {
+/// Extension for unuversal alert
+extension UIViewController {
     // MARK: - Constants
 
     private enum Constants {
