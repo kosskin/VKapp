@@ -9,9 +9,9 @@
 //
 import UIKit
 
-/// Main ViewController
+/// User input screen
 final class LoginViewController: UIViewController {
-    // MARK: Constants
+    // MARK: - Constants
 
     private enum Constants {
         static let alertTitleText = "Error"
@@ -22,7 +22,7 @@ final class LoginViewController: UIViewController {
         static let segueShowTabBarText = "showTabBar"
     }
 
-    // MARK: IBOutlets
+    // MARK: - IBOutlets
 
     @IBOutlet private var enterButton: UIButton!
     @IBOutlet private var loginTextField: UITextField!
@@ -31,7 +31,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private var signUpButton: UIButton!
     @IBOutlet private var loginScrollView: UIScrollView!
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,22 +56,17 @@ final class LoginViewController: UIViewController {
         loginScrollView.addGestureRecognizer(tapGesture)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    // MARK: Private Methods
+    // MARK: - Private Methods
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == Constants.segueShowTabBarText {
-            guard let loginText = loginTextField.text else { return false }
-            guard let passwordText = passwordTextField.text else { return false }
+            guard let loginText = loginTextField.text, let passwordText = passwordTextField.text else { return false }
             if loginText == Constants.loginText, passwordText == Constants.passwordText {
                 return true
             } else {
@@ -101,7 +96,10 @@ final class LoginViewController: UIViewController {
     @objc private func hideKeyboard() {
         loginScrollView.endEditing(true)
     }
+}
 
+/// Alert login failed
+extension LoginViewController {
     private func showErrorAlert() {
         let alert = UIAlertController(
             title: Constants.alertTitleText,
