@@ -14,9 +14,8 @@ final class LoginViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let alertTitleText = "Error"
-        static let alertMessageText = "Not right login/password"
-        static let okText = "Ok"
+        static let errorTitleText = "Error"
+        static let errorMessageText = "Not right login/password"
         static let loginText = "admin"
         static let passwordText = "12345"
         static let segueShowTabBarText = "showTabBar"
@@ -70,7 +69,7 @@ final class LoginViewController: UIViewController {
             if loginText == Constants.loginText, passwordText == Constants.passwordText {
                 return true
             } else {
-                showErrorAlert()
+                showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
                 return false
             }
         }
@@ -95,19 +94,5 @@ final class LoginViewController: UIViewController {
 
     @objc private func hideKeyboard() {
         loginScrollView.endEditing(true)
-    }
-}
-
-/// Alert login failed
-extension LoginViewController {
-    private func showErrorAlert() {
-        let alert = UIAlertController(
-            title: Constants.alertTitleText,
-            message: Constants.alertMessageText,
-            preferredStyle: .alert
-        )
-        let alertAction = UIAlertAction(title: Constants.okText, style: .default, handler: nil)
-        alert.addAction(alertAction)
-        present(alert, animated: true, completion: nil)
     }
 }

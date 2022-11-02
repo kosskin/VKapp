@@ -14,6 +14,7 @@
 		BB22B4B5290FD0790032AB8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B4290FD0790032AB8C /* Assets.xcassets */; };
 		BB22B4B8290FD0790032AB8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B6290FD0790032AB8C /* LaunchScreen.storyboard */; };
 		BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4EA2910631C0032AB8C /* Color.xcassets */; };
+		BB8B3B3E29129B1500346D00 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BB22B4B7290FD0790032AB8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB22B4B9290FD0790032AB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB22B4EA2910631C0032AB8C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		BB22B4AA290FD0750032AB8C /* VKapp */ = {
 			isa = PBXGroup;
 			children = (
+				BB8B3B3C29129AAE00346D00 /* Extensions */,
 				BB22B4AB290FD0750032AB8C /* AppDelegate.swift */,
 				BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */,
 				BB22B4AF290FD0750032AB8C /* LoginViewController.swift */,
@@ -68,6 +71,14 @@
 				BB22B4B9290FD0790032AB8C /* Info.plist */,
 			);
 			path = VKapp;
+			sourceTree = "<group>";
+		};
+		BB8B3B3C29129AAE00346D00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8B3B3E29129B1500346D00 /* UIViewController+Extension.swift in Sources */,
 				BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */,
 				BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */,
 				BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */,
