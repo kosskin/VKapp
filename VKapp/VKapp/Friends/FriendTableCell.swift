@@ -17,8 +17,6 @@ final class FriendTableCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     // MARK: - Public Methods
@@ -26,5 +24,9 @@ final class FriendTableCell: UITableViewCell {
     func setCell(upcomingFriend: User) {
         friendNameLabel.text = upcomingFriend.name
         friendImageView.image = UIImage(named: upcomingFriend.imageName)
+    }
+
+    func getFriendImageView() -> UIImageView {
+        friendImageView
     }
 }

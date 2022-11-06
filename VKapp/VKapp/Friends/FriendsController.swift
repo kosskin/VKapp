@@ -25,6 +25,7 @@ final class FriendsController: UITableViewController {
         static let friendSevenImageName = "mask"
         static let friendEightName = "Peskov"
         static let friendEightImageName = "peskov"
+        static let segueOneFriendId = "oneFriendSegue"
     }
 
     // MARK: - Private Properties
@@ -44,6 +45,16 @@ final class FriendsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    // MARK: - Public Methods
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.segueOneFriendId,
+              let oneFriendController = segue.destination as? OneFriendController,
+              let indexPath = tableView.indexPathForSelectedRow else { return }
+        let friendImageName = friends[indexPath.row].imageName
+        oneFriendController.setData(friendImageName)
     }
 
     // MARK: - TableView DataSource

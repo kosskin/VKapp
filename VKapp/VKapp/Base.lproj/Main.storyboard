@@ -195,7 +195,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ozs-mh-gAk">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ozs-mh-gAk">
                                             <rect key="frame" x="311" y="10" width="83" height="80"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYF-kI-bHY">
@@ -219,7 +219,7 @@
                                 <connections>
                                     <outlet property="friendImageView" destination="Ozs-mh-gAk" id="wU4-0m-MtK"/>
                                     <outlet property="friendNameLabel" destination="nYF-kI-bHY" id="SgH-HZ-EaI"/>
-                                    <segue destination="g4C-81-FY4" kind="show" id="W3f-5A-KzU"/>
+                                    <segue destination="g4C-81-FY4" kind="show" identifier="oneFriendSegue" id="W3f-5A-KzU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -462,7 +462,6 @@
         <image name="applelogo" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="vkpdf" width="595" height="595"/>

@@ -9,14 +9,23 @@ final class OneFriendController: UICollectionViewController {
 
     private enum Constants {
         static let oneFriendCellId = "oneFriendCell"
+        static let emptyString = ""
     }
 
-    // MARK: - Public Properties
+    // MARK: - Private Properties
 
-    var upcomingPhotoName = ""
+    var imageName = Constants.emptyString
+
+    // MARK: - Live Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    // MARK: = Public Methods
+
+    func setData(_ upcomingImageName: String) {
+        imageName = upcomingImageName
     }
 
     // MARK: - UICollectionViewDataSource
@@ -33,7 +42,7 @@ final class OneFriendController: UICollectionViewController {
             withReuseIdentifier: Constants.oneFriendCellId,
             for: indexPath
         ) as? OneFriendCell else { return UICollectionViewCell() }
-        // cell.photoFriendImageView = UIImage
+        cell.setCell(upcomingImageName: imageName)
         return cell
     }
 
