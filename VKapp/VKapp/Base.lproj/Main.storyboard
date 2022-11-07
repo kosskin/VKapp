@@ -195,8 +195,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxL-jc-IVo" customClass="AvatarView" customModule="VKapp" customModuleProvider="target">
+                                            <rect key="frame" x="311" y="10" width="83" height="80"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ozs-mh-gAk">
                                             <rect key="frame" x="311" y="10" width="83" height="80"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <nil key="value"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYF-kI-bHY">
                                             <rect key="frame" x="20" y="25" width="269" height="50"/>
@@ -210,15 +220,20 @@
                                         <constraint firstItem="nYF-kI-bHY" firstAttribute="centerY" secondItem="lC3-UU-Op7" secondAttribute="centerY" id="AVe-ct-DA1"/>
                                         <constraint firstItem="Ozs-mh-gAk" firstAttribute="centerY" secondItem="lC3-UU-Op7" secondAttribute="centerY" id="Eeu-yU-sya"/>
                                         <constraint firstItem="nYF-kI-bHY" firstAttribute="width" secondItem="lC3-UU-Op7" secondAttribute="width" multiplier="0.65" id="Egf-rH-8TB"/>
+                                        <constraint firstItem="CxL-jc-IVo" firstAttribute="height" secondItem="Ozs-mh-gAk" secondAttribute="height" id="SDh-ZI-dYz"/>
                                         <constraint firstItem="nYF-kI-bHY" firstAttribute="height" secondItem="lC3-UU-Op7" secondAttribute="height" multiplier="0.5" id="TZ9-vh-hMZ"/>
                                         <constraint firstAttribute="trailing" secondItem="Ozs-mh-gAk" secondAttribute="trailing" constant="20" symbolic="YES" id="Xux-6a-rEU"/>
                                         <constraint firstItem="nYF-kI-bHY" firstAttribute="leading" secondItem="lC3-UU-Op7" secondAttribute="leading" constant="20" symbolic="YES" id="Zt6-9o-MIV"/>
+                                        <constraint firstItem="CxL-jc-IVo" firstAttribute="centerY" secondItem="Ozs-mh-gAk" secondAttribute="centerY" id="dAp-Kb-XxR"/>
+                                        <constraint firstItem="CxL-jc-IVo" firstAttribute="centerX" secondItem="Ozs-mh-gAk" secondAttribute="centerX" id="gNG-H2-ddN"/>
                                         <constraint firstItem="Ozs-mh-gAk" firstAttribute="height" secondItem="lC3-UU-Op7" secondAttribute="height" multiplier="0.8" id="qD0-wm-kUG"/>
+                                        <constraint firstItem="CxL-jc-IVo" firstAttribute="width" secondItem="Ozs-mh-gAk" secondAttribute="width" id="rw4-m3-gSX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="friendImageView" destination="Ozs-mh-gAk" id="wU4-0m-MtK"/>
                                     <outlet property="friendNameLabel" destination="nYF-kI-bHY" id="SgH-HZ-EaI"/>
+                                    <outlet property="friendShadowView" destination="CxL-jc-IVo" id="2Om-pw-Qei"/>
                                     <segue destination="g4C-81-FY4" kind="show" identifier="oneFriendSegue" id="W3f-5A-KzU"/>
                                 </connections>
                             </tableViewCell>
@@ -286,7 +301,6 @@
                     <navigationItem key="navigationItem" title="Groups" id="hXO-hI-zh2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="P8T-1K-dW8">
                             <connections>
-                                <action selector="addGroupAction:" destination="8MR-ng-3Qj" id="1As-OW-fIP"/>
                                 <segue destination="anh-YG-y4U" kind="show" id="coO-hl-nOZ"/>
                             </connections>
                         </barButtonItem>
@@ -394,12 +408,45 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xEP-H6-cXO">
                                             <rect key="frame" x="4" y="3" width="142.5" height="143.5"/>
                                         </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weX-JR-U0s" customClass="LikesControl" customModule="VKapp" customModuleProvider="target">
+                                            <rect key="frame" x="67.5" y="115" width="79" height="27"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BRW-dy-1OU">
+                                                    <rect key="frame" x="44" y="0.0" width="30" height="27.5"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wy0-11-yfc">
+                                                    <rect key="frame" x="13" y="-1.5" width="30" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BRW-dy-1OU" firstAttribute="leading" secondItem="Wy0-11-yfc" secondAttribute="trailing" constant="1" id="AGC-sK-Nld"/>
+                                                <constraint firstItem="BRW-dy-1OU" firstAttribute="centerY" secondItem="weX-JR-U0s" secondAttribute="centerY" id="GEo-MD-7k6"/>
+                                                <constraint firstItem="BRW-dy-1OU" firstAttribute="height" secondItem="weX-JR-U0s" secondAttribute="height" multiplier="1.11111" id="NQh-k9-sHU"/>
+                                                <constraint firstItem="BRW-dy-1OU" firstAttribute="width" secondItem="weX-JR-U0s" secondAttribute="width" multiplier="0.379747" id="O9i-3n-Rd4"/>
+                                                <constraint firstItem="Wy0-11-yfc" firstAttribute="height" secondItem="BRW-dy-1OU" secondAttribute="height" id="XoR-Oo-AvM"/>
+                                                <constraint firstItem="Wy0-11-yfc" firstAttribute="width" secondItem="BRW-dy-1OU" secondAttribute="width" id="YsM-eW-gxc"/>
+                                                <constraint firstAttribute="trailing" secondItem="BRW-dy-1OU" secondAttribute="trailing" constant="5" id="n5M-6T-dem"/>
+                                                <constraint firstItem="Wy0-11-yfc" firstAttribute="centerY" secondItem="weX-JR-U0s" secondAttribute="centerY" id="zGx-ZT-J8K"/>
+                                            </constraints>
+                                            <connections>
+                                                <outlet property="countLikesLabel" destination="Wy0-11-yfc" id="gmW-sH-ij4"/>
+                                                <outlet property="heartImageView" destination="BRW-dy-1OU" id="lgt-UE-NYc"/>
+                                            </connections>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xEP-H6-cXO" firstAttribute="centerY" secondItem="huy-ox-gyy" secondAttribute="centerY" id="Hgu-gP-9GA"/>
+                                        <constraint firstItem="weX-JR-U0s" firstAttribute="width" secondItem="xEP-H6-cXO" secondAttribute="width" multiplier="0.554386" id="OrX-Nr-9PF"/>
+                                        <constraint firstItem="weX-JR-U0s" firstAttribute="height" secondItem="xEP-H6-cXO" secondAttribute="height" multiplier="0.189474" id="R1N-hc-pYc"/>
                                         <constraint firstItem="xEP-H6-cXO" firstAttribute="centerX" secondItem="huy-ox-gyy" secondAttribute="centerX" id="We3-4O-bsl"/>
+                                        <constraint firstItem="weX-JR-U0s" firstAttribute="trailing" secondItem="xEP-H6-cXO" secondAttribute="trailing" id="ZWy-b7-dgN"/>
                                         <constraint firstItem="xEP-H6-cXO" firstAttribute="width" secondItem="huy-ox-gyy" secondAttribute="width" multiplier="0.95" id="fL3-a3-vXW"/>
                                         <constraint firstItem="xEP-H6-cXO" firstAttribute="height" secondItem="huy-ox-gyy" secondAttribute="height" multiplier="0.95" id="ruU-5O-mQz"/>
+                                        <constraint firstItem="weX-JR-U0s" firstAttribute="top" secondItem="xEP-H6-cXO" secondAttribute="bottom" constant="-31.5" id="uoX-qJ-KQR"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="150" height="150"/>
@@ -417,7 +464,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMt-VG-ISP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5968" y="-210"/>
+            <point key="canvasLocation" x="5966.666666666667" y="-210.26785714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZI2-lv-Z5i">
@@ -460,6 +507,7 @@
     </scenes>
     <resources>
         <image name="applelogo" catalog="system" width="128" height="121"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>

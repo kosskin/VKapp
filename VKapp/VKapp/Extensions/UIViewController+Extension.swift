@@ -11,7 +11,7 @@ extension UIViewController {
         static let alertActionTitleText = "Ok"
     }
 
-    // MARK: - Private Methods
+    // MARK: - Public Methods
 
     func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(

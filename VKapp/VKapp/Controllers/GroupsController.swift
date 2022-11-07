@@ -40,16 +40,9 @@ final class GroupsController: UITableViewController {
         Group(name: Constants.groupEightName, imageName: Constants.groupEightImageName)
     ]
 
-    // MARK: - Live Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - IBActions
 
-    @IBAction func addGroupAction(_ sender: Any) {}
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
+    @IBAction private func addGroup(segue: UIStoryboardSegue) {
         guard segue.identifier == "addGroup" else { return }
         guard let newGroupsController = segue.source as? NewGroupsController else { return }
         guard let indexPath = newGroupsController.tableView.indexPathForSelectedRow else { return }

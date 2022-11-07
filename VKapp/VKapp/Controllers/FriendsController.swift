@@ -41,12 +41,6 @@ final class FriendsController: UITableViewController {
         User(name: Constants.friendEightName, imageName: Constants.friendEightImageName)
     ]
 
-    // MARK: - Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - Public Methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

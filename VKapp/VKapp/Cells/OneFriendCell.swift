@@ -7,13 +7,7 @@ import UIKit
 final class OneFriendCell: UICollectionViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var photoFriendImageView: UIImageView!
-
-    // MARK: - Life Cycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    @IBOutlet private var photoFriendImageView: UIImageView!
 
     // MARK: - Public Methods
 
