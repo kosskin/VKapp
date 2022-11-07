@@ -59,18 +59,26 @@ final class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
+    // MARK: - Public Methods
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard
+            identifier == Constants.segueShowTabBarText,
+            let loginText = loginTextField.text,
+            let passwordText = passwordTextField.text
+        else {
+            return false
+        }
+        
+        if loginText == Constants.loginText, passwordText == Constants.passwordText {
+            return true
+        } else {
+            showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
+            return false
+        }
+    }
+    
     // MARK: - Private Methods
-
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        guard identifier == Constants.segueShowTabBarText else { return false }
-//        guard let loginText = loginTextField.text, let passwordText = passwordTextField.text else { return false }
-//        if loginText == Constants.loginText, passwordText == Constants.passwordText {
-//            return true
-//        } else {
-//            showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
-//            return false
-//        }
-//    }
 
     @objc private func keyboardWillShownAction(notification: Notification) {
         guard let info = notification.userInfo as NSDictionary? else { return }

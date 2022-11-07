@@ -9,22 +9,18 @@ final class FriendTableCell: UITableViewCell {
 
     @IBOutlet private var friendImageView: UIImageView!
     @IBOutlet private var friendNameLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet private var friendShadowView: AvatarView!
 
     // MARK: - Public Methods
 
     func setCell(upcomingFriend: User) {
         friendNameLabel.text = upcomingFriend.name
         friendImageView.image = UIImage(named: upcomingFriend.imageName)
+        friendImageView.layer.masksToBounds = true
+        friendImageView.layer.cornerRadius = friendImageView.layer.bounds.width / 2
+    }
+
+    func getFriendImageView() -> UIImageView {
+        friendImageView
     }
 }
