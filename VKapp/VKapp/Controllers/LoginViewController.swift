@@ -59,11 +59,17 @@ final class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    // MARK: - Private Methods
-
+    // MARK: - Public Methods
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard identifier == Constants.segueShowTabBarText else { return false }
-        guard let loginText = loginTextField.text, let passwordText = passwordTextField.text else { return false }
+        guard
+            identifier == Constants.segueShowTabBarText,
+            let loginText = loginTextField.text,
+            let passwordText = passwordTextField.text
+        else {
+            return false
+        }
+        
         if loginText == Constants.loginText, passwordText == Constants.passwordText {
             return true
         } else {
@@ -71,6 +77,8 @@ final class LoginViewController: UIViewController {
             return false
         }
     }
+    
+    // MARK: - Private Methods
 
     @objc private func keyboardWillShownAction(notification: Notification) {
         guard let info = notification.userInfo as NSDictionary? else { return }

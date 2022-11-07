@@ -25,6 +25,7 @@ final class GroupsController: UITableViewController {
         static let groupSevenImageName = "mask"
         static let groupEightName = "Fans of Peskov"
         static let groupEightImageName = "peskov"
+        static let segueId = "addGroup"
     }
 
     // MARK: - Private Properties
@@ -42,8 +43,8 @@ final class GroupsController: UITableViewController {
 
     // MARK: - IBActions
 
-    @IBAction private func addGroup(segue: UIStoryboardSegue) {
-        guard segue.identifier == "addGroup" else { return }
+    @IBAction private func addGroupAction(segue: UIStoryboardSegue) {
+        guard segue.identifier == Constants.segueId else { return }
         guard let newGroupsController = segue.source as? NewGroupsController else { return }
         guard let indexPath = newGroupsController.tableView.indexPathForSelectedRow else { return }
         let group = newGroupsController.newGroups[indexPath.row]

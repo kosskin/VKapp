@@ -14,7 +14,7 @@ final class OneFriendController: UICollectionViewController {
 
     // MARK: - Private Properties
 
-    var imageName = Constants.emptyString
+    private var imageName = Constants.emptyString
 
     // MARK: - Public Methods
 
