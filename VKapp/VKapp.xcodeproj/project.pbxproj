@@ -16,6 +16,10 @@
 		BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4EA2910631C0032AB8C /* Color.xcassets */; };
 		BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */; };
 		BB47E0BB291908BF0019CF8F /* LikesControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0BA291908BF0019CF8F /* LikesControl.swift */; };
+		BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0DF291A70AD0019CF8F /* NewsCell.swift */; };
+		BB47E0E2291A70AD0019CF8F /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB47E0E0291A70AD0019CF8F /* NewsCell.xib */; };
+		BB47E0E5291A70F40019CF8F /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0E4291A70F40019CF8F /* NewsController.swift */; };
+		BB47E0E8291A82EE0019CF8F /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0E7291A82EE0019CF8F /* News.swift */; };
 		BB8B3B3E29129B1500346D00 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */; };
 		BB8B3B542913CD5800346D00 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B3B532913CD5800346D00 /* FriendsController.swift */; };
 		BB8B3B582913CD7900346D00 /* FriendTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B3B572913CD7900346D00 /* FriendTableCell.swift */; };
@@ -40,6 +44,10 @@
 		BB22B4EA2910631C0032AB8C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		BB47E0BA291908BF0019CF8F /* LikesControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesControl.swift; sourceTree = "<group>"; };
+		BB47E0DF291A70AD0019CF8F /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		BB47E0E0291A70AD0019CF8F /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		BB47E0E4291A70F40019CF8F /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
+		BB47E0E7291A82EE0019CF8F /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		BB8B3B532913CD5800346D00 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		BB8B3B572913CD7900346D00 /* FriendTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableCell.swift; sourceTree = "<group>"; };
@@ -107,6 +115,7 @@
 				BB8B3B5E2913E02800346D00 /* OneFriendController.swift */,
 				BB8B3B532913CD5800346D00 /* FriendsController.swift */,
 				BB8B3B652913FAF400346D00 /* GroupsController.swift */,
+				BB47E0E4291A70F40019CF8F /* NewsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -116,6 +125,7 @@
 			children = (
 				BB8B3B5A2913CE7400346D00 /* User.swift */,
 				BB8B3B6B2913FB2100346D00 /* Group.swift */,
+				BB47E0E7291A82EE0019CF8F /* News.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +144,8 @@
 				BB8B3B682913FB1600346D00 /* GroupTableCell.swift */,
 				BB8B3B612913E04800346D00 /* OneFriendCell.swift */,
 				BB8B3B572913CD7900346D00 /* FriendTableCell.swift */,
+				BB47E0DF291A70AD0019CF8F /* NewsCell.swift */,
+				BB47E0E0291A70AD0019CF8F /* NewsCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -215,6 +227,7 @@
 			files = (
 				BB22B4B8290FD0790032AB8C /* LaunchScreen.storyboard in Resources */,
 				BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */,
+				BB47E0E2291A70AD0019CF8F /* NewsCell.xib in Resources */,
 				BB22B4B5290FD0790032AB8C /* Assets.xcassets in Resources */,
 				BB22B4B3290FD0750032AB8C /* Main.storyboard in Resources */,
 			);
@@ -272,11 +285,14 @@
 				BB8B3B5F2913E02800346D00 /* OneFriendController.swift in Sources */,
 				BB8B3B6F291402C200346D00 /* NewGroupsController.swift in Sources */,
 				BB8B3B6C2913FB2100346D00 /* Group.swift in Sources */,
+				BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */,
 				BB8B3B692913FB1600346D00 /* GroupTableCell.swift in Sources */,
 				BB8B3B542913CD5800346D00 /* FriendsController.swift in Sources */,
 				BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */,
 				BB8B3B662913FAF400346D00 /* GroupsController.swift in Sources */,
 				BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */,
+				BB47E0E8291A82EE0019CF8F /* News.swift in Sources */,
+				BB47E0E5291A70F40019CF8F /* NewsController.swift in Sources */,
 				BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */,
 				BB8B3B582913CD7900346D00 /* FriendTableCell.swift in Sources */,
 				BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */,

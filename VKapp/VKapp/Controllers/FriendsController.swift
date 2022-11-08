@@ -50,10 +50,6 @@ final class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFriendSections()
-        tableView.register(
-            UINib(nibName: "FriendsSectionHeaderView", bundle: nil),
-            forHeaderFooterViewReuseIdentifier: "header"
-        )
     }
 
     // MARK: - Public Methods
