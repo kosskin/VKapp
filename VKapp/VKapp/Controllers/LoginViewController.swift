@@ -60,24 +60,24 @@ final class LoginViewController: UIViewController {
     }
 
     // MARK: - Public Methods
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard
-            identifier == Constants.segueShowTabBarText,
-            let loginText = loginTextField.text,
-            let passwordText = passwordTextField.text
-        else {
-            return false
-        }
-        
-        if loginText == Constants.loginText, passwordText == Constants.passwordText {
-            return true
-        } else {
-            showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
-            return false
-        }
-    }
-    
+
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        guard
+//            identifier == Constants.segueShowTabBarText,
+//            let loginText = loginTextField.text,
+//            let passwordText = passwordTextField.text
+//        else {
+//            return false
+//        }
+//
+//        if loginText == Constants.loginText, passwordText == Constants.passwordText {
+//            return true
+//        } else {
+//            showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
+//            return false
+//        }
+//    }
+
     // MARK: - Private Methods
 
     @objc private func keyboardWillShownAction(notification: Notification) {

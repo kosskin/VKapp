@@ -9,23 +9,24 @@ final class FriendsController: UITableViewController {
 
     private enum Constants {
         static let friendCellIdText = "friendCell"
-        static let friendOneName = "Vladimir Putin"
+        static let friendOneName = "Putin Vladimir"
         static let friendOneImageName = "putin"
-        static let friendTwoName = "Joe Baiden"
+        static let friendTwoName = "Baiden Joe"
         static let friendTwoImageName = "baiden"
         static let friendThreeName = "Kim Chen In"
         static let friendThreeImageName = "kim"
-        static let friendFourName = "Cristiano Ronaldo"
+        static let friendFourName = "Ronaldo Cristiano"
         static let friendFourImageName = "ronaldo"
-        static let friendFiveName = "Leonel Messi"
+        static let friendFiveName = "Messi Lionel"
         static let friendFiveImageName = "messi"
-        static let friendSixName = "Steve Jobs"
+        static let friendSixName = "Jobs Steve"
         static let friendSixImageName = "jobs"
-        static let friendSevenName = "Ilon Mask"
+        static let friendSevenName = "Mask Ilon"
         static let friendSevenImageName = "mask"
-        static let friendEightName = "Peskov"
+        static let friendEightName = "Peskov hzKakEgo"
         static let friendEightImageName = "peskov"
         static let segueOneFriendId = "oneFriendSegue"
+        static let backgroundColorName = "backgroundColor"
     }
 
     // MARK: - Private Properties
@@ -41,6 +42,20 @@ final class FriendsController: UITableViewController {
         User(name: Constants.friendEightName, imageName: Constants.friendEightImageName)
     ]
 
+    private var friendsSections: [Character: [User]] = [:]
+    private var friendSectionsTitles: [Character] = []
+
+    // MARK: - Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createFriendSections()
+        tableView.register(
+            UINib(nibName: "FriendsSectionHeaderView", bundle: nil),
+            forHeaderFooterViewReuseIdentifier: "header"
+        )
+    }
+
     // MARK: - Public Methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,17 +66,50 @@ final class FriendsController: UITableViewController {
         oneFriendController.setData(friendImageName)
     }
 
+    // MARK: - Private Methods
+
+    private func createFriendSections() {
+        for friend in friends {
+            guard let firstLetter = friend.name.first else { return }
+            if friendsSections[firstLetter] != nil {
+                friendsSections[firstLetter]?.append(friend)
+            } else {
+                friendsSections[firstLetter] = [friend]
+            }
+        }
+        friendSectionsTitles = Array(friendsSections.keys).sorted()
+    }
+
     // MARK: - TableView DataSource
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        friendsSections.count
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        friendSectionsTitles.map { String($0) }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(friendSectionsTitles[section])
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let viewHeader = (view as? UITableViewHeaderFooterView) else { return }
+        viewHeader.contentView.backgroundColor = UIColor(named: Constants.backgroundColorName)
+        viewHeader.contentView.alpha = 0.5
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friends.count
+        friendsSections[friendSectionsTitles[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
-            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell
+            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell,
+            let friend = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
-        cell.setCell(upcomingFriend: friends[indexPath.row])
+        cell.setCell(upcomingFriend: friend)
         return cell
     }
 }
