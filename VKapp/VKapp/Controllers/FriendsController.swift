@@ -57,8 +57,9 @@ final class FriendsController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.segueOneFriendId,
               let oneFriendController = segue.destination as? OneFriendController,
-              let indexPath = tableView.indexPathForSelectedRow else { return }
-        let friendImageName = friends[indexPath.row].imageName
+              let indexPath = tableView.indexPathForSelectedRow,
+              let friendImageName = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row].imageName
+        else { return }
         oneFriendController.setData(friendImageName)
     }
 

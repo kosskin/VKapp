@@ -45,14 +45,34 @@ final class NewsController: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet var newsTableView: UITableView!
-    
+
     // MARK: - Private Properties
-    
+
     private var news = [
-        News(senderName: Constants.senderNameOne, senderImageName: Constants.senderImageNameOne, text: Constants.textForAllPosts, newsImageName: Constants.newImageNameOne),
-        News(senderName: Constants.senderNameTwo, senderImageName: Constants.senderImageNameTwo, text: Constants.textForAllPosts, newsImageName: Constants.newImageNameTwo),
-        News(senderName: Constants.senderNameThree, senderImageName: Constants.senderImageNameThree, text: Constants.textForAllPosts, newsImageName: Constants.newImageNameThree),
-        News(senderName: Constants.senderNameFour, senderImageName: Constants.senderImageNameFour, text: Constants.textForAllPosts, newsImageName: Constants.newImageNameFour)
+        News(
+            senderName: Constants.senderNameOne,
+            senderImageName: Constants.senderImageNameOne,
+            text: Constants.textForAllPosts,
+            newsImageName: Constants.newImageNameOne
+        ),
+        News(
+            senderName: Constants.senderNameTwo,
+            senderImageName: Constants.senderImageNameTwo,
+            text: Constants.textForAllPosts,
+            newsImageName: Constants.newImageNameTwo
+        ),
+        News(
+            senderName: Constants.senderNameThree,
+            senderImageName: Constants.senderImageNameThree,
+            text: Constants.textForAllPosts,
+            newsImageName: Constants.newImageNameThree
+        ),
+        News(
+            senderName: Constants.senderNameFour,
+            senderImageName: Constants.senderImageNameFour,
+            text: Constants.textForAllPosts,
+            newsImageName: Constants.newImageNameFour
+        )
     ]
 
     // MARK: - Life Cycle

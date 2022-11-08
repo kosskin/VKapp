@@ -9,7 +9,7 @@ final class NewsCell: UITableViewCell {
 
     @IBOutlet private var senderImageView: UIImageView!
     @IBOutlet private var senderNameLabel: UILabel!
-    @IBOutlet private var postTextView: UITextView!
+    @IBOutlet private var postTextLabel: UILabel!
     @IBOutlet private var postImageView: UIImageView!
 
     // MARK: - Public Methods
@@ -19,7 +19,7 @@ final class NewsCell: UITableViewCell {
         senderNameLabel.text = news.senderImageName
         guard let postText = news.text,
               let postImage = news.newsImageName else { return }
-        postTextView.text = postText
+        postTextLabel.text = postText
         postImageView.image = UIImage(named: postImage)
     }
 }
