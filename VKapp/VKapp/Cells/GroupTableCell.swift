@@ -36,7 +36,6 @@ final class GroupTableCell: UITableViewCell {
             options: [.curveEaseInOut]
         ) {
             self.groupImageView.transform = .identity
-        } completion: { _ in
         }
     }
 }

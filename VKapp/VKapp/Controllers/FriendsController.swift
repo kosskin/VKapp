@@ -63,22 +63,7 @@ final class FriendsController: UITableViewController {
         oneFriendController.setData(friendImageName)
     }
 
-    // MARK: - Private Methods
-
-    private func createFriendSections() {
-        for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
-            if friendsSections[firstLetter] != nil {
-                friendsSections[firstLetter]?.append(friend)
-            } else {
-                friendsSections[firstLetter] = [friend]
-            }
-        }
-        friendSectionsTitles = Array(friendsSections.keys).sorted()
-    }
-
-    // MARK: - TableView DataSource
-
+    // DataSource methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         friendsSections.count
     }
@@ -108,5 +93,19 @@ final class FriendsController: UITableViewController {
         else { return UITableViewCell() }
         cell.setCell(upcomingFriend: friend)
         return cell
+    }
+
+    // MARK: - Private Methods
+
+    private func createFriendSections() {
+        for friend in friends {
+            guard let firstLetter = friend.name.first else { return }
+            if friendsSections[firstLetter] != nil {
+                friendsSections[firstLetter]?.append(friend)
+            } else {
+                friendsSections[firstLetter] = [friend]
+            }
+        }
+        friendSectionsTitles = Array(friendsSections.keys).sorted()
     }
 }

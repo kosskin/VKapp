@@ -176,11 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB22B4BC290FD0790032AB8C /* Build configuration list for PBXNativeTarget "VKapp" */;
 			buildPhases = (
-				BB47E0C129191A090019CF8F /* SwiftFormat */,
-				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 				BB22B4A4290FD0750032AB8C /* Sources */,
 				BB22B4A5290FD0750032AB8C /* Frameworks */,
 				BB22B4A6290FD0750032AB8C /* Resources */,
+				BB47E0C129191A090019CF8F /* SwiftFormat */,
+				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 			);
 			buildRules = (
 			);

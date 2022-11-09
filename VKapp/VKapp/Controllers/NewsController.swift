@@ -17,7 +17,7 @@ final class NewsController: UIViewController {
         static let senderImageNameOne = "putin"
         static let senderImageNameTwo = "peskov"
         static let senderImageNameThree = "bolt"
-        static let senderImageNameFour = "mpabe"
+        static let senderImageNameFour = "mbape"
         static let textForAllPosts = """
         TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
         TEXT TEXTTEXTTEXT TEXT TEXT TEXT TEXT
@@ -44,7 +44,7 @@ final class NewsController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet var newsTableView: UITableView!
+    @IBOutlet private var newsTableView: UITableView!
 
     // MARK: - Private Properties
 

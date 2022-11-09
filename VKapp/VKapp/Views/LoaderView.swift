@@ -5,7 +5,13 @@ import UIKit
 
 /// View for loading indicator
 final class LoaderView: UIView {
-    // MARK: Private Properties
+    // MARK: Constants
+
+    private enum Constants {
+        static let opacityText = "opacity"
+    }
+
+    // MARK: Visual Components
 
     private var loaderStackView: UIStackView?
     private lazy var pointViews: [UIView] = []
@@ -41,15 +47,18 @@ final class LoaderView: UIView {
             view.layer.masksToBounds = true
             pointViews.append(view)
         }
-        loaderStackView = UIStackView(arrangedSubviews: pointViews)
+        createLoaderStackView()
+        animatePoints()
+    }
 
+    private func createLoaderStackView() {
+        loaderStackView = UIStackView(arrangedSubviews: pointViews)
         guard let loaderStackView = loaderStackView else { return }
         loaderStackView.spacing = 8
         loaderStackView.axis = .horizontal
         loaderStackView.alignment = .center
         loaderStackView.distribution = .fillEqually
         addSubview(loaderStackView)
-        animatePoints()
     }
 
     private func animatePoints() {
@@ -61,7 +70,7 @@ final class LoaderView: UIView {
     }
 
     private func makeOpacity(for view: UIView, delay: Double) {
-        let animation = CABasicAnimation(keyPath: "opacity")
+        let animation = CABasicAnimation(keyPath: Constants.opacityText)
         animation.fromValue = 1
         animation.toValue = 0.5
         animation.duration = 0.7
