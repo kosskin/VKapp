@@ -60,7 +60,7 @@ final class LoginViewController: UIViewController {
     }
 
     // MARK: - Public Methods
-    
+
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard
             identifier == Constants.segueShowTabBarText,
@@ -69,7 +69,7 @@ final class LoginViewController: UIViewController {
         else {
             return false
         }
-        
+
         if loginText == Constants.loginText, passwordText == Constants.passwordText {
             return true
         } else {
@@ -77,7 +77,7 @@ final class LoginViewController: UIViewController {
             return false
         }
     }
-    
+
     // MARK: - Private Methods
 
     @objc private func keyboardWillShownAction(notification: Notification) {

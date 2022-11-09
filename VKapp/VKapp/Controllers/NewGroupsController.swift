@@ -19,6 +19,10 @@ final class NewGroupsController: UITableViewController {
         static let newGroupFourImageName = "neymar"
     }
 
+    // MARK: IBOutlets
+
+    @IBOutlet private var groupSearchBar: UISearchBar!
+
     // MARK: - Public Properties
 
     var newGroups = [
@@ -27,6 +31,10 @@ final class NewGroupsController: UITableViewController {
         Group(name: Constants.newGroupThreeName, imageName: Constants.newGroupThreeImageName),
         Group(name: Constants.newGroupFourName, imageName: Constants.newGroupFourImageName)
     ]
+
+    // MARK: - Private Properties
+
+    private var searchBackUpList: [Group]?
 
     // MARK: - Table view data source
 
@@ -41,5 +49,26 @@ final class NewGroupsController: UITableViewController {
         ) as? GroupTableCell else { return UITableViewCell() }
         cell.setCell(upcomingGrpup: newGroups[indexPath.row])
         return cell
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension NewGroupsController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBackUpList = newGroups
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        newGroups = searchBackUpList ?? []
+        tableView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        newGroups = searchBackUpList ?? []
+        if !searchText.isEmpty {
+            newGroups = newGroups.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+        tableView.reloadData()
     }
 }

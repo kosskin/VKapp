@@ -50,6 +50,9 @@ final class LikesControl: UIControl {
             heartImageView.tintColor = .lightGray
             countLikesLabel.text = String(likesCount)
             countLikesLabel.textColor = .lightGray
+            UIView.animate(withDuration: 0.5) {
+                self.heartImageView.transform = CGAffineTransform(rotationAngle: 0.0)
+            }
             return
         }
 
@@ -58,5 +61,19 @@ final class LikesControl: UIControl {
         heartImageView.tintColor = .systemRed
         countLikesLabel.text = String(likesCount)
         countLikesLabel.textColor = .systemRed
+        UIView.animate(withDuration: 0.5) {
+            self.heartImageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        }
+        countLikesLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        UIView.animate(
+            withDuration: 1.0,
+            delay: 0.2,
+            usingSpringWithDamping: 0.3,
+            initialSpringVelocity: 0.7,
+            options: [.curveEaseIn]
+        ) {
+            self.countLikesLabel.transform = .identity
+        } completion: { _ in
+        }
     }
 }
