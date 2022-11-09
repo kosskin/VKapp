@@ -79,6 +79,12 @@ final class NewsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerCell()
+    }
+
+    // MARK: - Private Methods
+
+    private func registerCell() {
         newsTableView.register(
             UINib(nibName: Constants.xibCellName, bundle: nil),
             forCellReuseIdentifier: Constants.xibCellId

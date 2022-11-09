@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// View for loading indicator
 final class LoaderView: UIView {
     // MARK: Private Properties
 
