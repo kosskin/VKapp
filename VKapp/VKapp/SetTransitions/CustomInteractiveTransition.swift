@@ -5,6 +5,12 @@ import UIKit
 
 /// interaction animation
 final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
+    // MARK: Constants
+
+    private enum Constants {
+        static let progressStatus: CGFloat = 0.33
+    }
+
     // MARK: Public Properties
 
     var viewController: UIViewController? {
@@ -32,7 +38,7 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
             let translation = sender.translation(in: sender.view)
             let relative = translation.y / (sender.view?.bounds.width ?? 1)
             let progress = max(0, min(1, relative))
-            isFinish = progress > 0.33
+            isFinish = progress > Constants.progressStatus
             update(progress)
         case .ended:
             isStarted = false

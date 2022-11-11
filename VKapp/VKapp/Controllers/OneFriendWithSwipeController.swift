@@ -7,7 +7,9 @@ import UIKit
 final class OneFriendWithSwipeController: UIViewController {
     // MARK: - Constants
 
-    private enum Constants {}
+    private enum Constants {
+        static let xTranslation: CGFloat = 500
+    }
 
     // MARK: - IBOutlets
 
@@ -87,9 +89,9 @@ final class OneFriendWithSwipeController: UIViewController {
     @objc private func doSwipeAction(gesture: UISwipeGestureRecognizer) {
         switch gesture.direction {
         case .left:
-            swipe(translationX: -500, differenceIndex: 1, rotatingAngle: CGFloat.pi / 8)
+            swipe(translationX: -Constants.xTranslation, differenceIndex: 1, rotatingAngle: CGFloat.pi / 8)
         case .right:
-            swipe(translationX: 500, differenceIndex: -1, rotatingAngle: -CGFloat.pi / 6)
+            swipe(translationX: Constants.xTranslation, differenceIndex: -1, rotatingAngle: -CGFloat.pi / 6)
         case .down:
             swipeDown()
         default:

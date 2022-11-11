@@ -5,10 +5,17 @@ import UIKit
 
 /// for animate transitions between viewControllers (push)
 final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Constants
+
+    private enum Constants {
+        static let allTimeInterval = 0.7
+        static let partTimeInterval = 0.4
+    }
+
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.7
+        Constants.allTimeInterval
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -33,7 +40,7 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             delay: 0,
             options: .calculationModePaced
         ) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partTimeInterval) {
                 let translation = CGAffineTransform(translationX: source.view.frame.width, y: 0)
                 let scale = CGAffineTransform(rotationAngle: .pi / -2)
                 source.view.transform = translation.concatenating(scale)
@@ -42,7 +49,7 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     y: source.view.bounds.width / 2
                 )
             }
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partTimeInterval) {
                 destination.view.transform = .identity
             }
         } completion: { finish in
