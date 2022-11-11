@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// custom navigation to do custom animation
 final class CustomNavigationController: UINavigationController {
     // MARK: Private properties
 
