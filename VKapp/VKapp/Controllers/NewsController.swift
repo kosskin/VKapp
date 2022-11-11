@@ -40,6 +40,7 @@ final class NewsController: UIViewController {
         static let newImageNameTwo = "sharapova"
         static let newImageNameThree = "kim"
         static let newImageNameFour = "mask"
+        static let forTransitionId = "ForTransitionController"
     }
 
     // MARK: - IBOutlets
@@ -80,6 +81,13 @@ final class NewsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
+    }
+
+    @IBAction private func goToVCAction(_ sender: Any) {
+        guard let nextVC = storyboard?
+            .instantiateViewController(identifier: Constants.forTransitionId) as? ForTransitionController
+        else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     // MARK: - Private Methods
