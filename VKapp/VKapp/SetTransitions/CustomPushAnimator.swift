@@ -11,12 +11,41 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
         static let translationDuration = 0.7
         static let shiftLeft: CGFloat = -200
         static let partRelativeDuration = 0.5
+        static let scaleTransform: CGFloat = 0.8
     }
 
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         Constants.translationDuration
+    }
+
+    func createAnimateKeyFrames(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController
+    ) {
+        UIView.animateKeyframes(
+            withDuration: transitionDuration(using: transitionContext),
+            delay: 0,
+            options: .calculationModePaced
+        ) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partRelativeDuration) {
+                let translation = CGAffineTransform(translationX: Constants.shiftLeft, y: 0)
+                let scale = CGAffineTransform(scaleX: Constants.scaleTransform, y: Constants.scaleTransform)
+                source.view.transform = translation.concatenating(scale)
+            }
+
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partRelativeDuration) {
+                destination.view.transform = .identity
+                destination.view.center = source.view.center
+            }
+        } completion: { finish in
+            if finish, !transitionContext.transitionWasCancelled {
+                source.view.transform = .identity
+            }
+            transitionContext.completeTransition(finish && !transitionContext.transitionWasCancelled)
+        }
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -39,26 +68,6 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
             y: source.view.bounds.width / 2
         )
 
-        UIView.animateKeyframes(
-            withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
-            options: .calculationModePaced
-        ) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partRelativeDuration) {
-                let translation = CGAffineTransform(translationX: Constants.shiftLeft, y: 0)
-                let scale = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                source.view.transform = translation.concatenating(scale)
-            }
-
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.partRelativeDuration) {
-                destination.view.transform = .identity
-                destination.view.center = source.view.center
-            }
-        } completion: { finish in
-            if finish, !transitionContext.transitionWasCancelled {
-                source.view.transform = .identity
-            }
-            transitionContext.completeTransition(finish && !transitionContext.transitionWasCancelled)
-        }
+        createAnimateKeyFrames(transitionContext: transitionContext, source: source, destination: destination)
     }
 }

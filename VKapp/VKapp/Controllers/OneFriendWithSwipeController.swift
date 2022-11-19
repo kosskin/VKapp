@@ -9,6 +9,15 @@ final class OneFriendWithSwipeController: UIViewController {
 
     private enum Constants {
         static let xTranslation: CGFloat = 500
+        static let halfDuration = 0.5
+        static let halfTransform: CGFloat = 0.5
+        static let halfOpacity: Float = 0.5
+        static let zeroTransform: CGFloat = 0
+        static let swipeYTransform: CGFloat = 1000
+        static let fullOpacity: Float = 1
+        static let differenceIndex = 1
+        static let swipeRotatingAngle = CGFloat.pi / 8
+        static let scaleTransform: CGFloat = 0.7
     }
 
     // MARK: - IBOutlets
@@ -59,18 +68,18 @@ final class OneFriendWithSwipeController: UIViewController {
             index -= differenceIndex
             return
         }
-        UIView.animate(withDuration: 0.5) {
-            let translation = CGAffineTransform(translationX: translationX, y: 0)
-            let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: Constants.halfDuration) {
+            let translation = CGAffineTransform(translationX: translationX, y: Constants.zeroTransform)
+            let scale = CGAffineTransform(scaleX: Constants.scaleTransform, y: Constants.scaleTransform)
             let rotating = CGAffineTransform(rotationAngle: rotatingAngle)
             self.photoImageView.transform = translation.concatenating(scale).concatenating(rotating)
-            self.photoImageView.layer.opacity = 0.5
+            self.photoImageView.layer.opacity = Constants.halfOpacity
         } completion: { _ in
-            let newPhotoScale = CGAffineTransform(scaleX: 0.5, y: 0.5)
-            self.photoImageView.transform = CGAffineTransform(translationX: -translationX, y: 0)
+            let newPhotoScale = CGAffineTransform(scaleX: Constants.halfTransform, y: Constants.halfTransform)
+            self.photoImageView.transform = CGAffineTransform(translationX: -translationX, y: Constants.zeroTransform)
                 .concatenating(newPhotoScale)
-            UIView.animate(withDuration: 0.5) {
-                self.photoImageView.layer.opacity = 1
+            UIView.animate(withDuration: Constants.halfDuration) {
+                self.photoImageView.layer.opacity = Constants.fullOpacity
                 self.photoImageView.transform = .identity
                 self.photoImageView.image = self.photos[self.index]
             }
@@ -78,8 +87,8 @@ final class OneFriendWithSwipeController: UIViewController {
     }
 
     private func swipeDown() {
-        UIView.animate(withDuration: 0.5) {
-            let translation = CGAffineTransform(translationX: 0, y: 1000)
+        UIView.animate(withDuration: Constants.halfDuration) {
+            let translation = CGAffineTransform(translationX: Constants.zeroTransform, y: Constants.swipeYTransform)
             self.photoImageView.transform = translation
         } completion: { _ in
             self.navigationController?.popViewController(animated: true)
@@ -89,9 +98,17 @@ final class OneFriendWithSwipeController: UIViewController {
     @objc private func doSwipeAction(gesture: UISwipeGestureRecognizer) {
         switch gesture.direction {
         case .left:
-            swipe(translationX: -Constants.xTranslation, differenceIndex: 1, rotatingAngle: CGFloat.pi / 8)
+            swipe(
+                translationX: -Constants.xTranslation,
+                differenceIndex: Constants.differenceIndex,
+                rotatingAngle: Constants.swipeRotatingAngle
+            )
         case .right:
-            swipe(translationX: Constants.xTranslation, differenceIndex: -1, rotatingAngle: -CGFloat.pi / 6)
+            swipe(
+                translationX: Constants.xTranslation,
+                differenceIndex: -Constants.differenceIndex,
+                rotatingAngle: -Constants.swipeRotatingAngle
+            )
         case .down:
             swipeDown()
         default:

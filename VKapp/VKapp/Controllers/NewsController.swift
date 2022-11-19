@@ -83,6 +83,8 @@ final class NewsController: UIViewController {
         registerCell()
     }
 
+    // MARK: IBActions
+
     @IBAction private func goToVCAction(_ sender: Any) {
         guard let nextVC = storyboard?
             .instantiateViewController(identifier: Constants.forTransitionId) as? ForTransitionController
