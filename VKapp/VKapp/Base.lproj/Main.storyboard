@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vx1-HX-ut7">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -239,7 +239,7 @@
                                     <outlet property="friendImageView" destination="Ozs-mh-gAk" id="wU4-0m-MtK"/>
                                     <outlet property="friendNameLabel" destination="nYF-kI-bHY" id="SgH-HZ-EaI"/>
                                     <outlet property="friendShadowView" destination="CxL-jc-IVo" id="2Om-pw-Qei"/>
-                                    <segue destination="g4C-81-FY4" kind="show" identifier="oneFriendSegue" id="W3f-5A-KzU"/>
+                                    <segue destination="5sg-a9-4kn" kind="show" identifier="oneFriendSegueWithSwipe" id="8CD-KO-1SL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -351,14 +351,37 @@
                             <constraint firstItem="hdy-6F-FWN" firstAttribute="trailing" secondItem="luZ-WC-3GY" secondAttribute="trailing" id="plV-J7-ChU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="News" id="ykR-AG-hau"/>
+                    <navigationItem key="navigationItem" title="News" id="ykR-AG-hau">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="UrG-JQ-m0C">
+                            <connections>
+                                <action selector="goToVCAction:" destination="pFH-aO-xZL" id="vwZ-q2-mrj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="newsTableView" destination="luZ-WC-3GY" id="59S-Cq-xug"/>
+                        <segue destination="sng-XZ-KEe" kind="show" id="NvQ-6y-njG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCJ-rM-TTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4880" y="1467"/>
+        </scene>
+        <!--For Transition Controller-->
+        <scene sceneID="tVI-tX-lJz">
+            <objects>
+                <viewController storyboardIdentifier="ForTransitionController" id="sng-XZ-KEe" customClass="ForTransitionController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PkT-dV-nv6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6WJ-8s-j9Y"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hgG-6J-sI5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hVn-a5-t4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5900.0000000000009" y="1466.5178571428571"/>
         </scene>
         <!--New Groups Controller-->
         <scene sceneID="Zqc-Fv-fWv">
@@ -426,10 +449,10 @@
             </objects>
             <point key="canvasLocation" x="5887" y="603"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="MW3-pO-vFt">
             <objects>
-                <navigationController id="Hcw-Dg-oiJ" sceneMemberID="viewController">
+                <navigationController id="Hcw-Dg-oiJ" customClass="CustomNavigationController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="person.3" catalog="system" selectedImage="person.3.fill" id="0Q2-ta-t2f"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8oe-qO-oS8">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -442,6 +465,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Khh-Pm-pZX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3969.5652173913045" y="603.34821428571422"/>
+        </scene>
+        <!--One Friend With Swipe Controller-->
+        <scene sceneID="W0i-Sj-rLR">
+            <objects>
+                <viewController id="5sg-a9-4kn" customClass="OneFriendWithSwipeController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p4n-LD-QAF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b0-eD-6WH">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S2g-O6-xah">
+                                        <rect key="frame" x="14.5" y="177.5" width="385" height="370"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="S2g-O6-xah" firstAttribute="width" secondItem="3b0-eD-6WH" secondAttribute="width" multiplier="0.929952" id="BbQ-2d-txK"/>
+                                    <constraint firstItem="S2g-O6-xah" firstAttribute="centerY" secondItem="3b0-eD-6WH" secondAttribute="centerY" id="GOj-xE-RGW"/>
+                                    <constraint firstItem="S2g-O6-xah" firstAttribute="centerX" secondItem="3b0-eD-6WH" secondAttribute="centerX" id="gSh-TQ-GQR"/>
+                                    <constraint firstItem="S2g-O6-xah" firstAttribute="height" secondItem="3b0-eD-6WH" secondAttribute="height" multiplier="0.510345" id="zj5-D1-xR2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nT7-4h-5Wo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nT7-4h-5Wo" firstAttribute="bottom" secondItem="3b0-eD-6WH" secondAttribute="bottom" id="8oQ-8C-Mkg"/>
+                            <constraint firstItem="3b0-eD-6WH" firstAttribute="leading" secondItem="nT7-4h-5Wo" secondAttribute="leading" id="ENK-Qg-5ql"/>
+                            <constraint firstItem="nT7-4h-5Wo" firstAttribute="trailing" secondItem="3b0-eD-6WH" secondAttribute="trailing" id="Tbc-Oa-nsm"/>
+                            <constraint firstItem="3b0-eD-6WH" firstAttribute="top" secondItem="nT7-4h-5Wo" secondAttribute="top" id="acO-80-by4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="j8e-zu-21v"/>
+                    <connections>
+                        <outlet property="photoImageView" destination="S2g-O6-xah" id="e8M-CP-ezs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lK5-lh-zXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5957.971014492754" y="-912.05357142857133"/>
         </scene>
         <!--One Friend Controller-->
         <scene sceneID="9Q7-rL-bNm">
@@ -526,10 +591,10 @@
             </objects>
             <point key="canvasLocation" x="5966.666666666667" y="-210.26785714285714"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="ZI2-lv-Z5i">
             <objects>
-                <navigationController id="U6s-Tm-cmr" sceneMemberID="viewController">
+                <navigationController id="U6s-Tm-cmr" customClass="CustomNavigationController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="person" catalog="system" selectedImage="person.fill" id="Kw4-8S-zku">
                         <color key="badgeColor" name="AccentColor"/>
                     </tabBarItem>
@@ -565,10 +630,10 @@
             </objects>
             <point key="canvasLocation" x="2477" y="603"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="Dan-7h-wjC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="usu-WQ-zuE" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="usu-WQ-zuE" customClass="CustomNavigationController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="newspaper" catalog="system" selectedImage="newspaper.fill" id="chT-7I-irc"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="aGM-cE-pIT"/>
@@ -618,6 +683,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -27,9 +27,16 @@ final class FriendsController: UITableViewController {
         static let friendEightImageName = "peskov"
         static let segueOneFriendId = "oneFriendSegue"
         static let backgroundColorName = "backgroundColor"
+        static let segueOneFriendWithSwipeId = "oneFriendSegueWithSwipe"
     }
 
     // MARK: - Private Properties
+
+    private let imagesForSwipe: [UIImage] = [
+        UIImage(named: Constants.friendOneImageName) ?? UIImage(),
+        UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
+        UIImage(named: Constants.friendThreeImageName) ?? UIImage()
+    ]
 
     private var friends = [
         User(name: Constants.friendOneName, imageName: Constants.friendOneImageName),
@@ -54,13 +61,16 @@ final class FriendsController: UITableViewController {
 
     // MARK: - Public Methods
 
+    /* Тут закомментированный код для перехода на экран с коллекшнВью, если понадобится в дальнейшем. Прошу не ругаться на ревью
+     Также для перехода на колекшнВью необходимо поменять название связи и тип контроллера */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.segueOneFriendId,
-              let oneFriendController = segue.destination as? OneFriendController,
-              let indexPath = tableView.indexPathForSelectedRow,
-              let friendImageName = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row].imageName
+        guard segue.identifier == Constants.segueOneFriendWithSwipeId,
+              let oneFriendController = segue.destination as? OneFriendWithSwipeController
+        // let indexPath = tableView.indexPathForSelectedRow,
+        // let friendImageName = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row].imageName
         else { return }
-        oneFriendController.setData(friendImageName)
+        oneFriendController.photos = imagesForSwipe
+        // oneFriendController.setData(friendImageName)
     }
 
     // DataSource methods
