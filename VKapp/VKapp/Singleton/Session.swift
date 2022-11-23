@@ -3,13 +3,13 @@
 
 import Foundation
 
-/// Save user information(token and userID)
+/// information about user session(token and userID)
 final class Session {
     // MARK: - Public Properties
 
     static let shared = Session()
     var token = ""
-    var userId = ""
+    var userID = ""
 
     // MARK: - Initializers
 

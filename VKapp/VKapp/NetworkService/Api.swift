@@ -12,7 +12,7 @@ enum Api {
     static let ownerId = "&owner_id="
     static let exampleId = 307_626_578
     static let groupsGet = "groups.get?"
-    static let userId = "userId=\(Session.shared.userId)"
+    static let userId = "userId=\(Session.shared.userID)"
     static let extended = "&extended=1"
     static let groupsSearch = "groups.search?"
     static let qSearch = "&q="

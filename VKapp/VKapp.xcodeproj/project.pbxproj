@@ -18,7 +18,7 @@
 		BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */; };
 		BB2C1BFB292E0B3D009D8198 /* LoginWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */; };
 		BB2C1BFE292E0C57009D8198 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2C1BFD292E0C57009D8198 /* WebKit.framework */; };
-		BB2C1C04292E35AE009D8198 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1C03292E35AE009D8198 /* NetworkService.swift */; };
+		BB2C1C04292E35AE009D8198 /* VKAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1C03292E35AE009D8198 /* VKAPIService.swift */; };
 		BB2C1C07292E3721009D8198 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1C06292E3721009D8198 /* Api.swift */; };
 		BB2C1C0A292E43D7009D8198 /* RequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1C09292E43D7009D8198 /* RequestType.swift */; };
 		BB384FC4291D8ADF00DB8F8E /* ForTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB384FC3291D8ADF00DB8F8E /* ForTransitionController.swift */; };
@@ -61,7 +61,7 @@
 		BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewViewController.swift; sourceTree = "<group>"; };
 		BB2C1BFD292E0C57009D8198 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		BB2C1C03292E35AE009D8198 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BB2C1C03292E35AE009D8198 /* VKAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPIService.swift; sourceTree = "<group>"; };
 		BB2C1C06292E3721009D8198 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		BB2C1C09292E43D7009D8198 /* RequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestType.swift; sourceTree = "<group>"; };
 		BB384FC3291D8ADF00DB8F8E /* ForTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForTransitionController.swift; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		BB2C1C02292E3487009D8198 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				BB2C1C03292E35AE009D8198 /* NetworkService.swift */,
+				BB2C1C03292E35AE009D8198 /* VKAPIService.swift */,
 				BB2C1C06292E3721009D8198 /* Api.swift */,
 				BB2C1C09292E43D7009D8198 /* RequestType.swift */,
 			);
@@ -415,7 +415,7 @@
 				BB8B3B5F2913E02800346D00 /* OneFriendController.swift in Sources */,
 				BB2C1C07292E3721009D8198 /* Api.swift in Sources */,
 				BB8B3B6F291402C200346D00 /* NewGroupsController.swift in Sources */,
-				BB2C1C04292E35AE009D8198 /* NetworkService.swift in Sources */,
+				BB2C1C04292E35AE009D8198 /* VKAPIService.swift in Sources */,
 				BB8B3B6C2913FB2100346D00 /* Group.swift in Sources */,
 				BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */,
 				BB51D829291DF0BF0020B639 /* CustomPushAnimator.swift in Sources */,

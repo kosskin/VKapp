@@ -9,21 +9,6 @@ final class LoginWebViewViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let scheme = "https"
-        static let host = "oauth.vk.com"
-        static let path = "/authorize"
-        static let urlQueryItemClientName = "client_id"
-        static let urlQueryItemClientValue = "51484462"
-        static let urlQueryItemDisplayName = "display"
-        static let urlQueryItemDisplayValue = "mobile"
-        static let urlQueryItemRedirectUriName = "redirect_uri"
-        static let urlQueryItemRedirectUriValue = "https://oauth.vk.com/blank.html"
-        static let urlQueryItemScopeName = "scope"
-        static let urlQueryItemScopeValue = "262150"
-        static let urlQueryItemResponseTypeName = "response_type"
-        static let urlQueryItemResponseTypeValue = "token"
-        static let urlQueryItemVName = "v"
-        static let urlQueryItemVValue = "5.131"
         static let urlPath = "/blank.html"
         static let ampersant = "&"
         static let equals = "="
@@ -40,6 +25,10 @@ final class LoginWebViewViewController: UIViewController {
         }
     }
 
+    // MARK: - Private Properties
+
+    private let vkAPISevice = VKAPIService()
+
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
@@ -50,21 +39,7 @@ final class LoginWebViewViewController: UIViewController {
     // MARK: - Private Methods
 
     private func webViewLoad() {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = Constants.scheme
-        urlComponents.host = Constants.host
-        urlComponents.path = Constants.path
-        urlComponents.queryItems = [
-            URLQueryItem(name: Constants.urlQueryItemClientName, value: Constants.urlQueryItemClientValue),
-            URLQueryItem(name: Constants.urlQueryItemDisplayName, value: Constants.urlQueryItemDisplayValue),
-            URLQueryItem(name: Constants.urlQueryItemRedirectUriName, value: Constants.urlQueryItemRedirectUriValue),
-            URLQueryItem(name: Constants.urlQueryItemScopeName, value: Constants.urlQueryItemScopeValue),
-            URLQueryItem(name: Constants.urlQueryItemResponseTypeName, value: Constants.urlQueryItemResponseTypeValue),
-            URLQueryItem(name: Constants.urlQueryItemVName, value: Constants.urlQueryItemVValue)
-        ]
-
-        guard let url = urlComponents.url else { return }
-        print(url)
+        guard let url = vkAPISevice.createURLToLoadWebView() else { return }
         let request = URLRequest(url: url)
         vkWebView.load(request)
     }
@@ -97,14 +72,14 @@ extension LoginWebViewViewController: WKNavigationDelegate {
                 return dict
             }
         guard let token = params[Constants.accessTokenName],
-              let userId = params[Constants.userIdName]
+              let userID = params[Constants.userIdName]
         else {
             decisionHandler(.allow)
             return
         }
 
         Session.shared.token = token
-        Session.shared.userId = userId
+        Session.shared.userID = userID
 
         performSegue(withIdentifier: Constants.segueTabBarId, sender: self)
         decisionHandler(.cancel)
