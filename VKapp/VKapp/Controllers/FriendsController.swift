@@ -37,6 +37,7 @@ final class FriendsController: UITableViewController {
         UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
         UIImage(named: Constants.friendThreeImageName) ?? UIImage()
     ]
+    private let networkService = NetworkService()
 
     private var friends = [
         User(name: Constants.friendOneName, imageName: Constants.friendOneImageName),
@@ -57,6 +58,10 @@ final class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFriendSections()
+        networkService.fetchData(urlString: RequestType.friends.urlString)
+        networkService.fetchData(urlString: RequestType.photos(id: Api.exampleId).urlString)
+        networkService.fetchData(urlString: RequestType.groups.urlString)
+        networkService.fetchData(urlString: RequestType.searchGroups(searchQuery: Api.exampleQ).urlString)
     }
 
     // MARK: - Public Methods
