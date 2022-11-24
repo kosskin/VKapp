@@ -37,6 +37,7 @@ final class FriendsController: UITableViewController {
         UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
         UIImage(named: Constants.friendThreeImageName) ?? UIImage()
     ]
+    private let vkAPIService = VKAPIService()
 
     private var friends = [
         User(name: Constants.friendOneName, imageName: Constants.friendOneImageName),
@@ -57,6 +58,7 @@ final class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFriendSections()
+        fetchAllRequests()
     }
 
     // MARK: - Public Methods
@@ -117,5 +119,12 @@ final class FriendsController: UITableViewController {
             }
         }
         friendSectionsTitles = Array(friendsSections.keys).sorted()
+    }
+
+    private func fetchAllRequests() {
+        vkAPIService.fetchData(urlString: RequestType.friends.urlString)
+        vkAPIService.fetchData(urlString: RequestType.photos(id: Api.exampleId).urlString)
+        vkAPIService.fetchData(urlString: RequestType.groups.urlString)
+        vkAPIService.fetchData(urlString: RequestType.searchGroups(searchQuery: Api.exampleQ).urlString)
     }
 }
