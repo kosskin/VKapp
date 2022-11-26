@@ -30,29 +30,29 @@ final class GroupsController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var groups = [
-        Group(name: Constants.groupOneName, imageName: Constants.groupOneImageName),
-        Group(name: Constants.groupTwoName, imageName: Constants.groupTwoImageName),
-        Group(name: Constants.groupThreeName, imageName: Constants.groupThreeImageName),
-        Group(name: Constants.groupFourName, imageName: Constants.groupFourImageName),
-        Group(name: Constants.groupFiveName, imageName: Constants.groupFiveImageName),
-        Group(name: Constants.groupSixName, imageName: Constants.groupSixImageName),
-        Group(name: Constants.groupSevenName, imageName: Constants.groupSevenImageName),
-        Group(name: Constants.groupEightName, imageName: Constants.groupEightImageName)
-    ]
+    private let vkApiService = VKAPIService()
+    private var groups: [Group] = []
 
-    // MARK: - IBActions
+    // MARK: - Life Cycle
 
-    @IBAction private func addGroupAction(segue: UIStoryboardSegue) {
-        guard segue.identifier == Constants.segueId else { return }
-        guard let newGroupsController = segue.source as? NewGroupsController else { return }
-        guard let indexPath = newGroupsController.tableView.indexPathForSelectedRow else { return }
-        let group = newGroupsController.newGroups[indexPath.row]
-        guard !groups.contains(group) else { return }
-        groups.append(group)
-        newGroupsController.newGroups.remove(at: indexPath.row)
-        newGroupsController.tableView.reloadData()
-        tableView.reloadData()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchGroups()
+    }
+
+    // MARK: - Private Methods
+
+    private func fetchGroups() {
+        vkApiService.fetchDataGroup(urlString: RequestType.groups.urlString) { [weak self] result in
+            switch result {
+            case let .success(groups):
+                self?.groups = groups
+                print(groups.first?.photo)
+                self?.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     // MARK: - Table view data source

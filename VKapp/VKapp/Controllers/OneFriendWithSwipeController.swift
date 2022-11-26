@@ -26,11 +26,13 @@ final class OneFriendWithSwipeController: UIViewController {
 
     // MARK: - Public Properties
 
-    var photos: [UIImage?] = []
+    var id = 0
 
     // MARK: Private Properties
 
-    private var index = Int()
+    private var listPhotos: [Photos] = []
+    private var index = 0
+    private let vkApiService = VKAPIService()
 
     // MARK: - Life Cycle
 
@@ -43,8 +45,26 @@ final class OneFriendWithSwipeController: UIViewController {
     // MARK: Private Methods
 
     private func configUI() {
-        guard let image = photos.first else { return }
-        photoImageView.image = image
+        fetchPhotos()
+        guard let imageURL = listPhotos.first?.photos.first?.url else { return }
+        photoImageView.loadImage(imageURL: imageURL)
+    }
+
+    private func fetchPhotos() {
+        vkApiService.fetchDataPhoto(urlString: RequestType.photos(id: id).urlString) { [weak self] response in
+            switch response {
+            case let .success(data):
+                self?.listPhotos = data.response.photoResponse
+                self?.savePhotos()
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+
+    private func savePhotos() {
+        guard let imageName = listPhotos.first?.photos[index].url else { return }
+        photoImageView.loadImage(imageURL: imageName)
     }
 
     private func createSwipeRecognizer() {
@@ -64,7 +84,7 @@ final class OneFriendWithSwipeController: UIViewController {
 
     private func swipe(translationX: CGFloat, differenceIndex: Int, rotatingAngle: CGFloat) {
         index += differenceIndex
-        guard index < photos.count, index >= 0 else {
+        guard index < listPhotos.count, index >= 0 else {
             index -= differenceIndex
             return
         }
@@ -81,7 +101,8 @@ final class OneFriendWithSwipeController: UIViewController {
             UIView.animate(withDuration: Constants.halfDuration) {
                 self.photoImageView.layer.opacity = Constants.fullOpacity
                 self.photoImageView.transform = .identity
-                self.photoImageView.image = self.photos[self.index]
+                guard let imageName = self.listPhotos[self.index].photos.first?.url else { return }
+                self.photoImageView.loadImage(imageURL: imageName)
             }
         }
     }

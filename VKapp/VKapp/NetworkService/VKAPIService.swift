@@ -28,11 +28,45 @@ final class VKAPIService {
 
     // MARK: - Public Methods
 
-    func fetchData(urlString: String) {
+    func fetchDataFriend(urlString: String, completion: @escaping (Result<[Friend], Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
-                guard let value = response.value else { return }
-                print(value)
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(FriendResult.self, from: data)
+                    completion(.success(object.response.friends))
+                } catch {
+                    completion(.failure(error))
+                    print(error.localizedDescription)
+                }
+            }
+    }
+
+    func fetchDataGroup(urlString: String, completion: @escaping (Result<[Group], Error>) -> Void) {
+        AF
+            .request(urlString).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(GroupResult.self, from: data)
+                    completion(.success(object.response.groups))
+                } catch {
+                    completion(.failure(error))
+                    print(error.localizedDescription)
+                }
+            }
+    }
+
+    func fetchDataPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
+        AF
+            .request(urlString).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(PhotoResult.self, from: data)
+                    completion(.success(object))
+                } catch {
+                    completion(.failure(error))
+                    print(error.localizedDescription)
+                }
             }
     }
 

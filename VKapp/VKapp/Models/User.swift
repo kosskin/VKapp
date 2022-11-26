@@ -4,7 +4,7 @@
 import Foundation
 
 /// Describe one friend
-struct User {
+struct User: Decodable {
     let name: String
     let imageName: String
 }
