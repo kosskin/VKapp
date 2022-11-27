@@ -15,7 +15,6 @@ final class GroupTableCell: UITableViewCell {
     func setCell(upcomingGrpup: Group) {
         groupName.text = upcomingGrpup.nameGroup
         groupImageView.loadImage(imageURL: upcomingGrpup.photo)
-        // groupImageView.image = UIImage(named: upcomingGrpup.imageName)
         groupImageView.isUserInteractionEnabled = true
         createGestureRecognizer()
     }
