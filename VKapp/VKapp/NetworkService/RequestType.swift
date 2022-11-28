@@ -13,7 +13,7 @@ enum RequestType {
     var urlString: String {
         switch self {
         case .friends:
-            return "\(Api.baseURL)\(Api.friendsGet)\(Api.accessToken)\(Api.frinedFields)\(Api.version)"
+            return "\(Api.baseURL)\(Api.friendsGet)\(Api.accessToken)\(Api.frinedFields)\(Api.sortByName)\(Api.fields)"
         case let .photos(id):
             return "\(Api.baseURL)\(Api.photosGet)\(Api.accessToken)\(Api.extended)\(Api.version)\(Api.ownerId)\(id)"
         case .groups:

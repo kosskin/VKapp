@@ -10,11 +10,13 @@ enum Api {
     static let friendsGet = "friends.get?"
     static let photosGet = "photos.getAll?"
     static let ownerId = "&owner_id="
-    static let exampleId = 307_626_578
+    static let exampleId = 28_784_714
     static let groupsGet = "groups.get?"
     static let userId = "userId=\(Session.shared.userID)"
     static let extended = "&extended=1"
     static let groupsSearch = "groups.search?"
     static let qSearch = "&q="
     static let exampleQ = "sport"
+    static let sortByName = "&order=name"
+    static let fields = "&fields=photo_100&v=5.131"
 }

@@ -27,7 +27,7 @@ final class LoginWebViewViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let vkAPISevice = VKAPIService()
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -39,7 +39,7 @@ final class LoginWebViewViewController: UIViewController {
     // MARK: - Private Methods
 
     private func webViewLoad() {
-        guard let url = vkAPISevice.createURLToLoadWebView() else { return }
+        guard let url = networkService.createURLToLoadWebView() else { return }
         let request = URLRequest(url: url)
         vkWebView.load(request)
     }

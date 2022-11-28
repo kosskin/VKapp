@@ -37,20 +37,10 @@ final class FriendsController: UITableViewController {
         UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
         UIImage(named: Constants.friendThreeImageName) ?? UIImage()
     ]
-    private let vkAPIService = VKAPIService()
 
-    private var friends = [
-        User(name: Constants.friendOneName, imageName: Constants.friendOneImageName),
-        User(name: Constants.friendTwoName, imageName: Constants.friendTwoImageName),
-        User(name: Constants.friendThreeName, imageName: Constants.friendThreeImageName),
-        User(name: Constants.friendFourName, imageName: Constants.friendFourImageName),
-        User(name: Constants.friendFiveName, imageName: Constants.friendFiveImageName),
-        User(name: Constants.friendSixName, imageName: Constants.friendSixImageName),
-        User(name: Constants.friendSevenName, imageName: Constants.friendSevenImageName),
-        User(name: Constants.friendEightName, imageName: Constants.friendEightImageName)
-    ]
-
-    private var friendsSections: [Character: [User]] = [:]
+    private let networkService = NetworkService()
+    private var friends: [Friend] = []
+    private var friendsSections: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
 
     // MARK: - Life Cycle
@@ -58,52 +48,31 @@ final class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFriendSections()
-        fetchAllRequests()
+        fetchFriend()
     }
 
     // MARK: - Public Methods
 
-    /* Тут закомментированный код для перехода на экран с коллекшнВью, если понадобится в дальнейшем. Прошу не ругаться на ревью
-     Также для перехода на колекшнВью необходимо поменять название связи и тип контроллера */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.segueOneFriendWithSwipeId,
-              let oneFriendController = segue.destination as? OneFriendWithSwipeController
-        // let indexPath = tableView.indexPathForSelectedRow,
-        // let friendImageName = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row].imageName
+              let oneFriendController = segue.destination as? OneFriendWithSwipeController,
+              let currnetId = tableView.indexPathForSelectedRow
         else { return }
-        oneFriendController.photos = imagesForSwipe
-        // oneFriendController.setData(friendImageName)
+        oneFriendController.id = friends[currnetId.row].id
     }
 
     // DataSource methods
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        friendsSections.count
-    }
-
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        friendSectionsTitles.map { String($0) }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        String(friendSectionsTitles[section])
-    }
-
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let viewHeader = (view as? UITableViewHeaderFooterView) else { return }
-        viewHeader.contentView.backgroundColor = UIColor(named: Constants.backgroundColorName)
-        viewHeader.contentView.alpha = 0.5
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friendsSections[friendSectionsTitles[section]]?.count ?? 0
+        friends.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
-            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell,
-            let friend = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row]
+            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell
         else { return UITableViewCell() }
-        cell.setCell(upcomingFriend: friend)
+        let friend = friends[indexPath.row]
+        cell.setCell(upcomingFriend: friend, service: networkService)
         return cell
     }
 
@@ -111,7 +80,7 @@ final class FriendsController: UITableViewController {
 
     private func createFriendSections() {
         for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
+            guard let firstLetter = friend.firstName.first else { return }
             if friendsSections[firstLetter] != nil {
                 friendsSections[firstLetter]?.append(friend)
             } else {
@@ -121,10 +90,16 @@ final class FriendsController: UITableViewController {
         friendSectionsTitles = Array(friendsSections.keys).sorted()
     }
 
-    private func fetchAllRequests() {
-        vkAPIService.fetchData(urlString: RequestType.friends.urlString)
-        vkAPIService.fetchData(urlString: RequestType.photos(id: Api.exampleId).urlString)
-        vkAPIService.fetchData(urlString: RequestType.groups.urlString)
-        vkAPIService.fetchData(urlString: RequestType.searchGroups(searchQuery: Api.exampleQ).urlString)
+    private func fetchFriend() {
+        networkService.fetchFriend(urlString: RequestType.friends.urlString) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(friends):
+                self.friends = friends
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

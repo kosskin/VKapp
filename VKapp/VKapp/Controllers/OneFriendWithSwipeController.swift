@@ -26,11 +26,13 @@ final class OneFriendWithSwipeController: UIViewController {
 
     // MARK: - Public Properties
 
-    var photos: [UIImage?] = []
+    var id = 0
 
     // MARK: Private Properties
 
-    private var index = Int()
+    private var photos: [Photos] = []
+    private var index = 0
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -43,8 +45,27 @@ final class OneFriendWithSwipeController: UIViewController {
     // MARK: Private Methods
 
     private func configUI() {
-        guard let image = photos.first else { return }
-        photoImageView.image = image
+        fetchPhotos()
+        guard let imageURL = photos.first?.photos.first?.url else { return }
+        photoImageView.loadImage(imageURL: imageURL, service: networkService)
+    }
+
+    private func fetchPhotos() {
+        networkService.fetchPhoto(urlString: RequestType.photos(id: id).urlString) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case let .success(data):
+                self.photos = data.response.photoResponse
+                self.savePhotos()
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+
+    private func savePhotos() {
+        guard let imageName = photos.first?.photos[index].url else { return }
+        photoImageView.loadImage(imageURL: imageName, service: networkService)
     }
 
     private func createSwipeRecognizer() {
@@ -81,7 +102,8 @@ final class OneFriendWithSwipeController: UIViewController {
             UIView.animate(withDuration: Constants.halfDuration) {
                 self.photoImageView.layer.opacity = Constants.fullOpacity
                 self.photoImageView.transform = .identity
-                self.photoImageView.image = self.photos[self.index]
+                guard let imageName = self.photos[self.index].photos.first?.url else { return }
+                self.photoImageView.loadImage(imageURL: imageName, service: self.networkService)
             }
         }
     }

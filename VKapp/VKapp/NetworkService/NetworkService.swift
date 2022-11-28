@@ -1,11 +1,11 @@
-// VKAPIService.swift
+// NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
 import Foundation
 
 /// Network requests
-final class VKAPIService {
+final class NetworkService {
     // MARK: - Constants
 
     private enum Constants {
@@ -28,12 +28,52 @@ final class VKAPIService {
 
     // MARK: - Public Methods
 
-    func fetchData(urlString: String) {
+    func fetchFriend(urlString: String, completion: @escaping (Result<[Friend], Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
-                guard let value = response.value else { return }
-                print(value)
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(FriendResult.self, from: data)
+                    completion(.success(object.response.friends))
+                } catch {
+                    completion(.failure(error))
+                }
             }
+    }
+
+    func fetchGroup(urlString: String, completion: @escaping (Result<[Group], Error>) -> Void) {
+        AF
+            .request(urlString).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(GroupResult.self, from: data)
+                    completion(.success(object.response.groups))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+    }
+
+    func fetchPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
+        AF
+            .request(urlString).responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(PhotoResult.self, from: data)
+                    completion(.success(object))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+    }
+
+    func loadImageData(imageURL: String) -> Data? {
+        var dataImage: Data?
+        guard let url = URL(string: imageURL),
+              let data = try? Data(contentsOf: url)
+        else { return nil }
+        dataImage = data
+        return dataImage
     }
 
     func createURLToLoadWebView() -> URL? {

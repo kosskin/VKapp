@@ -3,8 +3,13 @@
 
 import Foundation
 
-/// Describe one group
-struct Group: Equatable {
-    let name: String
-    let imageName: String
+/// Group
+final class Group: Decodable {
+    @objc dynamic var nameGroup: String
+    @objc dynamic var photo: String
+
+    private enum CodingKeys: String, CodingKey {
+        case nameGroup = "name"
+        case photo = "photo_100"
+    }
 }
