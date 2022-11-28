@@ -72,7 +72,7 @@ final class FriendsController: UITableViewController {
             .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
-        cell.setCell(upcomingFriend: friend)
+        cell.setCell(upcomingFriend: friend, service: networkService)
         return cell
     }
 

@@ -67,8 +67,8 @@ final class NetworkService {
             }
     }
 
-    func loadImageData(imageURL: String) -> Data {
-        var dataImage = Data()
+    func loadImageData(imageURL: String) -> Data? {
+        var dataImage: Data?
         guard let url = URL(string: imageURL),
               let data = try? Data(contentsOf: url)
         else { return dataImage }

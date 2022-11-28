@@ -47,7 +47,7 @@ final class OneFriendWithSwipeController: UIViewController {
     private func configUI() {
         fetchPhotos()
         guard let imageURL = photos.first?.photos.first?.url else { return }
-        photoImageView.loadImage(imageURL: imageURL)
+        photoImageView.loadImage(imageURL: imageURL, service: networkService)
     }
 
     private func fetchPhotos() {
@@ -65,7 +65,7 @@ final class OneFriendWithSwipeController: UIViewController {
 
     private func savePhotos() {
         guard let imageName = photos.first?.photos[index].url else { return }
-        photoImageView.loadImage(imageURL: imageName)
+        photoImageView.loadImage(imageURL: imageName, service: networkService)
     }
 
     private func createSwipeRecognizer() {
@@ -103,7 +103,7 @@ final class OneFriendWithSwipeController: UIViewController {
                 self.photoImageView.layer.opacity = Constants.fullOpacity
                 self.photoImageView.transform = .identity
                 guard let imageName = self.photos[self.index].photos.first?.url else { return }
-                self.photoImageView.loadImage(imageURL: imageName)
+                self.photoImageView.loadImage(imageURL: imageName, service: self.networkService)
             }
         }
     }

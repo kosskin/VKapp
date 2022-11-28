@@ -12,9 +12,9 @@ final class GroupTableCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func setCell(upcomingGrpup: Group) {
+    func setCell(upcomingGrpup: Group, service: NetworkService) {
         groupName.text = upcomingGrpup.nameGroup
-        groupImageView.loadImage(imageURL: upcomingGrpup.photo)
+        groupImageView.loadImage(imageURL: upcomingGrpup.photo, service: service)
         groupImageView.isUserInteractionEnabled = true
         createGestureRecognizer()
     }
