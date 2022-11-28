@@ -30,9 +30,9 @@ final class OneFriendWithSwipeController: UIViewController {
 
     // MARK: Private Properties
 
-    private var listPhotos: [Photos] = []
+    private var photos: [Photos] = []
     private var index = 0
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -46,16 +46,17 @@ final class OneFriendWithSwipeController: UIViewController {
 
     private func configUI() {
         fetchPhotos()
-        guard let imageURL = listPhotos.first?.photos.first?.url else { return }
+        guard let imageURL = photos.first?.photos.first?.url else { return }
         photoImageView.loadImage(imageURL: imageURL)
     }
 
     private func fetchPhotos() {
-        vkApiService.fetchDataPhoto(urlString: RequestType.photos(id: id).urlString) { [weak self] response in
+        networkService.fetchPhoto(urlString: RequestType.photos(id: id).urlString) { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case let .success(data):
-                self?.listPhotos = data.response.photoResponse
-                self?.savePhotos()
+                self.photos = data.response.photoResponse
+                self.savePhotos()
             case let .failure(error):
                 print(error)
             }
@@ -63,7 +64,7 @@ final class OneFriendWithSwipeController: UIViewController {
     }
 
     private func savePhotos() {
-        guard let imageName = listPhotos.first?.photos[index].url else { return }
+        guard let imageName = photos.first?.photos[index].url else { return }
         photoImageView.loadImage(imageURL: imageName)
     }
 
@@ -84,7 +85,7 @@ final class OneFriendWithSwipeController: UIViewController {
 
     private func swipe(translationX: CGFloat, differenceIndex: Int, rotatingAngle: CGFloat) {
         index += differenceIndex
-        guard index < listPhotos.count, index >= 0 else {
+        guard index < photos.count, index >= 0 else {
             index -= differenceIndex
             return
         }
@@ -101,7 +102,7 @@ final class OneFriendWithSwipeController: UIViewController {
             UIView.animate(withDuration: Constants.halfDuration) {
                 self.photoImageView.layer.opacity = Constants.fullOpacity
                 self.photoImageView.transform = .identity
-                guard let imageName = self.listPhotos[self.index].photos.first?.url else { return }
+                guard let imageName = self.photos[self.index].photos.first?.url else { return }
                 self.photoImageView.loadImage(imageURL: imageName)
             }
         }

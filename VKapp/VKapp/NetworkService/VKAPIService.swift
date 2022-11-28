@@ -5,7 +5,7 @@ import Alamofire
 import Foundation
 
 /// Network requests
-final class VKAPIService {
+final class NetworkService {
     // MARK: - Constants
 
     private enum Constants {
@@ -28,7 +28,7 @@ final class VKAPIService {
 
     // MARK: - Public Methods
 
-    func fetchDataFriend(urlString: String, completion: @escaping (Result<[Friend], Error>) -> Void) {
+    func fetchFriend(urlString: String, completion: @escaping (Result<[Friend], Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
                 guard let data = response.data else { return }
@@ -37,12 +37,11 @@ final class VKAPIService {
                     completion(.success(object.response.friends))
                 } catch {
                     completion(.failure(error))
-                    print(error.localizedDescription)
                 }
             }
     }
 
-    func fetchDataGroup(urlString: String, completion: @escaping (Result<[Group], Error>) -> Void) {
+    func fetchGroup(urlString: String, completion: @escaping (Result<[Group], Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
                 guard let data = response.data else { return }
@@ -51,12 +50,11 @@ final class VKAPIService {
                     completion(.success(object.response.groups))
                 } catch {
                     completion(.failure(error))
-                    print(error.localizedDescription)
                 }
             }
     }
 
-    func fetchDataPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
+    func fetchPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
                 guard let data = response.data else { return }
@@ -65,7 +63,6 @@ final class VKAPIService {
                     completion(.success(object))
                 } catch {
                     completion(.failure(error))
-                    print(error.localizedDescription)
                 }
             }
     }

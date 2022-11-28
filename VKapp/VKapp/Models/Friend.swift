@@ -4,20 +4,6 @@
 import Foundation
 import RealmSwift
 
-/// Result of friend response
-struct FriendResult: Decodable {
-    let response: Friends
-}
-
-/// List of friends
-struct Friends: Decodable {
-    let friends: [Friend]
-
-    enum CodingKeys: String, CodingKey {
-        case friends = "items"
-    }
-}
-
 /// Friend
 final class Friend: Object, Decodable {
     @objc dynamic var id: Int

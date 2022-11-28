@@ -38,7 +38,7 @@ final class FriendsController: UITableViewController {
         UIImage(named: Constants.friendThreeImageName) ?? UIImage()
     ]
 
-    private let vkAPIService = VKAPIService()
+    private let networkService = NetworkService()
     private var friends: [Friend] = []
     private var friendsSections: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
@@ -91,11 +91,12 @@ final class FriendsController: UITableViewController {
     }
 
     private func fetchFriend() {
-        vkAPIService.fetchDataFriend(urlString: RequestType.friends.urlString) { [weak self] result in
+        networkService.fetchFriend(urlString: RequestType.friends.urlString) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .success(friends):
-                self?.friends = friends
-                self?.tableView.reloadData()
+                self.friends = friends
+                self.tableView.reloadData()
             case let .failure(error):
                 print(error.localizedDescription)
             }

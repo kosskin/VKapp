@@ -30,7 +30,7 @@ final class GroupsController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private let vkApiService = VKAPIService()
+    private let networkService = NetworkService()
     private var groups: [Group] = []
 
     // MARK: - Life Cycle
@@ -43,12 +43,13 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Methods
 
     private func fetchGroups() {
-        vkApiService.fetchDataGroup(urlString: RequestType.groups.urlString) { [weak self] result in
+        networkService.fetchGroup(urlString: RequestType.groups.urlString) { [weak self] result in
             switch result {
             case let .success(groups):
-                self?.groups = groups
+                guard let self = self else { return }
+                self.groups = groups
                 print(groups.first?.photo)
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
             case let .failure(error):
                 print(error.localizedDescription)
             }
