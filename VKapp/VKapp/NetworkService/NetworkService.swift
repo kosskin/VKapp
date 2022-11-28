@@ -1,4 +1,4 @@
-// VKAPIService.swift
+// NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
@@ -65,6 +65,15 @@ final class NetworkService {
                     completion(.failure(error))
                 }
             }
+    }
+
+    func loadImageData(imageURL: String) -> Data {
+        var dataImage = Data()
+        guard let url = URL(string: imageURL),
+              let data = try? Data(contentsOf: url)
+        else { return dataImage }
+        dataImage = data
+        return dataImage
     }
 
     func createURLToLoadWebView() -> URL? {

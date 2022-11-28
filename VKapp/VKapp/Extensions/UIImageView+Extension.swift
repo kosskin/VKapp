@@ -6,10 +6,9 @@ import UIKit
 /// Extension for adding image from Internet
 extension UIImageView {
     func loadImage(imageURL: String) {
+        let networkService = NetworkService()
         DispatchQueue.main.async {
-            guard let url = URL(string: imageURL),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data) else { return }
+            guard let image = UIImage(data: networkService.loadImageData(imageURL: imageURL)) else { return }
             self.image = image
         }
     }
