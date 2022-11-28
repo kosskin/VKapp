@@ -71,7 +71,7 @@ final class NetworkService {
         var dataImage: Data?
         guard let url = URL(string: imageURL),
               let data = try? Data(contentsOf: url)
-        else { return dataImage }
+        else { return nil }
         dataImage = data
         return dataImage
     }
