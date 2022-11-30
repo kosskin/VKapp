@@ -5,11 +5,12 @@ import Foundation
 import RealmSwift
 
 /// Friend
+@objcMembers
 final class Friend: Object, Decodable {
-    @objc dynamic var id: Int
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var imageName: String
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var firstName: String
+    @Persisted var lastName: String
+    @Persisted var imageName: String
 
     private enum CodingKeys: String, CodingKey {
         case id

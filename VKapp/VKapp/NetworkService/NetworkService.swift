@@ -3,6 +3,7 @@
 
 import Alamofire
 import Foundation
+import RealmSwift
 
 /// Network requests
 final class NetworkService {
@@ -74,6 +75,43 @@ final class NetworkService {
         else { return nil }
         dataImage = data
         return dataImage
+    }
+
+    func saveFriendToRealm(_ friends: [Friend]) {
+        do {
+            let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: configuration)
+            try realm.write {
+                realm.add(friends, update: .modified)
+                print(realm.configuration.fileURL)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func saveGroupToRealm(_ groups: [Group]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(groups, update: .modified)
+                print(realm.configuration.fileURL)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func savePhotosToRealm(_ photos: [Photos]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(photos, update: .modified)
+                print(realm.configuration.fileURL)
+            }
+        } catch {
+            print(error)
+        }
     }
 
     func createURLToLoadWebView() -> URL? {

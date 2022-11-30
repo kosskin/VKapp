@@ -2,8 +2,10 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
+import RealmSwift
 
 /// One Photo
-final class Photo: Decodable {
-    @objc dynamic var url: String
+@objcMembers
+final class Photo: Object, Decodable {
+    dynamic var url: String
 }
