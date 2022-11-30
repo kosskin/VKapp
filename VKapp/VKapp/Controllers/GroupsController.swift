@@ -32,6 +32,7 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
     private var groups: Results<Group>?
     private var groupToken: NotificationToken?
 
@@ -49,7 +50,7 @@ final class GroupsController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case let .success(groups):
-                self.networkService.saveGroupToRealm(groups)
+                self.realmService.saveGroupToRealm(groups)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -81,7 +82,7 @@ final class GroupsController: UITableViewController {
                 fetchGroups()
             }
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 

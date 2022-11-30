@@ -40,6 +40,7 @@ final class FriendsController: UITableViewController {
     ]
 
     private let networkService = NetworkService()
+    private let realmService = RealmService()
     private var friends: Results<Friend>?
     private var friendsSections: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
@@ -99,7 +100,7 @@ final class FriendsController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case let .success(friends):
-                self.networkService.saveFriendToRealm(friends)
+                self.realmService.saveFriendToRealm(friends)
             case let .failure(error):
                 print(error.localizedDescription)
             }

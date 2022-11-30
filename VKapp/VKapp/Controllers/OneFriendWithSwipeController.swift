@@ -34,6 +34,7 @@ final class OneFriendWithSwipeController: UIViewController {
     private var photos: [Photos] = []
     private var index = 0
     private let networkService = NetworkService()
+    private let realmService = RealmService()
 
     // MARK: - Life Cycle
 
@@ -57,10 +58,10 @@ final class OneFriendWithSwipeController: UIViewController {
             switch response {
             case let .success(data):
                 self.photos = data.response.photoResponse
-                self.networkService.savePhotosToRealm(self.photos)
+                self.realmService.savePhotosToRealm(self.photos)
                 self.savePhotos()
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -81,7 +82,7 @@ final class OneFriendWithSwipeController: UIViewController {
                 fetchPhotos()
             }
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 
