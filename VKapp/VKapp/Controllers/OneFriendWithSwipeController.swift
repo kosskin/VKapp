@@ -34,7 +34,6 @@ final class OneFriendWithSwipeController: UIViewController {
     private var photos: [Photos] = []
     private var index = 0
     private let networkService = NetworkService()
-    private let realmService = RealmService()
 
     // MARK: - Life Cycle
 
@@ -58,7 +57,7 @@ final class OneFriendWithSwipeController: UIViewController {
             switch response {
             case let .success(data):
                 self.photos = data.response.photoResponse
-                self.realmService.savePhotosToRealm(self.photos)
+                RealmService.save(items: self.photos)
                 self.savePhotos()
             case let .failure(error):
                 print(error.localizedDescription)
@@ -72,17 +71,13 @@ final class OneFriendWithSwipeController: UIViewController {
     }
 
     private func loadData() {
-        do {
-            let realm = try Realm()
-            let photosFromRealm = Array(realm.objects(Photos.self))
-            let currentId = photosFromRealm.map(\.ownerId)
-            if currentId.contains(where: { idFromRealm in
-                idFromRealm == id
-            }) { photos = photosFromRealm.filter { $0.ownerId == id }} else {
-                fetchPhotos()
-            }
-        } catch {
-            print(error.localizedDescription)
+        let dataFromRealm = RealmService.get(Photos.self)
+        guard let photosFromRealm = dataFromRealm else { return }
+        let currentId = photosFromRealm.map(\.ownerId)
+        if currentId.contains(where: { idFromRealm in
+            idFromRealm == id
+        }) { photos = photosFromRealm.filter { $0.ownerId == id }} else {
+            fetchPhotos()
         }
     }
 

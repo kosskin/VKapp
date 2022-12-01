@@ -32,7 +32,6 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
-    private let realmService = RealmService()
     private var groups: Results<Group>?
     private var groupToken: NotificationToken?
 
@@ -40,17 +39,16 @@ final class GroupsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGroups()
+        loadData()
     }
 
     // MARK: - Private Methods
 
     private func fetchGroups() {
-        networkService.fetchGroup(urlString: RequestType.groups.urlString) { [weak self] result in
-            guard let self = self else { return }
+        networkService.fetchGroup(urlString: RequestType.groups.urlString) { result in
             switch result {
             case let .success(groups):
-                self.realmService.saveGroupToRealm(groups)
+                RealmService.save(items: groups)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -71,18 +69,14 @@ final class GroupsController: UITableViewController {
         }
     }
 
-    private func loadGroups() {
-        do {
-            let realm = try Realm()
-            let groupsFromRealm = realm.objects(Group.self)
-            addGroupNotificationToken(result: groupsFromRealm)
-            if !groupsFromRealm.isEmpty {
-                groups = groupsFromRealm
-            } else {
-                fetchGroups()
-            }
-        } catch {
-            print(error.localizedDescription)
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Group.self)
+        guard let groupsFromRealm = dataFromRealm else { return }
+        addGroupNotificationToken(result: groupsFromRealm)
+        if !groupsFromRealm.isEmpty {
+            groups = groupsFromRealm
+        } else {
+            fetchGroups()
         }
     }
 

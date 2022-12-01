@@ -40,9 +40,8 @@ final class FriendsController: UITableViewController {
     ]
 
     private let networkService = NetworkService()
-    private let realmService = RealmService()
     private var friends: Results<Friend>?
-    private var friendsSections: [Character: [Friend]] = [:]
+    private var friendsSectionsMap: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
     private var friendToken: NotificationToken?
 
@@ -50,7 +49,7 @@ final class FriendsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFriends()
+        loadData()
     }
 
     // MARK: - Public Methods
@@ -86,21 +85,20 @@ final class FriendsController: UITableViewController {
         guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetter = friend.firstName.first else { return }
-            if friendsSections[firstLetter] != nil {
-                friendsSections[firstLetter]?.append(friend)
+            if friendsSectionsMap[firstLetter] != nil {
+                friendsSectionsMap[firstLetter]?.append(friend)
             } else {
-                friendsSections[firstLetter] = [friend]
+                friendsSectionsMap[firstLetter] = [friend]
             }
         }
-        friendSectionsTitles = Array(friendsSections.keys).sorted()
+        friendSectionsTitles = Array(friendsSectionsMap.keys).sorted()
     }
 
     private func fetchFriends() {
-        networkService.fetchFriend(urlString: RequestType.friends.urlString) { [weak self] result in
-            guard let self = self else { return }
+        networkService.fetchFriend(urlString: RequestType.friends.urlString) { result in
             switch result {
             case let .success(friends):
-                self.realmService.saveFriendToRealm(friends)
+                RealmService.save(items: friends)
             case let .failure(error):
                 print(error.localizedDescription)
             }
@@ -121,18 +119,14 @@ final class FriendsController: UITableViewController {
         }
     }
 
-    private func loadFriends() {
-        do {
-            let realm = try Realm()
-            let friendsFromRealm = realm.objects(Friend.self)
-            addFriendNotificationToken(result: friendsFromRealm)
-            if !friendsFromRealm.isEmpty {
-                friends = friendsFromRealm
-            } else {
-                fetchFriends()
-            }
-        } catch {
-            print(error)
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Friend.self)
+        guard let friendsFromRealm = dataFromRealm else { return }
+        addFriendNotificationToken(result: friendsFromRealm)
+        if !friendsFromRealm.isEmpty {
+            friends = friendsFromRealm
+        } else {
+            fetchFriends()
         }
     }
 }

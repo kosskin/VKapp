@@ -3,44 +3,43 @@
 
 import RealmSwift
 
-/// Database Realm
-final class RealmService {
+/// Service Realm
+class RealmService {
+    // MARK: - Public Properties
+
+    static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+
     // MARK: - Public Methods
 
-    func saveFriendToRealm(_ friends: [Friend]) {
+    static func save<T: Object>(
+        items: [T],
+        config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+        update: Bool = true
+    ) {
+        print(config.fileURL ?? "")
+
         do {
-            let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm(configuration: configuration)
+            let realm = try Realm(configuration: deleteIfMigration)
+
             try realm.write {
-                realm.add(friends, update: .modified)
-                print(realm.configuration.fileURL)
+                realm.add(items, update: .modified)
             }
+
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
 
-    func saveGroupToRealm(_ groups: [Group]) {
+    static func get<T: Object>(
+        _ type: T.Type,
+        config: Realm.Configuration = Realm.Configuration.defaultConfiguration
+    ) -> Results<T>? {
         do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(groups, update: .modified)
-                print(realm.configuration.fileURL)
-            }
+            let realm = try Realm(configuration: deleteIfMigration)
+            return realm.objects(type)
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
-    }
-
-    func savePhotosToRealm(_ photos: [Photos]) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(photos, update: .modified)
-                print(realm.configuration.fileURL)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
+        return nil
     }
 }
