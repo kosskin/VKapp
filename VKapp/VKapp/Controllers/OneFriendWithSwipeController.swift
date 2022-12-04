@@ -1,6 +1,7 @@
 // OneFriendWithSwipeController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// List of photos one friend with swipe
@@ -45,7 +46,7 @@ final class OneFriendWithSwipeController: UIViewController {
     // MARK: Private Methods
 
     private func configUI() {
-        fetchPhotos()
+        loadData()
         guard let imageURL = photos.first?.photos.first?.url else { return }
         photoImageView.loadImage(imageURL: imageURL, service: networkService)
     }
@@ -56,9 +57,10 @@ final class OneFriendWithSwipeController: UIViewController {
             switch response {
             case let .success(data):
                 self.photos = data.response.photoResponse
+                RealmService.save(items: self.photos)
                 self.savePhotos()
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -66,6 +68,17 @@ final class OneFriendWithSwipeController: UIViewController {
     private func savePhotos() {
         guard let imageName = photos.first?.photos[index].url else { return }
         photoImageView.loadImage(imageURL: imageName, service: networkService)
+    }
+
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Photos.self)
+        guard let photosFromRealm = dataFromRealm else { return }
+        let currentId = photosFromRealm.map(\.ownerId)
+        if currentId.contains(where: { idFromRealm in
+            idFromRealm == id
+        }) { photos = photosFromRealm.filter { $0.ownerId == id }} else {
+            fetchPhotos()
+        }
     }
 
     private func createSwipeRecognizer() {

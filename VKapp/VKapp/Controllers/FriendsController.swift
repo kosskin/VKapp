@@ -1,6 +1,7 @@
 // FriendsController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// List of friends screen
@@ -39,16 +40,16 @@ final class FriendsController: UITableViewController {
     ]
 
     private let networkService = NetworkService()
-    private var friends: [Friend] = []
-    private var friendsSections: [Character: [Friend]] = [:]
+    private var friends: Results<Friend>?
+    private var friendsSectionsMap: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
+    private var friendToken: NotificationToken?
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createFriendSections()
-        fetchFriend()
+        loadData()
     }
 
     // MARK: - Public Methods
@@ -56,7 +57,8 @@ final class FriendsController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.segueOneFriendWithSwipeId,
               let oneFriendController = segue.destination as? OneFriendWithSwipeController,
-              let currnetId = tableView.indexPathForSelectedRow
+              let currnetId = tableView.indexPathForSelectedRow,
+              let friends = friends
         else { return }
         oneFriendController.id = friends[currnetId.row].id
     }
@@ -64,12 +66,13 @@ final class FriendsController: UITableViewController {
     // DataSource methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friends.count
+        friends?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
-            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell
+            .dequeueReusableCell(withIdentifier: Constants.friendCellIdText, for: indexPath) as? FriendTableCell,
+            let friends = friends
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
         cell.setCell(upcomingFriend: friend, service: networkService)
@@ -79,27 +82,51 @@ final class FriendsController: UITableViewController {
     // MARK: - Private Methods
 
     private func createFriendSections() {
+        guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetter = friend.firstName.first else { return }
-            if friendsSections[firstLetter] != nil {
-                friendsSections[firstLetter]?.append(friend)
+            if friendsSectionsMap[firstLetter] != nil {
+                friendsSectionsMap[firstLetter]?.append(friend)
             } else {
-                friendsSections[firstLetter] = [friend]
+                friendsSectionsMap[firstLetter] = [friend]
             }
         }
-        friendSectionsTitles = Array(friendsSections.keys).sorted()
+        friendSectionsTitles = Array(friendsSectionsMap.keys).sorted()
     }
 
-    private func fetchFriend() {
-        networkService.fetchFriend(urlString: RequestType.friends.urlString) { [weak self] result in
-            guard let self = self else { return }
+    private func fetchFriends() {
+        networkService.fetchFriend(urlString: RequestType.friends.urlString) { result in
             switch result {
             case let .success(friends):
-                self.friends = friends
-                self.tableView.reloadData()
+                RealmService.save(items: friends)
             case let .failure(error):
                 print(error.localizedDescription)
             }
+        }
+    }
+
+    private func addFriendNotificationToken(result: Results<Friend>) {
+        friendToken = result.observe { [weak self] changes in
+            switch changes {
+            case .initial:
+                break
+            case .update:
+                self?.friends = result
+                self?.tableView.reloadData()
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Friend.self)
+        guard let friendsFromRealm = dataFromRealm else { return }
+        addFriendNotificationToken(result: friendsFromRealm)
+        if !friendsFromRealm.isEmpty {
+            friends = friendsFromRealm
+        } else {
+            fetchFriends()
         }
     }
 }

@@ -1,6 +1,7 @@
 // GroupsController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// List of groups screen
@@ -31,42 +32,65 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
-    private var groups: [Group] = []
+    private var groups: Results<Group>?
+    private var groupToken: NotificationToken?
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchGroups()
+        loadData()
     }
 
     // MARK: - Private Methods
 
     private func fetchGroups() {
-        networkService.fetchGroup(urlString: RequestType.groups.urlString) { [weak self] result in
+        networkService.fetchGroup(urlString: RequestType.groups.urlString) { result in
             switch result {
             case let .success(groups):
-                guard let self = self else { return }
-                self.groups = groups
-                print(groups.first?.photo)
-                self.tableView.reloadData()
+                RealmService.save(items: groups)
             case let .failure(error):
                 print(error.localizedDescription)
             }
         }
     }
 
+    private func addGroupNotificationToken(result: Results<Group>) {
+        groupToken = result.observe { [weak self] changes in
+            switch changes {
+            case .initial:
+                break
+            case .update:
+                self?.groups = result
+                self?.tableView.reloadData()
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Group.self)
+        guard let groupsFromRealm = dataFromRealm else { return }
+        addGroupNotificationToken(result: groupsFromRealm)
+        if !groupsFromRealm.isEmpty {
+            groups = groupsFromRealm
+        } else {
+            fetchGroups()
+        }
+    }
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        groups?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView
             .dequeueReusableCell(withIdentifier: Constants.groupCellIdText, for: indexPath) as? GroupTableCell
         else { return UITableViewCell() }
-        cell.setCell(upcomingGrpup: groups[indexPath.row], service: networkService)
+        cell.setCell(upcomingGrpup: groups?[indexPath.row] ?? Group(), service: networkService)
         return cell
     }
 }
