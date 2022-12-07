@@ -50,7 +50,7 @@ final class NewsController: UIViewController {
     // MARK: - Private Properties
     
     private let networkService = NetworkService()
-    private var news: [NewsFeed] = []
+    private var newsFeed: [NewsFeed] = []
 
     // MARK: - Life Cycle
 
@@ -87,14 +87,14 @@ final class NewsController: UIViewController {
             guard let self = self else { return }
             switch result {
             case let .success(post):
-                self.fetchPost(response: post)
+                self.updateNews(response: post)
             case let .failure(error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    private func fetchPost(response: NewsFeedResponse) {
+    private func updateNews(response: NewsFeedResponse) {
         response.news.forEach { item in
             if item.sourceID < 0 {
                 guard let group = response.groups.filter({ group in
@@ -111,7 +111,7 @@ final class NewsController: UIViewController {
             }
         }
         DispatchQueue.main.async {
-            self.news = response.news
+            self.newsFeed = response.news
             self.newsTableView.reloadData()
         }
     }
@@ -122,7 +122,7 @@ final class NewsController: UIViewController {
 extension NewsController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return news.count
+        return newsFeed.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,7 +130,7 @@ extension NewsController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentNews = news[indexPath.section]
+        let currentNews = newsFeed[indexPath.section]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.xibCellName,
                                                        for: indexPath) as? NewsCell else {
                                                         return UITableViewCell() }

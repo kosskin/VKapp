@@ -24,7 +24,9 @@ final class NewsCell: UITableViewCell {
         postDateLabel.text = formatData(timestamp: news.date)
     }
     
-    func formatData(timestamp: Int) -> String {
+    // MARK: - Private Methods
+    
+    private func formatData(timestamp: Int) -> String {
         let date = NSDate(timeIntervalSince1970: TimeInterval(timestamp))
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.medium
