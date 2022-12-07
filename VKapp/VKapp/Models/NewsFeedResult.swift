@@ -7,7 +7,8 @@
 
 import Foundation
 
-/// third level of request newsfeed
+/// first level of request newsfeed
 struct NewsFeedResult: Decodable {
+    /// response 1st level of request
     let response: NewsFeedResponse
 }

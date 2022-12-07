@@ -28,7 +28,6 @@
 		BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0DF291A70AD0019CF8F /* NewsCell.swift */; };
 		BB47E0E2291A70AD0019CF8F /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB47E0E0291A70AD0019CF8F /* NewsCell.xib */; };
 		BB47E0E5291A70F40019CF8F /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0E4291A70F40019CF8F /* NewsController.swift */; };
-		BB47E0E8291A82EE0019CF8F /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0E7291A82EE0019CF8F /* News.swift */; };
 		BB47E0EC291B0A9D0019CF8F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47E0EB291B0A9D0019CF8F /* LoaderView.swift */; };
 		BB51D829291DF0BF0020B639 /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51D828291DF0BF0020B639 /* CustomPushAnimator.swift */; };
 		BB51D82C291DF0ED0020B639 /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51D82B291DF0ED0020B639 /* CustomPopAnimator.swift */; };
@@ -44,7 +43,6 @@
 		BB6D84B62934F11C00D9A91A /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6D84B52934F11C00D9A91A /* PhotoResult.swift */; };
 		BB6D84B92934F13300D9A91A /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6D84B82934F13300D9A91A /* PhotoResponse.swift */; };
 		BB6D84BC2934F14400D9A91A /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6D84BB2934F14400D9A91A /* Photos.swift */; };
-		BB7BB0CE293F8B5700C5FE4A /* NewsConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BB0CD293F8B5700C5FE4A /* NewsConfigurable.swift */; };
 		BB7BB0D0293FD26800C5FE4A /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BB0CF293FD26800C5FE4A /* NewsFeed.swift */; };
 		BB7BB0D2293FD83800C5FE4A /* NewsFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BB0D1293FD83800C5FE4A /* NewsFeedResponse.swift */; };
 		BB7BB0D4293FDAD300C5FE4A /* NewsFeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7BB0D3293FDAD300C5FE4A /* NewsFeedResult.swift */; };
@@ -87,7 +85,6 @@
 		BB47E0DF291A70AD0019CF8F /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		BB47E0E0291A70AD0019CF8F /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		BB47E0E4291A70F40019CF8F /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
-		BB47E0E7291A82EE0019CF8F /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		BB47E0EB291B0A9D0019CF8F /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		BB51D828291DF0BF0020B639 /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
 		BB51D82B291DF0ED0020B639 /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
@@ -103,7 +100,6 @@
 		BB6D84B52934F11C00D9A91A /* PhotoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResult.swift; sourceTree = "<group>"; };
 		BB6D84B82934F13300D9A91A /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		BB6D84BB2934F14400D9A91A /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
-		BB7BB0CD293F8B5700C5FE4A /* NewsConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsConfigurable.swift; sourceTree = "<group>"; };
 		BB7BB0CF293FD26800C5FE4A /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		BB7BB0D1293FD83800C5FE4A /* NewsFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedResponse.swift; sourceTree = "<group>"; };
 		BB7BB0D3293FDAD300C5FE4A /* NewsFeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedResult.swift; sourceTree = "<group>"; };
@@ -219,8 +215,6 @@
 				BB7BB0CF293FD26800C5FE4A /* NewsFeed.swift */,
 				BB7BB0D1293FD83800C5FE4A /* NewsFeedResponse.swift */,
 				BB7BB0D3293FDAD300C5FE4A /* NewsFeedResult.swift */,
-				BB47E0E7291A82EE0019CF8F /* News.swift */,
-				BB7BB0CD293F8B5700C5FE4A /* NewsConfigurable.swift */,
 				BBBE38F3292F9AD6001833DF /* Photo.swift */,
 				BB6D84BB2934F14400D9A91A /* Photos.swift */,
 				BB6D84B82934F13300D9A91A /* PhotoResponse.swift */,
@@ -331,7 +325,7 @@
 				BB22B4A6290FD0750032AB8C /* Resources */,
 				BB47E0C129191A090019CF8F /* SwiftFormat */,
 				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
-				EDC9231682E58A1BBE93A716 /* [CP] Embed Pods Frameworks */,
+				D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,7 +443,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		EDC9231682E58A1BBE93A716 /* [CP] Embed Pods Frameworks */ = {
+		D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -496,7 +490,6 @@
 				BB2B9D752930AD9200892B4D /* UIImageView+Extension.swift in Sources */,
 				BB8B3B662913FAF400346D00 /* GroupsController.swift in Sources */,
 				BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */,
-				BB47E0E8291A82EE0019CF8F /* News.swift in Sources */,
 				BB2C1BFB292E0B3D009D8198 /* LoginWebViewViewController.swift in Sources */,
 				BB47E0E5291A70F40019CF8F /* NewsController.swift in Sources */,
 				BBBE38F7292FABE1001833DF /* Friend.swift in Sources */,
@@ -512,7 +505,6 @@
 				BB6D84BC2934F14400D9A91A /* Photos.swift in Sources */,
 				BB8B3B622913E04800346D00 /* OneFriendCell.swift in Sources */,
 				BB51D82C291DF0ED0020B639 /* CustomPopAnimator.swift in Sources */,
-				BB7BB0CE293F8B5700C5FE4A /* NewsConfigurable.swift in Sources */,
 				BBFA6694291CDF0300D2EF63 /* OneFriendWithSwipeController.swift in Sources */,
 				BB2C1C0A292E43D7009D8198 /* RequestType.swift in Sources */,
 				BB7BB0D2293FD83800C5FE4A /* NewsFeedResponse.swift in Sources */,

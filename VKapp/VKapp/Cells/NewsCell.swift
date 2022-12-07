@@ -11,11 +11,11 @@ final class NewsCell: UITableViewCell {
     @IBOutlet private var senderNameLabel: UILabel!
     @IBOutlet private var postTextLabel: UILabel!
     @IBOutlet private var postImageView: UIImageView!
-    @IBOutlet weak var postDateLabel: UILabel!
+    @IBOutlet private var postDateLabel: UILabel!
     
     // MARK: - Public Methods
 
-    func setCell(news: NewsFeed, service: NetworkService) {
+    func configure(news: NewsFeed, service: NetworkService) {
         guard let photoUrl = news.avaratPath else { return }
         senderImageView.loadImage(imageURL: photoUrl, service: service)
         senderNameLabel.text = news.authorName

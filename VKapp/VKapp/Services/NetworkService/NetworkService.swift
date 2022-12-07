@@ -72,7 +72,6 @@ final class NetworkService {
             guard let data = response.data else { return }
             do {
                 let object = try JSONDecoder().decode(NewsFeedResult.self, from: data)
-                print(response.request)
                 completion(.success(object.response))
             } catch {
                 completion(.failure(error))

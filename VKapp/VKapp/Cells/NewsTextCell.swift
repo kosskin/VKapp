@@ -8,18 +8,18 @@
 import UIKit
 
 /// describe 1 post with text only
-class NewsTextCell: UITableViewCell, NewsConfigurable {
+final class NewsTextCell: UITableViewCell {
     
-    @IBOutlet weak var senderImageView: UIImageView!
-    @IBOutlet weak var senderNameLabel: UILabel!
-    @IBOutlet weak var postTextLabel: UILabel!
+    @IBOutlet private var senderImageView: UIImageView!
+    @IBOutlet private var senderNameLabel: UILabel!
+    @IBOutlet private var postTextLabel: UILabel!
     
     // MARK: - Public Methods
 
-    func setCell(news: News) {
-        senderImageView.image = UIImage(named: news.senderImageName)
-        senderNameLabel.text = news.senderImageName
-        guard let postText = news.text else { return }
-        postTextLabel.text = postText
+    func configure(news: NewsFeed, service: NetworkService) {
+        guard let photoUrl = news.avaratPath else { return }
+        senderImageView.loadImage(imageURL: photoUrl, service: service)
+        senderNameLabel.text = news.authorName
+        postTextLabel.text = news.text
     }
 }

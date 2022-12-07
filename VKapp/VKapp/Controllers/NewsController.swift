@@ -45,41 +45,11 @@ final class NewsController: UIViewController {
 
     // MARK: - IBOutlets
 
-    private let networkService = NetworkService()
     @IBOutlet private var newsTableView: UITableView!
 
     // MARK: - Private Properties
-
-//    private var news = [
-//        News(
-//            senderName: Constants.senderNameOne,
-//            senderImageName: Constants.senderImageNameOne,
-//            text: Constants.textForAllPosts,
-//            newsImageName: Constants.newImageNameOne,
-//            type: .photo
-//        ),
-//        News(
-//            senderName: Constants.senderNameTwo,
-//            senderImageName: Constants.senderImageNameTwo,
-//            text: Constants.textForAllPosts,
-//            newsImageName: Constants.newImageNameTwo,
-//            type: .photo
-//        ),
-//        News(
-//            senderName: Constants.senderNameThree,
-//            senderImageName: Constants.senderImageNameThree,
-//            text: Constants.textForAllPosts,
-//            newsImageName: Constants.newImageNameThree,
-//            type: .photo
-//        ),
-//        News(
-//            senderName: Constants.senderNameFour,
-//            senderImageName: Constants.senderImageNameFour,
-//            text: Constants.textForAllPosts,
-//            newsImageName: Constants.newImageNameFour,
-//            type: .text
-//        )
-//    ]
+    
+    private let networkService = NetworkService()
     private var news: [NewsFeed] = []
 
     // MARK: - Life Cycle
@@ -147,7 +117,7 @@ final class NewsController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension NewsController: UITableViewDataSource, UITableViewDelegate {
     
@@ -159,27 +129,12 @@ extension NewsController: UITableViewDataSource, UITableViewDelegate {
         1
     }
     
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let currentNews = news[indexPath.section]
-//        var cellId = ""
-//        switch currentNews.type {
-//        case .text:
-//            cellId = Constants.xibTextCellName
-//        case .photo:
-//            cellId = Constants.xibCellName
-//        }
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId,
-//                                                       for: indexPath) as? NewsConfigurable else {
-//                                                        return UITableViewCell() }
-//        cell.setCell(news: currentNews)
-//        return cell as? UITableViewCell ?? UITableViewCell()
-//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currentNews = news[indexPath.section]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.xibCellName,
                                                        for: indexPath) as? NewsCell else {
                                                         return UITableViewCell() }
-        cell.setCell(news: currentNews, service: networkService)
+        cell.configure(news: currentNews, service: networkService)
         return cell as? UITableViewCell ?? UITableViewCell()
     }
 }
