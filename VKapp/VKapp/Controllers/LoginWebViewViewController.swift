@@ -79,6 +79,7 @@ extension LoginWebViewViewController: WKNavigationDelegate {
         }
 
         Session.shared.token = token
+        print(Session.shared.token)
         Session.shared.userID = userID
 
         performSegue(withIdentifier: Constants.segueTabBarId, sender: self)

@@ -19,7 +19,7 @@ final class NetworkService {
         static let urlQueryItemRedirectUriName = "redirect_uri"
         static let urlQueryItemRedirectUriValue = "https://oauth.vk.com/blank.html"
         static let urlQueryItemScopeName = "scope"
-        static let urlQueryItemScopeValue = "262150"
+        static let urlQueryItemScopeValue = "8198"
         static let urlQueryItemResponseTypeName = "response_type"
         static let urlQueryItemResponseTypeValue = "token"
         static let urlQueryItemVName = "v"
@@ -65,6 +65,19 @@ final class NetworkService {
                     completion(.failure(error))
                 }
             }
+    }
+    
+    func fetchNews(urlString: String, completion: @escaping (Result<NewsFeedResponse, Error>) -> Void) {
+        AF.request(urlString).responseJSON { response in
+            guard let data = response.data else { return }
+            do {
+                let object = try JSONDecoder().decode(NewsFeedResult.self, from: data)
+                print(response.request)
+                completion(.success(object.response))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
 
     func loadImageData(imageURL: String) -> Data? {

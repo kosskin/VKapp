@@ -11,15 +11,26 @@ final class NewsCell: UITableViewCell {
     @IBOutlet private var senderNameLabel: UILabel!
     @IBOutlet private var postTextLabel: UILabel!
     @IBOutlet private var postImageView: UIImageView!
-
+    @IBOutlet weak var postDateLabel: UILabel!
+    
     // MARK: - Public Methods
 
-    func setCell(news: News) {
-        senderImageView.image = UIImage(named: news.senderImageName)
-        senderNameLabel.text = news.senderImageName
-        guard let postText = news.text,
-              let postImage = news.newsImageName else { return }
-        postTextLabel.text = postText
-        postImageView.image = UIImage(named: postImage)
+    func setCell(news: NewsFeed, service: NetworkService) {
+        guard let photoUrl = news.avaratPath else { return }
+        senderImageView.loadImage(imageURL: photoUrl, service: service)
+        senderNameLabel.text = news.authorName
+        postTextLabel.text = news.text
+        postImageView.image = UIImage(named: news.postImage ?? "")
+        postDateLabel.text = formatData(timestamp: news.date)
+    }
+    
+    func formatData(timestamp: Int) -> String {
+        let date = NSDate(timeIntervalSince1970: TimeInterval(timestamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.medium
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date as Date)
+        return String(localDate)
     }
 }

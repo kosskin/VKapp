@@ -19,4 +19,6 @@ enum Api {
     static let exampleQ = "sport"
     static let sortByName = "&order=name"
     static let fields = "&fields=photo_100&v=5.131"
+    static let newsfeed = "newsfeed.get?"
+    static let newsFilter = "&filters=post"
 }
