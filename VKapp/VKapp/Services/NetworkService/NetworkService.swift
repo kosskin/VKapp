@@ -53,6 +53,21 @@ final class NetworkService {
                 }
             }
     }
+    
+    func fetchGroupOperation(urlString: String) {
+        let request = getRequest(urlSting: urlString)
+        let opq = OperationQueue()
+        let getDataOperation = GetDataOperation(request: request)
+        opq.addOperation(getDataOperation)
+        
+        let parseGroupData = ParseGroupData()
+        parseGroupData.addDependency(getDataOperation)
+        opq.addOperation(parseGroupData)
+        
+        let reloadGroupsController = ReloadTableController()
+        reloadGroupsController.addDependency(parseGroupData)
+        OperationQueue.main.addOperation(reloadGroupsController)
+    }
 
     func fetchPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
         AF
@@ -102,5 +117,12 @@ final class NetworkService {
             URLQueryItem(name: Constants.urlQueryItemVName, value: Constants.urlQueryItemVValue)
         ]
         return urlComponents.url
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getRequest(urlSting: String) -> DataRequest {
+        let request = AF.request(urlSting)
+        return request
     }
 }

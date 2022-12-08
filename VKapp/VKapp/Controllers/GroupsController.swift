@@ -45,16 +45,21 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Methods
 
     private func fetchGroups() {
-        networkService.fetchGroup(urlString: RequestType.groups.urlString) { result in
-            switch result {
-            case let .success(groups):
-                RealmService.save(items: groups)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
+        networkService.fetchGroupOperation(urlString: RequestType.groups.urlString)
     }
 
+    private func loadData() {
+        let dataFromRealm = RealmService.get(Group.self)
+        let realm = try? Realm()
+        guard let groupsFromRealm = dataFromRealm else { return }
+        addGroupNotificationToken(result: groupsFromRealm)
+        if !groupsFromRealm.isEmpty {
+            groups = groupsFromRealm
+        } else {
+            fetchGroups()
+        }
+    }
+    
     private func addGroupNotificationToken(result: Results<Group>) {
         groupToken = result.observe { [weak self] changes in
             switch changes {
@@ -66,17 +71,6 @@ final class GroupsController: UITableViewController {
             case let .error(error):
                 print(error.localizedDescription)
             }
-        }
-    }
-
-    private func loadData() {
-        let dataFromRealm = RealmService.get(Group.self)
-        guard let groupsFromRealm = dataFromRealm else { return }
-        addGroupNotificationToken(result: groupsFromRealm)
-        if !groupsFromRealm.isEmpty {
-            groups = groupsFromRealm
-        } else {
-            fetchGroups()
         }
     }
 

@@ -1,6 +1,7 @@
 // FriendsController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -39,6 +40,7 @@ final class FriendsController: UITableViewController {
         UIImage(named: Constants.friendThreeImageName) ?? UIImage()
     ]
 
+    private let networkServicePromise = NetworkServicePromise()
     private let networkService = NetworkService()
     private var friends: Results<Friend>?
     private var friendsSectionsMap: [Character: [Friend]] = [:]
@@ -93,15 +95,14 @@ final class FriendsController: UITableViewController {
         }
         friendSectionsTitles = Array(friendsSectionsMap.keys).sorted()
     }
-
+    
     private func fetchFriends() {
-        networkService.fetchFriend(urlString: RequestType.friends.urlString) { result in
-            switch result {
-            case let .success(friends):
-                RealmService.save(items: friends)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
+        firstly {
+            networkServicePromise.fetchFriends(urlSting: RequestType.friends.urlString)
+        }.done { friends in
+            RealmService.save(items: friends)
+        }.catch { error in
+            print(error.localizedDescription)
         }
     }
 
