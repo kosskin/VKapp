@@ -7,6 +7,7 @@ enum RequestType {
     case groups
     case photos(id: Int)
     case searchGroups(searchQuery: String)
+    case news
 
     // MARK: - Public Properties
 
@@ -20,6 +21,8 @@ enum RequestType {
             return "\(Api.baseURL)\(Api.groupsGet)\(Api.userId)\(Api.extended)\(Api.accessToken)\(Api.version)"
         case let .searchGroups(searchQuery):
             return "\(Api.baseURL)\(Api.groupsSearch)\(Api.accessToken)\(Api.qSearch)\(searchQuery)\(Api.version)"
+        case .news:
+            return "\(Api.baseURL)\(Api.newsfeed)\(Api.accessToken)\(Api.newsFilter)\(Api.version)"
         }
     }
 }
