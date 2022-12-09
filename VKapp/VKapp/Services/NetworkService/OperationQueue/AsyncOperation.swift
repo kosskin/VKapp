@@ -9,11 +9,18 @@ import Foundation
 
 /// For asynchonic operation
 class AsyncOperation: Operation {
+    
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let isText = "is"
+    }
+    
     /// state of current operation
     enum State: String {
         case ready, executing, finished
         fileprivate var keyPath: String {
-            return "is" + rawValue.capitalized
+            return Constants.isText + rawValue.capitalized
         }
     }
     

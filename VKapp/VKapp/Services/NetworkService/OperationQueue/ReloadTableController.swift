@@ -7,6 +7,7 @@
 
 import RealmSwift
 
+/// Describe operation save to realm after parsing
 final class ReloadTableController: Operation {
     
     // MARK: - Public Methods
