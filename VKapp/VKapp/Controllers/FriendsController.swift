@@ -37,7 +37,7 @@ final class FriendsController: UITableViewController {
     private let imagesForSwipe: [UIImage] = [
         UIImage(named: Constants.friendOneImageName) ?? UIImage(),
         UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
-        UIImage(named: Constants.friendThreeImageName) ?? UIImage()
+        UIImage(named: Constants.friendThreeImageName) ?? UIImage(),
     ]
 
     private let networkServicePromise = NetworkServicePromise()
@@ -56,7 +56,7 @@ final class FriendsController: UITableViewController {
 
     // MARK: - Public Methods
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         guard segue.identifier == Constants.segueOneFriendWithSwipeId,
               let oneFriendController = segue.destination as? OneFriendWithSwipeController,
               let currnetId = tableView.indexPathForSelectedRow,
@@ -67,7 +67,7 @@ final class FriendsController: UITableViewController {
 
     // DataSource methods
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         friends?.count ?? 0
     }
 
@@ -95,7 +95,7 @@ final class FriendsController: UITableViewController {
         }
         friendSectionsTitles = Array(friendsSectionsMap.keys).sorted()
     }
-    
+
     private func fetchFriends() {
         firstly {
             networkServicePromise.fetchFriends(urlSting: RequestType.friends.urlString)

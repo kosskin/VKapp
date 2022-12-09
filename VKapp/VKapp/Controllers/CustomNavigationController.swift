@@ -29,7 +29,7 @@ extension CustomNavigationController: UINavigationControllerDelegate {
     func navigationController(
         _ navigationController: UINavigationController,
         animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
+        from _: UIViewController,
         to toVC: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
@@ -47,8 +47,8 @@ extension CustomNavigationController: UINavigationControllerDelegate {
     }
 
     func navigationController(
-        _ navigationController: UINavigationController,
-        interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
+        _: UINavigationController,
+        interactionControllerFor _: UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
         interactive.isStarted ? interactive : nil
     }

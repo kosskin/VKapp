@@ -1,9 +1,5 @@
-//
-//  NewsFeed.swift
-//  VKapp
-//
-//  Created by Валентин Коскин on 06.12.2022.
-//
+// NewsFeed.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
@@ -23,7 +19,7 @@ final class NewsFeed: Decodable {
     var postImage: String?
     /// date of publication
     var date: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case sourceID = "source_id"

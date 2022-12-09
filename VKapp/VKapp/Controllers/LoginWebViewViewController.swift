@@ -49,7 +49,7 @@ final class LoginWebViewViewController: UIViewController {
 
 extension LoginWebViewViewController: WKNavigationDelegate {
     func webView(
-        _ webView: WKWebView,
+        _: WKWebView,
         decidePolicyFor navigationResponse: WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {

@@ -12,7 +12,7 @@ final class NewsCell: UITableViewCell {
     @IBOutlet private var postTextLabel: UILabel!
     @IBOutlet private var postImageView: UIImageView!
     @IBOutlet private var postDateLabel: UILabel!
-    
+
     // MARK: - Public Methods
 
     func configure(news: NewsFeed, service: NetworkService) {
@@ -23,9 +23,9 @@ final class NewsCell: UITableViewCell {
         postImageView.image = UIImage(named: news.postImage ?? "")
         postDateLabel.text = formatData(timestamp: news.date)
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func formatData(timestamp: Int) -> String {
         let date = NSDate(timeIntervalSince1970: TimeInterval(timestamp))
         let dateFormatter = DateFormatter()

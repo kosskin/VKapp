@@ -1,31 +1,26 @@
-//
-//  AsyncOperation.swift
-//  VKapp
-//
-//  Created by Валентин Коскин on 08.12.2022.
-//
+// AsyncOperation.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
 /// For asynchonic operation
 class AsyncOperation: Operation {
-    
     // MARK: - Constants
-    
+
     private enum Constants {
         static let isText = "is"
     }
-    
+
     /// state of current operation
     enum State: String {
         case ready, executing, finished
         fileprivate var keyPath: String {
-            return Constants.isText + rawValue.capitalized
+            Constants.isText + rawValue.capitalized
         }
     }
-    
+
     // MARK: - Public Properties
-    
+
     var state = State.ready {
         willSet {
             willChangeValue(forKey: state.keyPath)
@@ -36,21 +31,25 @@ class AsyncOperation: Operation {
             didChangeValue(forKey: oldValue.keyPath)
         }
     }
+
     override var isAsynchronous: Bool {
-        return true
+        true
     }
+
     override var isReady: Bool {
-        return super.isReady && state == .ready
+        super.isReady && state == .ready
     }
+
     override var isExecuting: Bool {
-        return state == .executing
+        state == .executing
     }
+
     override var isFinished: Bool {
-        return state == .finished
+        state == .finished
     }
-    
+
     // MARK: - Public Methods
-    
+
     override func start() {
         if isCancelled {
             state = .finished
@@ -59,6 +58,7 @@ class AsyncOperation: Operation {
             state = .executing
         }
     }
+
     override func cancel() {
         super.cancel()
         state = .finished

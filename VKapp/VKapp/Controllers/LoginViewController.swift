@@ -61,7 +61,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
         guard
             identifier == Constants.segueShowTabBarText,
             let loginText = loginTextField.text,
@@ -91,7 +91,7 @@ final class LoginViewController: UIViewController {
         loginScrollView.scrollIndicatorInsets = contentInset
     }
 
-    @objc private func keyboardWillHideAction(notification: Notification) {
+    @objc private func keyboardWillHideAction(notification _: Notification) {
         loginScrollView.contentInset = UIEdgeInsets.zero
         loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }

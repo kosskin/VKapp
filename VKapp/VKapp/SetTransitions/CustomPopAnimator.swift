@@ -16,7 +16,7 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
     // MARK: - Public Methods
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         Constants.allTimeInterval
     }
 

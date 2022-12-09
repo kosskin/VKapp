@@ -11,7 +11,7 @@
 		BB186A612941D38800B43C20 /* ParseGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A602941D38800B43C20 /* ParseGroupData.swift */; };
 		BB186A632941D73500B43C20 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A622941D73500B43C20 /* GetDataOperation.swift */; };
 		BB186A652941D7EC00B43C20 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A642941D7EC00B43C20 /* AsyncOperation.swift */; };
-		BB186A672941E15D00B43C20 /* ReloadTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A662941E15D00B43C20 /* ReloadTableController.swift */; };
+		BB186A672941E15D00B43C20 /* ReloadTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A662941E15D00B43C20 /* ReloadTable.swift */; };
 		BB186A69294276CC00B43C20 /* NetworkServicePromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A68294276CC00B43C20 /* NetworkServicePromise.swift */; };
 		BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AB290FD0750032AB8C /* AppDelegate.swift */; };
 		BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */; };
@@ -71,7 +71,7 @@
 		BB186A602941D38800B43C20 /* ParseGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGroupData.swift; sourceTree = "<group>"; };
 		BB186A622941D73500B43C20 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		BB186A642941D7EC00B43C20 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		BB186A662941E15D00B43C20 /* ReloadTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTableController.swift; sourceTree = "<group>"; };
+		BB186A662941E15D00B43C20 /* ReloadTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTable.swift; sourceTree = "<group>"; };
 		BB186A68294276CC00B43C20 /* NetworkServicePromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicePromise.swift; sourceTree = "<group>"; };
 		BB22B4A8290FD0750032AB8C /* VKapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB22B4AB290FD0750032AB8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				BB186A642941D7EC00B43C20 /* AsyncOperation.swift */,
 				BB186A602941D38800B43C20 /* ParseGroupData.swift */,
 				BB186A622941D73500B43C20 /* GetDataOperation.swift */,
-				BB186A662941E15D00B43C20 /* ReloadTableController.swift */,
+				BB186A662941E15D00B43C20 /* ReloadTable.swift */,
 			);
 			path = OperationQueue;
 			sourceTree = "<group>";
@@ -346,9 +346,9 @@
 				BB22B4A4290FD0750032AB8C /* Sources */,
 				BB22B4A5290FD0750032AB8C /* Frameworks */,
 				BB22B4A6290FD0750032AB8C /* Resources */,
-				BB47E0C129191A090019CF8F /* SwiftFormat */,
-				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 				D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */,
+				BB30E79529435C2E00598448 /* SwiftFormat */,
+				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -446,9 +446,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=/opt/homebrew/bin:$PATH\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		BB47E0C129191A090019CF8F /* SwiftFormat */ = {
+		BB30E79529435C2E00598448 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -464,7 +464,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -492,7 +492,7 @@
 			files = (
 				BB7BB0D0293FD26800C5FE4A /* NewsFeed.swift in Sources */,
 				BB384FC4291D8ADF00DB8F8E /* ForTransitionController.swift in Sources */,
-				BB186A672941E15D00B43C20 /* ReloadTableController.swift in Sources */,
+				BB186A672941E15D00B43C20 /* ReloadTable.swift in Sources */,
 				BB47E0BB291908BF0019CF8F /* LikesControl.swift in Sources */,
 				BB8B3B3E29129B1500346D00 /* UIViewController+Extension.swift in Sources */,
 				BB8B3B5B2913CE7400346D00 /* User.swift in Sources */,

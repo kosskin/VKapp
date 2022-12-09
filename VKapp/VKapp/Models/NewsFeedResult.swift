@@ -1,9 +1,5 @@
-//
-//  NewsFeedResult.swift
-//  VKapp
-//
-//  Created by Валентин Коскин on 06.12.2022.
-//
+// NewsFeedResult.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

@@ -59,7 +59,7 @@ final class GroupsController: UITableViewController {
             fetchGroups()
         }
     }
-    
+
     private func addGroupNotificationToken(result: Results<Group>) {
         groupToken = result.observe { [weak self] changes in
             switch changes {
@@ -76,7 +76,7 @@ final class GroupsController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         groups?.count ?? 0
     }
 

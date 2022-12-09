@@ -1,17 +1,12 @@
-//
-//  ReloadTableController.swift
-//  VKapp
-//
-//  Created by Валентин Коскин on 08.12.2022.
-//
+// ReloadTable.swift
+// Copyright © RoadMap. All rights reserved.
 
 import RealmSwift
 
 /// Describe operation save to realm after parsing
-final class ReloadTableController: Operation {
-    
+final class ReloadTable: Operation {
     // MARK: - Public Methods
-    
+
     override func main() {
         guard let getParseData = dependencies.first as? ParseGroupData else { return }
         let parseData = getParseData.outputData
