@@ -56,13 +56,13 @@ final class NetworkService {
 
     func fetchGroupOperation(urlString: String) {
         let request = getRequest(urlSting: urlString)
-        let opq = OperationQueue()
+        let operationQueue = OperationQueue()
         let getDataOperation = GetDataOperation(request: request)
-        opq.addOperation(getDataOperation)
+        operationQueue.addOperation(getDataOperation)
 
         let parseGroupData = ParseGroupData()
         parseGroupData.addDependency(getDataOperation)
-        opq.addOperation(parseGroupData)
+        operationQueue.addOperation(parseGroupData)
 
         let reloadGroups = ReloadTable()
         reloadGroups.addDependency(parseGroupData)

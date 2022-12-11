@@ -49,9 +49,8 @@ final class GroupsController: UITableViewController {
     }
 
     private func loadData() {
-        let dataFromRealm = RealmService.get(Group.self)
-        let realm = try? Realm()
-        guard let groupsFromRealm = dataFromRealm else { return }
+        let data = RealmService.get(Group.self)
+        guard let groupsFromRealm = data else { return }
         addGroupNotificationToken(result: groupsFromRealm)
         if !groupsFromRealm.isEmpty {
             groups = groupsFromRealm
