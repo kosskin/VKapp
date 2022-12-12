@@ -5,14 +5,22 @@ import UIKit
 
 /// Extenstion for PhotoCacheService
 extension PhotoCacheService {
+    /// Class to reload Table
     class Table: DataReloadable {
+        // MARK: - Public Properties
+
         let table: UITableView
+
+        // MARK: - Initializers
+
         init(table: UITableView) {
             self.table = table
         }
 
-        func reloadRow(atIndexpath indexPath: IndexPath) {
-            table.reloadRows(at: [indexPath], with: .none)
+        // MARK: - Public Methods
+
+        func reloadRow() {
+            table.reloadData()
         }
     }
 }

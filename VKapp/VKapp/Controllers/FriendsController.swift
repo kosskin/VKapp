@@ -79,11 +79,10 @@ final class FriendsController: UITableViewController {
             let friends = friends
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
-        cell.setCell(
+        cell.configureCell(
             upcomingFriend: friend,
-            service: networkService,
-            photo: photoCacheService?
-                .photo(atIndexpath: indexPath, byUrl: friends[indexPath.row].imageName) ?? UIImage()
+            photoCacheService: photoCacheService ?? PhotoCacheService(container: tableView),
+            indexPathIndex: indexPath
         )
         return cell
     }

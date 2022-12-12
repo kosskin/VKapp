@@ -13,11 +13,10 @@ final class FriendTableCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func setCell(upcomingFriend: Friend, service: NetworkService, photo: UIImage) {
+    func configureCell(upcomingFriend: Friend, photoCacheService: PhotoCacheService, indexPathIndex: IndexPath) {
         friendNameLabel.text = "\(upcomingFriend.firstName) \(upcomingFriend.lastName)"
-        friendImageView.loadImage(imageURL: upcomingFriend.imageName, service: service)
         configureImageView()
-        friendImageView.image = photo
+        friendImageView.image = photoCacheService.photo(byUrl: upcomingFriend.imageName)
     }
 
     func getFriendImageView() -> UIImageView {

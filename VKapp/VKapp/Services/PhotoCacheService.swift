@@ -44,7 +44,7 @@ final class PhotoCacheService {
         return pathName
     }()
 
-    private var images = [String: UIImage]()
+    private var imagesMap = [String: UIImage]()
 
     // MARK: Init
 
@@ -54,31 +54,31 @@ final class PhotoCacheService {
 
     // MARK: - Public Methods
 
-    func photo(atIndexpath indexPath: IndexPath, byUrl url: String) -> UIImage? {
+    func photo(byUrl url: String) -> UIImage? {
         var image: UIImage?
-        if let photo = images[url] {
+        if let photo = imagesMap[url] {
             image = photo
         } else if let photo = getImageFromCache(url: url) {
             image = photo
         } else {
-            loadPhoto(atIndexpath: indexPath, byUrl: url)
+            loadPhoto(byUrl: url)
         }
         return image
     }
 
     // MARK: - Private Methods
 
-    private func loadPhoto(atIndexpath indexPath: IndexPath, byUrl url: String) {
+    private func loadPhoto(byUrl url: String) {
         AF.request(url).responseData(queue: DispatchQueue.global()) { [weak self] response in
             guard
                 let data = response.data,
                 let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
-                self?.images[url] = image
+                self?.imagesMap[url] = image
             }
             self?.saveImageToCache(url: url, image: image)
             DispatchQueue.main.async {
-                self?.container.reloadRow(atIndexpath: indexPath)
+                self?.container.reloadRow()
             }
         }
     }
@@ -119,7 +119,7 @@ final class PhotoCacheService {
             lifeTime <= cacheLifeTime,
             let image = UIImage(contentsOfFile: fileName) else { return nil }
         DispatchQueue.main.async {
-            self.images[url] = image
+            self.imagesMap[url] = image
         }
         return image
     }

@@ -5,5 +5,5 @@ import Foundation
 
 /// Method for reload cells
 protocol DataReloadable {
-    func reloadRow(atIndexpath indexPath: IndexPath)
+    func reloadRow()
 }
