@@ -53,6 +53,7 @@ final class FriendsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        configureCache()
     }
 
     // MARK: - Public Methods
@@ -88,6 +89,10 @@ final class FriendsController: UITableViewController {
     }
 
     // MARK: - Private Methods
+
+    private func configureCache() {
+        photoCacheService = PhotoCacheService(container: tableView)
+    }
 
     private func createFriendSections() {
         guard let friends = friends else { return }
@@ -127,14 +132,11 @@ final class FriendsController: UITableViewController {
     }
 
     private func loadData() {
-        let realm = try? Realm()
-        print(realm?.configuration.fileURL)
         let dataFromRealm = RealmService.get(Friend.self)
         guard let friendsFromRealm = dataFromRealm else { return }
         addFriendNotificationToken(result: friendsFromRealm)
         if !friendsFromRealm.isEmpty {
             friends = friendsFromRealm
-            photoCacheService = PhotoCacheService(container: tableView)
         } else {
             fetchFriends()
         }
