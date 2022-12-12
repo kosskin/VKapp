@@ -46,12 +46,14 @@ final class FriendsController: UITableViewController {
     private var friendsSectionsMap: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
     private var friendToken: NotificationToken?
+    private var photoCacheService: PhotoCacheService?
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        configureCache()
     }
 
     // MARK: - Public Methods
@@ -77,11 +79,18 @@ final class FriendsController: UITableViewController {
             let friends = friends
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
-        cell.setCell(upcomingFriend: friend, service: networkService)
+        cell.configureCell(
+            upcomingFriend: friend,
+            photoCacheService: photoCacheService ?? PhotoCacheService(container: tableView)
+        )
         return cell
     }
 
     // MARK: - Private Methods
+
+    private func configureCache() {
+        photoCacheService = PhotoCacheService(container: tableView)
+    }
 
     private func createFriendSections() {
         guard let friends = friends else { return }
