@@ -46,6 +46,7 @@ final class FriendsController: UITableViewController {
     private var friendsSectionsMap: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
     private var friendToken: NotificationToken?
+    private var photoCacheService: PhotoCacheService?
 
     // MARK: - Life Cycle
 
@@ -77,7 +78,12 @@ final class FriendsController: UITableViewController {
             let friends = friends
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
-        cell.setCell(upcomingFriend: friend, service: networkService)
+        cell.setCell(
+            upcomingFriend: friend,
+            service: networkService,
+            photo: photoCacheService?
+                .photo(atIndexpath: indexPath, byUrl: friends[indexPath.row].imageName) ?? UIImage()
+        )
         return cell
     }
 
@@ -121,11 +127,14 @@ final class FriendsController: UITableViewController {
     }
 
     private func loadData() {
+        let realm = try? Realm()
+        print(realm?.configuration.fileURL)
         let dataFromRealm = RealmService.get(Friend.self)
         guard let friendsFromRealm = dataFromRealm else { return }
         addFriendNotificationToken(result: friendsFromRealm)
         if !friendsFromRealm.isEmpty {
             friends = friendsFromRealm
+            photoCacheService = PhotoCacheService(container: tableView)
         } else {
             fetchFriends()
         }

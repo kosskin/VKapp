@@ -20,6 +20,9 @@
 		BB22B4B5290FD0790032AB8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B4290FD0790032AB8C /* Assets.xcassets */; };
 		BB22B4B8290FD0790032AB8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4B6290FD0790032AB8C /* LaunchScreen.storyboard */; };
 		BB22B4EB2910631C0032AB8C /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB22B4EA2910631C0032AB8C /* Color.xcassets */; };
+		BB2760C72946F760007CBB75 /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760C62946F760007CBB75 /* PhotoCacheService.swift */; };
+		BB2760C92946FC44007CBB75 /* PhotoCacheService+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */; };
+		BB2760CE2946FCDB007CBB75 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760CD2946FCDB007CBB75 /* DataReloadable.swift */; };
 		BB2B9D752930AD9200892B4D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */; };
 		BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */; };
 		BB2C1BFB292E0B3D009D8198 /* LoginWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */; };
@@ -82,6 +85,9 @@
 		BB22B4B7290FD0790032AB8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB22B4B9290FD0790032AB8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB22B4EA2910631C0032AB8C /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		BB2760C62946F760007CBB75 /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
+		BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCacheService+Extension.swift"; sourceTree = "<group>"; };
+		BB2760CD2946FCDB007CBB75 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
 		BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 		BB22B4AA290FD0750032AB8C /* VKapp */ = {
 			isa = PBXGroup;
 			children = (
+				BB2760CC2946FCCC007CBB75 /* Helpers */,
 				BB5F5D2229378B0E00172D04 /* Services */,
 				BB4458D5292CFFC9004E6F35 /* Singleton */,
 				BB51D827291DF08E0020B639 /* SetTransitions */,
@@ -209,6 +216,14 @@
 				BB22B4B9290FD0790032AB8C /* Info.plist */,
 			);
 			path = VKapp;
+			sourceTree = "<group>";
+		};
+		BB2760CC2946FCCC007CBB75 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB2760CD2946FCDB007CBB75 /* DataReloadable.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BB2BD9DA2918EC000021C5C6 /* Controllers */ = {
@@ -314,6 +329,7 @@
 			children = (
 				BB5F5D2329378B3200172D04 /* RealmService */,
 				BB2C1C02292E3487009D8198 /* NetworkService */,
+				BB2760C62946F760007CBB75 /* PhotoCacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -331,6 +347,7 @@
 			children = (
 				BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */,
 				BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */,
+				BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -505,6 +522,7 @@
 				BB6D84AD2934F0D700D9A91A /* Friends.swift in Sources */,
 				BB51D829291DF0BF0020B639 /* CustomPushAnimator.swift in Sources */,
 				BB47E0EC291B0A9D0019CF8F /* LoaderView.swift in Sources */,
+				BB2760C92946FC44007CBB75 /* PhotoCacheService+Extension.swift in Sources */,
 				BB8B3B692913FB1600346D00 /* GroupTableCell.swift in Sources */,
 				BB186A69294276CC00B43C20 /* NetworkServicePromise.swift in Sources */,
 				BB51D82F291DF1540020B639 /* CustomNavigationController.swift in Sources */,
@@ -515,6 +533,7 @@
 				BBBE38F4292F9AD6001833DF /* Photo.swift in Sources */,
 				BB617AF5293E4D61004752CB /* NewsTextCell.swift in Sources */,
 				BB2B9D752930AD9200892B4D /* UIImageView+Extension.swift in Sources */,
+				BB2760CE2946FCDB007CBB75 /* DataReloadable.swift in Sources */,
 				BB8B3B662913FAF400346D00 /* GroupsController.swift in Sources */,
 				BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */,
 				BB2C1BFB292E0B3D009D8198 /* LoginWebViewViewController.swift in Sources */,
@@ -523,6 +542,7 @@
 				BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */,
 				BB4458D7292D0BD1004E6F35 /* Session.swift in Sources */,
 				BB8B3B582913CD7900346D00 /* FriendTableCell.swift in Sources */,
+				BB2760C72946F760007CBB75 /* PhotoCacheService.swift in Sources */,
 				BB6D84AA2934F0B700D9A91A /* FriendResult.swift in Sources */,
 				BB6D84B92934F13300D9A91A /* PhotoResponse.swift in Sources */,
 				BB6D84B62934F11C00D9A91A /* PhotoResult.swift in Sources */,
