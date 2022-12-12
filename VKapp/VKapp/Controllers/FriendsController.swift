@@ -1,6 +1,7 @@
 // FriendsController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -36,9 +37,10 @@ final class FriendsController: UITableViewController {
     private let imagesForSwipe: [UIImage] = [
         UIImage(named: Constants.friendOneImageName) ?? UIImage(),
         UIImage(named: Constants.friendTwoImageName) ?? UIImage(),
-        UIImage(named: Constants.friendThreeImageName) ?? UIImage()
+        UIImage(named: Constants.friendThreeImageName) ?? UIImage(),
     ]
 
+    private let networkServicePromise = NetworkServicePromise()
     private let networkService = NetworkService()
     private var friends: Results<Friend>?
     private var friendsSectionsMap: [Character: [Friend]] = [:]
@@ -54,7 +56,7 @@ final class FriendsController: UITableViewController {
 
     // MARK: - Public Methods
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         guard segue.identifier == Constants.segueOneFriendWithSwipeId,
               let oneFriendController = segue.destination as? OneFriendWithSwipeController,
               let currnetId = tableView.indexPathForSelectedRow,
@@ -65,7 +67,7 @@ final class FriendsController: UITableViewController {
 
     // DataSource methods
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         friends?.count ?? 0
     }
 
@@ -95,13 +97,12 @@ final class FriendsController: UITableViewController {
     }
 
     private func fetchFriends() {
-        networkService.fetchFriend(urlString: RequestType.friends.urlString) { result in
-            switch result {
-            case let .success(friends):
-                RealmService.save(items: friends)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
+        firstly {
+            networkServicePromise.fetchFriends(urlSting: RequestType.friends.urlString)
+        }.done { friends in
+            RealmService.save(items: friends)
+        }.catch { error in
+            print(error.localizedDescription)
         }
     }
 

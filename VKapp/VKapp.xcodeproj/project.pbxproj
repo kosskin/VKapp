@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		573021CD3C89FD69633F73D9 /* Pods_VKapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4352BBE0F8F4C3069B523ADA /* Pods_VKapp.framework */; };
+		BB186A612941D38800B43C20 /* ParseGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A602941D38800B43C20 /* ParseGroupData.swift */; };
+		BB186A632941D73500B43C20 /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A622941D73500B43C20 /* GetDataOperation.swift */; };
+		BB186A652941D7EC00B43C20 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A642941D7EC00B43C20 /* AsyncOperation.swift */; };
+		BB186A672941E15D00B43C20 /* ReloadTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A662941E15D00B43C20 /* ReloadTable.swift */; };
+		BB186A69294276CC00B43C20 /* NetworkServicePromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB186A68294276CC00B43C20 /* NetworkServicePromise.swift */; };
 		BB22B4AC290FD0750032AB8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AB290FD0750032AB8C /* AppDelegate.swift */; };
 		BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */; };
 		BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B4AF290FD0750032AB8C /* LoginViewController.swift */; };
@@ -63,6 +68,11 @@
 /* Begin PBXFileReference section */
 		4352BBE0F8F4C3069B523ADA /* Pods_VKapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		544838850AEB94C4855676CB /* Pods-VKapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKapp.release.xcconfig"; path = "Target Support Files/Pods-VKapp/Pods-VKapp.release.xcconfig"; sourceTree = "<group>"; };
+		BB186A602941D38800B43C20 /* ParseGroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGroupData.swift; sourceTree = "<group>"; };
+		BB186A622941D73500B43C20 /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
+		BB186A642941D7EC00B43C20 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		BB186A662941E15D00B43C20 /* ReloadTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTable.swift; sourceTree = "<group>"; };
+		BB186A68294276CC00B43C20 /* NetworkServicePromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicePromise.swift; sourceTree = "<group>"; };
 		BB22B4A8290FD0750032AB8C /* VKapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB22B4AB290FD0750032AB8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB22B4AD290FD0750032AB8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +159,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BB186A5E2941D23400B43C20 /* OperationQueue */ = {
+			isa = PBXGroup;
+			children = (
+				BB186A642941D7EC00B43C20 /* AsyncOperation.swift */,
+				BB186A602941D38800B43C20 /* ParseGroupData.swift */,
+				BB186A622941D73500B43C20 /* GetDataOperation.swift */,
+				BB186A662941E15D00B43C20 /* ReloadTable.swift */,
+			);
+			path = OperationQueue;
+			sourceTree = "<group>";
+		};
 		BB22B49F290FD0750032AB8C = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +233,8 @@
 				BB8B3B5A2913CE7400346D00 /* User.swift */,
 				BBBE38F6292FABE1001833DF /* Friend.swift */,
 				BB8B3B6B2913FB2100346D00 /* Group.swift */,
+				BB6D84B22934F10700D9A91A /* Groups.swift */,
+				BB6D84AF2934F0F000D9A91A /* GroupResult.swift */,
 				BB7BB0CF293FD26800C5FE4A /* NewsFeed.swift */,
 				BB7BB0D1293FD83800C5FE4A /* NewsFeedResponse.swift */,
 				BB7BB0D3293FDAD300C5FE4A /* NewsFeedResult.swift */,
@@ -221,8 +244,6 @@
 				BB6D84B52934F11C00D9A91A /* PhotoResult.swift */,
 				BB6D84A92934F0B700D9A91A /* FriendResult.swift */,
 				BB6D84AC2934F0D700D9A91A /* Friends.swift */,
-				BB6D84AF2934F0F000D9A91A /* GroupResult.swift */,
-				BB6D84B22934F10700D9A91A /* Groups.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -253,7 +274,9 @@
 		BB2C1C02292E3487009D8198 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				BB186A5E2941D23400B43C20 /* OperationQueue */,
 				BB2C1C03292E35AE009D8198 /* NetworkService.swift */,
+				BB186A68294276CC00B43C20 /* NetworkServicePromise.swift */,
 				BB2C1C06292E3721009D8198 /* Api.swift */,
 				BB2C1C09292E43D7009D8198 /* RequestType.swift */,
 			);
@@ -323,9 +346,9 @@
 				BB22B4A4290FD0750032AB8C /* Sources */,
 				BB22B4A5290FD0750032AB8C /* Frameworks */,
 				BB22B4A6290FD0750032AB8C /* Resources */,
-				BB47E0C129191A090019CF8F /* SwiftFormat */,
-				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 				D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */,
+				BB30E79529435C2E00598448 /* SwiftFormat */,
+				BB22B4C0290FE12C0032AB8C /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -423,9 +446,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=/opt/homebrew/bin:$PATH\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		BB47E0C129191A090019CF8F /* SwiftFormat */ = {
+		BB30E79529435C2E00598448 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -441,7 +464,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		D8CF2FF50C21E5C47645C98B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -469,6 +492,7 @@
 			files = (
 				BB7BB0D0293FD26800C5FE4A /* NewsFeed.swift in Sources */,
 				BB384FC4291D8ADF00DB8F8E /* ForTransitionController.swift in Sources */,
+				BB186A672941E15D00B43C20 /* ReloadTable.swift in Sources */,
 				BB47E0BB291908BF0019CF8F /* LikesControl.swift in Sources */,
 				BB8B3B3E29129B1500346D00 /* UIViewController+Extension.swift in Sources */,
 				BB8B3B5B2913CE7400346D00 /* User.swift in Sources */,
@@ -476,15 +500,18 @@
 				BB2C1C07292E3721009D8198 /* Api.swift in Sources */,
 				BB2C1C04292E35AE009D8198 /* NetworkService.swift in Sources */,
 				BB8B3B6C2913FB2100346D00 /* Group.swift in Sources */,
+				BB186A612941D38800B43C20 /* ParseGroupData.swift in Sources */,
 				BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */,
 				BB6D84AD2934F0D700D9A91A /* Friends.swift in Sources */,
 				BB51D829291DF0BF0020B639 /* CustomPushAnimator.swift in Sources */,
 				BB47E0EC291B0A9D0019CF8F /* LoaderView.swift in Sources */,
 				BB8B3B692913FB1600346D00 /* GroupTableCell.swift in Sources */,
+				BB186A69294276CC00B43C20 /* NetworkServicePromise.swift in Sources */,
 				BB51D82F291DF1540020B639 /* CustomNavigationController.swift in Sources */,
 				BB8B3B542913CD5800346D00 /* FriendsController.swift in Sources */,
 				BB51D833291DF27A0020B639 /* CustomInteractiveTransition.swift in Sources */,
 				BB22B4B0290FD0750032AB8C /* LoginViewController.swift in Sources */,
+				BB186A632941D73500B43C20 /* GetDataOperation.swift in Sources */,
 				BBBE38F4292F9AD6001833DF /* Photo.swift in Sources */,
 				BB617AF5293E4D61004752CB /* NewsTextCell.swift in Sources */,
 				BB2B9D752930AD9200892B4D /* UIImageView+Extension.swift in Sources */,
@@ -499,6 +526,7 @@
 				BB6D84AA2934F0B700D9A91A /* FriendResult.swift in Sources */,
 				BB6D84B92934F13300D9A91A /* PhotoResponse.swift in Sources */,
 				BB6D84B62934F11C00D9A91A /* PhotoResult.swift in Sources */,
+				BB186A652941D7EC00B43C20 /* AsyncOperation.swift in Sources */,
 				BB6D84B02934F0F000D9A91A /* GroupResult.swift in Sources */,
 				BB7BB0D4293FDAD300C5FE4A /* NewsFeedResult.swift in Sources */,
 				BB22B4AE290FD0750032AB8C /* SceneDelegate.swift in Sources */,

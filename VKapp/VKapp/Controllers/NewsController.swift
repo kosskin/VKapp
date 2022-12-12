@@ -48,7 +48,7 @@ final class NewsController: UIViewController {
     @IBOutlet private var newsTableView: UITableView!
 
     // MARK: - Private Properties
-    
+
     private let networkService = NetworkService()
     private var newsFeed: [NewsFeed] = []
 
@@ -62,7 +62,7 @@ final class NewsController: UIViewController {
 
     // MARK: IBActions
 
-    @IBAction private func goToVCAction(_ sender: Any) {
+    @IBAction private func goToVCAction(_: Any) {
         guard let nextVC = storyboard?
             .instantiateViewController(identifier: Constants.forTransitionId) as? ForTransitionController
         else { return }
@@ -81,7 +81,7 @@ final class NewsController: UIViewController {
             forCellReuseIdentifier: Constants.xibCellName
         )
     }
-    
+
     private func fetchNews() {
         networkService.fetchNews(urlString: RequestType.news.urlString) { [weak self] result in
             guard let self = self else { return }
@@ -93,7 +93,7 @@ final class NewsController: UIViewController {
             }
         }
     }
-    
+
     private func updateNews(response: NewsFeedResponse) {
         response.news.forEach { item in
             if item.sourceID < 0 {
@@ -120,20 +120,23 @@ final class NewsController: UIViewController {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension NewsController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return newsFeed.count
+    func numberOfSections(in _: UITableView) -> Int {
+        newsFeed.count
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currentNews = newsFeed[indexPath.section]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.xibCellName,
-                                                       for: indexPath) as? NewsCell else {
-                                                        return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.xibCellName,
+            for: indexPath
+        ) as? NewsCell
+        else {
+            return UITableViewCell()
+        }
         cell.configure(news: currentNews, service: networkService)
         return cell as? UITableViewCell ?? UITableViewCell()
     }

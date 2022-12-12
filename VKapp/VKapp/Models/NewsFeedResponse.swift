@@ -1,9 +1,5 @@
-//
-//  NewsFeedResponse.swift
-//  VKapp
-//
-//  Created by Валентин Коскин on 06.12.2022.
-//
+// NewsFeedResponse.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
@@ -15,7 +11,7 @@ struct NewsFeedResponse: Decodable {
     let groups: [Group]
     /// array of friends
     let friends: [Friend]
-    
+
     enum CodingKeys: String, CodingKey {
         case news = "items"
         case friends = "profiles"

@@ -24,7 +24,7 @@ final class OneFriendController: UICollectionViewController {
 
     // MARK: - UICollectionViewDataSource
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         30
     }
 

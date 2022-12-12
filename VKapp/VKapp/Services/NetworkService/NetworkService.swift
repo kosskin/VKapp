@@ -54,6 +54,21 @@ final class NetworkService {
             }
     }
 
+    func fetchGroupOperation(urlString: String) {
+        let request = getRequest(urlSting: urlString)
+        let operationQueue = OperationQueue()
+        let getDataOperation = GetDataOperation(request: request)
+        operationQueue.addOperation(getDataOperation)
+
+        let parseGroupData = ParseGroupData()
+        parseGroupData.addDependency(getDataOperation)
+        operationQueue.addOperation(parseGroupData)
+
+        let reloadGroups = ReloadTable()
+        reloadGroups.addDependency(parseGroupData)
+        OperationQueue.main.addOperation(reloadGroups)
+    }
+
     func fetchPhoto(urlString: String, completion: @escaping (Result<PhotoResult, Error>) -> Void) {
         AF
             .request(urlString).responseJSON { response in
@@ -66,7 +81,7 @@ final class NetworkService {
                 }
             }
     }
-    
+
     func fetchNews(urlString: String, completion: @escaping (Result<NewsFeedResponse, Error>) -> Void) {
         AF.request(urlString).responseJSON { response in
             guard let data = response.data else { return }
@@ -99,8 +114,15 @@ final class NetworkService {
             URLQueryItem(name: Constants.urlQueryItemRedirectUriName, value: Constants.urlQueryItemRedirectUriValue),
             URLQueryItem(name: Constants.urlQueryItemScopeName, value: Constants.urlQueryItemScopeValue),
             URLQueryItem(name: Constants.urlQueryItemResponseTypeName, value: Constants.urlQueryItemResponseTypeValue),
-            URLQueryItem(name: Constants.urlQueryItemVName, value: Constants.urlQueryItemVValue)
+            URLQueryItem(name: Constants.urlQueryItemVName, value: Constants.urlQueryItemVValue),
         ]
         return urlComponents.url
+    }
+
+    // MARK: - Private Methods
+
+    private func getRequest(urlSting: String) -> DataRequest {
+        let request = AF.request(urlSting)
+        return request
     }
 }
