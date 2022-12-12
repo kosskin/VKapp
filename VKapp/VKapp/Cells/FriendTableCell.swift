@@ -13,12 +13,13 @@ final class FriendTableCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func setCell(upcomingFriend: Friend, service: NetworkService) {
+    func setCell(upcomingFriend: Friend, service: NetworkService, photo: UIImage) {
         friendNameLabel.text = "\(upcomingFriend.firstName) \(upcomingFriend.lastName)"
         friendImageView.loadImage(imageURL: upcomingFriend.imageName, service: service)
 
         friendImageView.layer.masksToBounds = true
         friendImageView.layer.cornerRadius = friendImageView.layer.bounds.width / 2
+        friendImageView.image = photo
     }
 
     func getFriendImageView() -> UIImageView {
