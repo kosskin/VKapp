@@ -32,6 +32,7 @@ final class GroupsController: UITableViewController {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
+    private var photoCacheService: PhotoCacheService?
     private var groups: Results<Group>?
     private var groupToken: NotificationToken?
 
@@ -40,9 +41,14 @@ final class GroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        configureCache()
     }
 
     // MARK: - Private Methods
+
+    private func configureCache() {
+        photoCacheService = PhotoCacheService(container: tableView)
+    }
 
     private func fetchGroups() {
         networkService.fetchGroupOperation(urlString: RequestType.groups.urlString)
@@ -83,7 +89,10 @@ final class GroupsController: UITableViewController {
         guard let cell = tableView
             .dequeueReusableCell(withIdentifier: Constants.groupCellIdText, for: indexPath) as? GroupTableCell
         else { return UITableViewCell() }
-        cell.configure(upcomingGrpup: groups?[indexPath.row] ?? Group(), service: networkService)
+        cell.configure(
+            upcomingGrpup: groups?[indexPath.row] ?? Group(),
+            service: photoCacheService ?? PhotoCacheService(container: tableView)
+        )
         return cell
     }
 }

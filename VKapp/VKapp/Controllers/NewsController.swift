@@ -52,6 +52,7 @@ final class NewsController: UIViewController {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
+    private var photoCacheService: PhotoCacheService?
     private var newsFeed: [NewsFeed] = []
     private var isLoading = false
     private var nextPage = ""
@@ -61,6 +62,7 @@ final class NewsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCache()
         addPrefetchDataSource()
         registerCell()
         fetchNews()
@@ -140,6 +142,31 @@ final class NewsController: UIViewController {
         newsTableView.prefetchDataSource = self
     }
 
+    private func configureCache() {
+        photoCacheService = PhotoCacheService(container: newsTableView)
+    }
+
+    private func fetchNewsWithParams() {
+        networkService.fetchNews(
+            urlString: RequestType.news.urlString,
+            nextPage: nextPage,
+            startTime: Double(currentDate)
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = IndexSet(integersIn: self.newsFeed.count ..< self.newsFeed.count + data.news.count)
+                let updatingNews = self.updateNews(response: data)
+                self.newsFeed.append(contentsOf: updatingNews)
+                self.currentDate = Int(updatingNews.first?.date ?? 0)
+                self.newsTableView.insertSections(indexSet, with: .automatic)
+                self.isLoading = false
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     @objc private func refreshNewsAction() {
         fetchNews()
     }
@@ -165,22 +192,9 @@ extension NewsController: UITableViewDataSource, UITableViewDelegate {
         else {
             return UITableViewCell()
         }
-        cell.configure(news: currentNews, service: networkService)
+        cell.configure(news: currentNews, service: photoCacheService ?? PhotoCacheService(container: newsTableView))
         return cell as UITableViewCell
     }
-
-    /* СДЕЛАЛ МЕТОД ПО УКАЗАНИЮ ВЫСОТЫ ЯЧЕЙКИ, РАСЧИТЫВАЕМОЙ ЧЕРЕЗ СООТНОШЕНИЕ СТОРОН ФОТОГРАФИИ,
-     НО У МЕНЯ В ПРОЕКТЕ НЕТ ОТДЕЛЬНО ХЕДЕРА/ФУТЕРА/ТЕКСТА/ФОТОГРАФИИ, А СДЕЛАНО ВСЁ ОДНОЙ ЯЧЕЙКОЙ,
-     ПОЭТОМУ КОГДА ПРИМЕНЯЮ ЭТОТ МЕТОД СЪЕЗЖАЮТ ВСЕ НОВОСТИ(ВЫСОТА ВСЕЙ НОВОСТИ СТАНОВИТСЯ РАВНОЙ
-     ПРЕДПОЛАГАЕМОЙ ВЫСОТЕ ФОТОГРАФИИ, ПОЭТОМУ ОСТАВИЛ ВСЁ ТАК. ну и ещё потому что рукожоп)
-     */
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let currentNews = newsFeed[indexPath.section]
-//        let tableWidth = newsTableView.bounds.width
-//        let cellHeight = tableWidth * (currentNews.attachments?.first?.photo?.photos.first?.aspectRatio ?? 1)
-//        return cellHeight
-//    }
 }
 
 // MARK: - UITableViewDataSourcePrefetching
@@ -190,24 +204,7 @@ extension NewsController: UITableViewDataSourcePrefetching {
         guard let maxSection = indexPaths.map(\.section).max() else { return }
         if maxSection > newsFeed.count - 3, !isLoading {
             isLoading = true
-            networkService.fetchNews(
-                urlString: RequestType.news.urlString,
-                nextPage: nextPage,
-                startTime: Double(currentDate)
-            ) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case let .success(data):
-                    let indexSet = IndexSet(integersIn: self.newsFeed.count ..< self.newsFeed.count + data.news.count)
-                    let updatingNews = self.updateNews(response: data)
-                    self.newsFeed.append(contentsOf: updatingNews)
-                    self.currentDate = Int(updatingNews.first?.date ?? 0)
-                    self.newsTableView.insertSections(indexSet, with: .automatic)
-                    self.isLoading = false
-                case let .failure(error):
-                    print(error.localizedDescription)
-                }
-            }
+            fetchNewsWithParams()
         }
     }
 }

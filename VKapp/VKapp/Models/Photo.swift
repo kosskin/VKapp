@@ -7,12 +7,12 @@ import RealmSwift
 /// One Photo
 @objcMembers
 final class Photo: Object, Decodable {
-    /// URL of  photo
+    /// URL of photo
     dynamic var url: String
     /// Height of photo
     dynamic var height: Int
     /// Width of photo
     dynamic var width: Int
-    /// aspectRatio of photo
+    /// AspectRatio of photo
     dynamic var aspectRatio: CGFloat { CGFloat(height) / CGFloat(width) }
 }

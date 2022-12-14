@@ -1,13 +1,6 @@
 // LoginViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-// LoginViewController.swift
-// Copyright © RoadMap. All rights reserved.
-
-//  VKapp
-//
-//  Created by Валентин Коскин on 31.10.2022.
-//
 import UIKit
 
 /// User input screen
@@ -30,16 +23,7 @@ final class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(contentView?.hideKeyboardAction)
-        )
-        contentView?.loginScrollView.addGestureRecognizer(tapGesture)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        addGestureRecognizer()
     }
 
     // MARK: - Public Methods
@@ -59,5 +43,15 @@ final class LoginViewController: UIViewController {
             showErrorAlert(title: Constants.errorTitleText, message: Constants.errorMessageText)
             return false
         }
+    }
+
+    // MARK: - Private Methods
+
+    private func addGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(contentView?.hideKeyboardAction)
+        )
+        contentView?.loginScrollView.addGestureRecognizer(tapGesture)
     }
 }

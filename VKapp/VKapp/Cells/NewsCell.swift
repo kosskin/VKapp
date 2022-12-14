@@ -20,11 +20,13 @@ final class NewsCell: UITableViewCell {
         postImageView.image = nil
     }
 
-    func configure(news: NewsFeed, service: NetworkService) {
-        guard let photoUrl = news.avaratPath else { return }
-        guard let photoNewsUrl = news.attachments?.first?.photo?.photos.last?.url else { return }
-        senderImageView.loadImage(imageURL: photoUrl, service: service)
-        postImageView.loadImage(imageURL: photoNewsUrl, service: service)
+    func configure(news: NewsFeed, service: PhotoCacheService) {
+        guard let photoUrl = news.avaratPath,
+              let photoNewsUrl = news.attachments?.first?.photo?.photos.last?.url else { return }
+//        senderImageView.loadImage(imageURL: photoUrl, service: service)
+//        postImageView.loadImage(imageURL: photoNewsUrl, service: service)
+        senderImageView.image = service.photo(byUrl: photoUrl)
+        postImageView.image = service.photo(byUrl: photoNewsUrl)
         senderNameLabel.text = news.authorName
         postTextLabel.text = news.text
         postDateLabel.text = DateFormatter.convert(timestamp: news.date)

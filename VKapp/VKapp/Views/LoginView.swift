@@ -7,16 +7,22 @@ import UIKit
 final class LoginView: UIView {
     // MARK: - IBOutlets
 
-    @IBOutlet var enterButton: UIButton!
+    @IBOutlet private var enterButton: UIButton!
+    @IBOutlet private var enterAppleButton: UIButton!
+    @IBOutlet private var signUpButton: UIButton!
+    @IBOutlet var loginScrollView: UIScrollView!
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    @IBOutlet var enterAppleButton: UIButton!
-    @IBOutlet var signUpButton: UIButton!
-    @IBOutlet var loginScrollView: UIScrollView!
 
     // MARK: - Public Methods
 
-    func addKeyboardEvents() {
+    @objc func hideKeyboardAction() {
+        loginScrollView.endEditing(true)
+    }
+
+    // MARK: - Private Methods
+
+    private func addKeyboardEvents() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShownAction(notification:)),
@@ -32,23 +38,17 @@ final class LoginView: UIView {
         )
     }
 
-    func removeKeyboardEvents() {
+    private func removeKeyboardEvents() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
-
-    @objc func hideKeyboardAction() {
-        loginScrollView.endEditing(true)
-    }
-
-    // MARK: - Private Methods
 
     @objc private func keyboardWillShownAction(notification: Notification) {
-        guard let info = notification.userInfo as NSDictionary? else { return }
-        guard let kbSize = (
-            info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey)
-                as? NSValue?
-        )??.cgRectValue.size else { return }
+        guard let info = notification.userInfo as NSDictionary?,
+              let kbSize = (
+                  info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey)
+                      as? NSValue?
+              )??.cgRectValue.size else { return }
         let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
         loginScrollView.contentInset = contentInset
         loginScrollView.scrollIndicatorInsets = contentInset
