@@ -23,8 +23,6 @@ final class NewsCell: UITableViewCell {
     func configure(news: NewsFeed, service: PhotoCacheService) {
         guard let photoUrl = news.avaratPath,
               let photoNewsUrl = news.attachments?.first?.photo?.photos.last?.url else { return }
-//        senderImageView.loadImage(imageURL: photoUrl, service: service)
-//        postImageView.loadImage(imageURL: photoNewsUrl, service: service)
         senderImageView.image = service.photo(byUrl: photoUrl)
         postImageView.image = service.photo(byUrl: photoNewsUrl)
         senderNameLabel.text = news.authorName
