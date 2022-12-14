@@ -21,4 +21,6 @@ enum Api {
     static let fields = "&fields=photo_100&v=5.131"
     static let newsfeed = "newsfeed.get?"
     static let newsFilter = "&filters=post"
+    static let startTimeText = "&start_time="
+    static let startFromText = "&start_from="
 }

@@ -83,7 +83,7 @@ final class GroupsController: UITableViewController {
         guard let cell = tableView
             .dequeueReusableCell(withIdentifier: Constants.groupCellIdText, for: indexPath) as? GroupTableCell
         else { return UITableViewCell() }
-        cell.setCell(upcomingGrpup: groups?[indexPath.row] ?? Group(), service: networkService)
+        cell.configureCell(upcomingGrpup: groups?[indexPath.row] ?? Group(), service: networkService)
         return cell
     }
 }

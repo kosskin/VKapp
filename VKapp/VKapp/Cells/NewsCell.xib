@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,6 +21,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vep-9Y-Tqj">
                         <rect key="frame" x="20" y="7.5" width="60" height="55.5"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="Cas-Lb-OVJ"/>
                             <constraint firstAttribute="width" constant="60" id="rKE-dv-t4g"/>
@@ -32,16 +35,18 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oq-7B-Y8F">
                         <rect key="frame" x="103" y="5" width="437" height="20"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="437" id="GIv-ch-mMq"/>
                             <constraint firstAttribute="height" constant="20" id="dzv-oi-UVJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.11.2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEB-wL-JDj">
                         <rect key="frame" x="103" y="33" width="437" height="20"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="437" id="5Mg-JU-jeJ"/>
                             <constraint firstAttribute="height" constant="20" id="sgE-17-XNi"/>
@@ -62,23 +67,30 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="v2V-Mh-APQ">
                                 <rect key="frame" x="41" y="4.5" width="20.666666666666671" height="19.5"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="message" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cns-fx-6Sw">
                                 <rect key="frame" x="100" y="5" width="22" height="19.5"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowshape.turn.up.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dfV-kM-3wJ">
                                 <rect key="frame" x="155" y="5" width="21" height="19.5"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUD-QP-Q1F">
                                 <rect key="frame" x="8" y="4" width="10.666666666666664" height="20.5"/>
+                                <color key="backgroundColor" name="backgroundColor"/>
+                                <color key="tintColor" systemColor="systemGray2Color"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="v2V-Mh-APQ" firstAttribute="leading" secondItem="KUD-QP-Q1F" secondAttribute="trailing" constant="22.5" id="1Ar-h1-jYl"/>
                             <constraint firstItem="cns-fx-6Sw" firstAttribute="leading" secondItem="v2V-Mh-APQ" secondAttribute="trailing" constant="38.5" id="5Gp-yv-1kF"/>
@@ -105,11 +117,15 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZk-8h-wez">
                         <rect key="frame" x="5" y="63" width="41.5" height="211"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <color key="tintColor" name="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" name="backgroundColor"/>
+                <color key="tintColor" name="textColor"/>
                 <constraints>
                     <constraint firstItem="NZk-8h-wez" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="30g-5x-vLX"/>
                     <constraint firstItem="xkC-G5-MWx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="5xv-ka-hnR"/>
@@ -129,6 +145,8 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="backgroundColor"/>
+            <color key="tintColor" systemColor="linkColor"/>
             <connections>
                 <outlet property="postDateLabel" destination="aEB-wL-JDj" id="ZTy-Rd-gth"/>
                 <outlet property="postImageView" destination="Weg-Pc-fNl" id="XX1-YU-XRM"/>
@@ -144,5 +162,17 @@
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="message" catalog="system" width="128" height="116"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <namedColor name="backgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

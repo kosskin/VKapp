@@ -41,6 +41,8 @@ final class NewsController: UIViewController {
         static let newImageNameFour = "mask"
         static let forTransitionId = "ForTransitionController"
         static let xibTextCellName = "NewsTextCell"
+        static let refreshingText = "Refreshing..."
+        static let emptyString = ""
     }
 
     // MARK: - IBOutlets
@@ -51,13 +53,18 @@ final class NewsController: UIViewController {
 
     private let networkService = NetworkService()
     private var newsFeed: [NewsFeed] = []
+    private var isLoading = false
+    private var nextPage = ""
+    private var currentDate = 0
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        newsTableView.prefetchDataSource = self
         registerCell()
         fetchNews()
+        setupRefreshControl()
     }
 
     // MARK: IBActions
@@ -83,18 +90,27 @@ final class NewsController: UIViewController {
     }
 
     private func fetchNews() {
-        networkService.fetchNews(urlString: RequestType.news.urlString) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(post):
-                self.updateNews(response: post)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
+        newsTableView.refreshControl?.beginRefreshing()
+        var mostFreshDate: TimeInterval?
+        if let firstItem = newsFeed.first {
+            mostFreshDate = firstItem.date + 1
         }
+        networkService
+            .fetchNews(urlString: RequestType.news.urlString, startTime: mostFreshDate) { [weak self] result in
+                guard let self = self else { return }
+                self.newsTableView.refreshControl?.endRefreshing()
+                switch result {
+                case let .success(data):
+                    self.newsFeed = self.updateNews(response: data) + self.newsFeed
+                    self.nextPage = data.nextPage ?? Constants.emptyString
+                    self.newsTableView.reloadData()
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
     }
 
-    private func updateNews(response: NewsFeedResponse) {
+    private func updateNews(response: NewsFeedResponse) -> [NewsFeed] {
         response.news.forEach { item in
             if item.sourceID < 0 {
                 guard let group = response.groups.filter({ group in
@@ -110,10 +126,18 @@ final class NewsController: UIViewController {
                 item.avaratPath = user.imageName
             }
         }
-        DispatchQueue.main.async {
-            self.newsFeed = response.news
-            self.newsTableView.reloadData()
-        }
+        return response.news
+    }
+
+    private func setupRefreshControl() {
+        newsTableView.refreshControl = UIRefreshControl()
+        newsTableView.refreshControl?.attributedTitle = NSAttributedString(string: Constants.refreshingText)
+        newsTableView.refreshControl?.tintColor = .green
+        newsTableView.refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+    }
+
+    @objc private func refreshNews() {
+        fetchNews()
     }
 }
 
@@ -138,6 +162,49 @@ extension NewsController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(news: currentNews, service: networkService)
-        return cell as? UITableViewCell ?? UITableViewCell()
+        return cell as UITableViewCell
+    }
+
+    /* СДЕЛАЛ МЕТОД ПО УКАЗАНИЮ ВЫСОТЫ ЯЧЕЙКИ, РАСЧИТЫВАЕМОЙ ЧЕРЕЗ СООТНОШЕНИЕ СТОРОН ФОТОГРАФИИ,
+     НО У МЕНЯ В ПРОЕКТЕ НЕТ ОТДЕЛЬНО ХЕДЕРА/ФУТЕРА/ТЕКСТА/ФОТОГРАФИИ, А СДЕЛАНО ВСЁ ОДНОЙ ЯЧЕЙКОЙ,
+     ПОЭТОМУ КОГДА ПРИМЕНЯЮ ЭТОТ МЕТОД СЪЕЗЖАЮТ ВСЕ НОВОСТИ(ВЫСОТА ВСЕЙ НОВОСТИ СТАНОВИТСЯ РАВНОЙ
+     ПРЕДПОЛАГАЕМОЙ ВЫСОТЕ ФОТОГРАФИИ, ПОЭТОМУ ОСТАВИЛ ВСЁ ТАК. ну и ещё потому что рукожоп)
+     */
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let currentNews = newsFeed[indexPath.section]
+//        let tableWidth = newsTableView.bounds.width
+//        print(currentNews.attachments?.first?.photo?.photos.first?.aspectRatio)
+//        let cellHeight = tableWidth * (currentNews.attachments?.first?.photo?.photos.first?.aspectRatio ?? 1)
+//        return cellHeight
+//    }
+}
+
+// MARK: - UITableViewDataSourcePrefetching
+
+extension NewsController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxSection = indexPaths.map(\.section).max() else { return }
+        if maxSection > newsFeed.count - 3, !isLoading {
+            isLoading = true
+            networkService.fetchNews(
+                urlString: RequestType.news.urlString,
+                nextPage: nextPage,
+                startTime: Double(currentDate)
+            ) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case let .success(data):
+                    let indexSet = IndexSet(integersIn: self.newsFeed.count ..< self.newsFeed.count + data.news.count)
+                    let updatingNews = self.updateNews(response: data)
+                    self.newsFeed.append(contentsOf: updatingNews)
+                    self.currentDate = Int(updatingNews.first?.date ?? 0)
+                    self.newsTableView.insertSections(indexSet, with: .automatic)
+                    self.isLoading = false
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }

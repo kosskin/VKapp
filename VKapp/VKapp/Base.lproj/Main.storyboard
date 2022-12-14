@@ -50,7 +50,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="VKapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LoginView" customModule="VKapp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -205,16 +205,16 @@
                             <constraint firstItem="k1X-mo-sv1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NHf-Qg-8rO"/>
                             <constraint firstItem="k1X-mo-sv1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="TvQ-bO-Ph6"/>
                         </constraints>
+                        <connections>
+                            <outlet property="enterAppleButton" destination="3KE-56-G2i" id="LhK-8T-qm4"/>
+                            <outlet property="enterButton" destination="9UQ-qa-a1P" id="ile-Yq-f7w"/>
+                            <outlet property="loginScrollView" destination="k1X-mo-sv1" id="OHs-T5-jjg"/>
+                            <outlet property="loginTextField" destination="0NS-Cu-RZv" id="MwF-AU-QJb"/>
+                            <outlet property="passwordTextField" destination="PjC-hc-MM6" id="LwN-Mu-TWS"/>
+                            <outlet property="signUpButton" destination="zlv-TP-g8s" id="lSA-nf-qx5"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="QmH-vC-Q5y"/>
-                    <connections>
-                        <outlet property="enterAppleButton" destination="3KE-56-G2i" id="e8k-H0-Lau"/>
-                        <outlet property="enterButton" destination="9UQ-qa-a1P" id="biP-kY-c6R"/>
-                        <outlet property="loginScrollView" destination="k1X-mo-sv1" id="zXq-Ve-SJX"/>
-                        <outlet property="loginTextField" destination="0NS-Cu-RZv" id="fdr-Xq-Gqn"/>
-                        <outlet property="passwordTextField" destination="PjC-hc-MM6" id="hXj-ca-Vwr"/>
-                        <outlet property="signUpButton" destination="zlv-TP-g8s" id="OQP-yL-XKk"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,6 +242,7 @@
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ozs-mh-gAk">
                                             <rect key="frame" x="311" y="10" width="83" height="80"/>
+                                            <color key="backgroundColor" name="backgroundColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -251,8 +252,9 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYF-kI-bHY">
                                             <rect key="frame" x="20" y="25" width="269" height="50"/>
+                                            <color key="backgroundColor" name="backgroundColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -312,8 +314,9 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUR-Q6-hyp">
                                             <rect key="frame" x="20" y="25" width="269" height="50"/>
+                                            <color key="backgroundColor" name="backgroundColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -341,6 +344,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Groups" id="hXO-hI-zh2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="P8T-1K-dW8">
+                            <color key="tintColor" systemColor="linkColor"/>
                             <connections>
                                 <segue destination="anh-YG-y4U" kind="show" id="coO-hl-nOZ"/>
                             </connections>
@@ -362,6 +366,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="luZ-WC-3GY">
                                 <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexColor" name="textColor"/>
+                                <color key="sectionIndexBackgroundColor" name="backgroundColor"/>
+                                <color key="sectionIndexTrackingBackgroundColor" name="textColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dik-tc-sqL" customClass="NewsCell" customModule="VKapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="44"/>
@@ -369,7 +376,11 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dik-tc-sqL" id="dhb-qH-Pye">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" name="backgroundColor"/>
+                                            <color key="tintColor" name="textColor"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="backgroundColor"/>
+                                        <color key="tintColor" name="textColor"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Kix-nr-fR1" customClass="NewsTextCell" customModule="VKapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94" width="414" height="44"/>
@@ -377,7 +388,11 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kix-nr-fR1" id="aR9-tZ-edV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" name="backgroundColor"/>
+                                            <color key="tintColor" name="textColor"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="backgroundColor"/>
+                                        <color key="tintColor" name="textColor"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -387,7 +402,8 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hdy-6F-FWN"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backgroundColor"/>
+                        <color key="tintColor" name="textColor"/>
                         <constraints>
                             <constraint firstItem="luZ-WC-3GY" firstAttribute="leading" secondItem="hdy-6F-FWN" secondAttribute="leading" id="E4V-GD-pZe"/>
                             <constraint firstItem="luZ-WC-3GY" firstAttribute="top" secondItem="hdy-6F-FWN" secondAttribute="top" id="EvX-p2-syr"/>
@@ -696,7 +712,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Mul-se-PAm"/>
+        <segue reference="ZzR-hQ-CIG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="applelogo" catalog="system" width="105" height="128"/>
@@ -719,6 +735,9 @@
         <namedColor name="textColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

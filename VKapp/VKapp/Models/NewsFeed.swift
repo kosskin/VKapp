@@ -12,18 +12,21 @@ final class NewsFeed: Decodable {
     /// text if news
     let text: String
     /// date of publication
-    let date: Int
+    let date: Double
     /// author name of this new
     var authorName: String?
     /// path to image avatar
     var avaratPath: String?
     /// path to post image
     var postImage: String?
+    /// path to photo in post
+    var attachments: [Attachment]?
 
     enum CodingKeys: String, CodingKey {
         case id
         case sourceID = "source_id"
         case text
         case date
+        case attachments
     }
 }

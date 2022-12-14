@@ -11,7 +11,7 @@ final class OneFriendCell: UICollectionViewCell {
 
     // MARK: - Public Methods
 
-    func setCell(upcomingImageName: String) {
+    func configureCell(upcomingImageName: String) {
         photoFriendImageView.image = UIImage(named: upcomingImageName)
     }
 }
