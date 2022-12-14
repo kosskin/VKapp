@@ -36,7 +36,7 @@ final class OneFriendController: UICollectionViewController {
             withReuseIdentifier: Constants.oneFriendCellId,
             for: indexPath
         ) as? OneFriendCell else { return UICollectionViewCell() }
-        cell.configureCell(upcomingImageName: imageName)
+        cell.configure(upcomingImageName: imageName)
         return cell
     }
 }

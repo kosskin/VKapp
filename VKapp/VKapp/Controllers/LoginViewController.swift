@@ -22,7 +22,7 @@ final class LoginViewController: UIViewController {
         static let segueShowTabBarText = "showTabBar"
     }
 
-    // MARK: - Private Properties
+    // MARK: - Private Visual Components
 
     private lazy var contentView = self.view as? LoginView
 

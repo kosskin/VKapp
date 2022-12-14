@@ -12,7 +12,7 @@ final class GroupTableCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(upcomingGrpup: Group, service: NetworkService) {
+    func configure(upcomingGrpup: Group, service: NetworkService) {
         groupName.text = upcomingGrpup.nameGroup
         groupImageView.loadImage(imageURL: upcomingGrpup.photo, service: service)
         groupImageView.isUserInteractionEnabled = true

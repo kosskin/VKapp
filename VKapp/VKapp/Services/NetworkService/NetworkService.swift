@@ -89,8 +89,7 @@ final class NetworkService {
         completion: @escaping (Result<NewsFeedResponse, Error>) -> Void
     ) {
         guard let nextPage = nextPage else { return }
-        let xx = urlString + "\(Api.startTimeText)\(startTime ?? 0)\(Api.startFromText)\(nextPage)"
-        AF.request(xx)
+        AF.request(urlString + "\(Api.startTimeText)\(startTime ?? 0)\(Api.startFromText)\(nextPage)")
             .responseJSON { response in
                 guard let data = response.data else { return }
                 do {

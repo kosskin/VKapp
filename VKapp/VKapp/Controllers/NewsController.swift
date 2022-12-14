@@ -61,7 +61,7 @@ final class NewsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        newsTableView.prefetchDataSource = self
+        addPrefetchDataSource()
         registerCell()
         fetchNews()
         setupRefreshControl()
@@ -133,10 +133,14 @@ final class NewsController: UIViewController {
         newsTableView.refreshControl = UIRefreshControl()
         newsTableView.refreshControl?.attributedTitle = NSAttributedString(string: Constants.refreshingText)
         newsTableView.refreshControl?.tintColor = .green
-        newsTableView.refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        newsTableView.refreshControl?.addTarget(self, action: #selector(refreshNewsAction), for: .valueChanged)
     }
 
-    @objc private func refreshNews() {
+    private func addPrefetchDataSource() {
+        newsTableView.prefetchDataSource = self
+    }
+
+    @objc private func refreshNewsAction() {
         fetchNews()
     }
 }
@@ -174,7 +178,6 @@ extension NewsController: UITableViewDataSource, UITableViewDelegate {
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        let currentNews = newsFeed[indexPath.section]
 //        let tableWidth = newsTableView.bounds.width
-//        print(currentNews.attachments?.first?.photo?.photos.first?.aspectRatio)
 //        let cellHeight = tableWidth * (currentNews.attachments?.first?.photo?.photos.first?.aspectRatio ?? 1)
 //        return cellHeight
 //    }

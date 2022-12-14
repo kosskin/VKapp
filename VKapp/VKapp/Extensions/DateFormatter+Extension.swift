@@ -3,6 +3,7 @@
 
 import Foundation
 
+/// Extension for confert TimeInterval in String with needly format
 extension DateFormatter {
     // MARK: - Public Methods
 
