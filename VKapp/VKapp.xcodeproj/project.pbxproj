@@ -23,6 +23,9 @@
 		BB2760C72946F760007CBB75 /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760C62946F760007CBB75 /* PhotoCacheService.swift */; };
 		BB2760C92946FC44007CBB75 /* PhotoCacheService+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */; };
 		BB2760CE2946FCDB007CBB75 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760CD2946FCDB007CBB75 /* DataReloadable.swift */; };
+		BB2760D0294874CA007CBB75 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760CF294874CA007CBB75 /* LoginView.swift */; };
+		BB2760D2294884C8007CBB75 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760D1294884C8007CBB75 /* DateFormatter+Extension.swift */; };
+		BB2760D629490FE3007CBB75 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2760D529490FE3007CBB75 /* Attachment.swift */; };
 		BB2B9D752930AD9200892B4D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */; };
 		BB2BD9DF2918ED880021C5C6 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */; };
 		BB2C1BFB292E0B3D009D8198 /* LoginWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */; };
@@ -88,6 +91,9 @@
 		BB2760C62946F760007CBB75 /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
 		BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCacheService+Extension.swift"; sourceTree = "<group>"; };
 		BB2760CD2946FCDB007CBB75 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
+		BB2760CF294874CA007CBB75 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BB2760D1294884C8007CBB75 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		BB2760D529490FE3007CBB75 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		BB2C1BFA292E0B3D009D8198 /* LoginWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebViewViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +265,7 @@
 				BB6D84B52934F11C00D9A91A /* PhotoResult.swift */,
 				BB6D84A92934F0B700D9A91A /* FriendResult.swift */,
 				BB6D84AC2934F0D700D9A91A /* Friends.swift */,
+				BB2760D529490FE3007CBB75 /* Attachment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,6 +275,7 @@
 			children = (
 				BB2BD9DE2918ED880021C5C6 /* AvatarView.swift */,
 				BB47E0EB291B0A9D0019CF8F /* LoaderView.swift */,
+				BB2760CF294874CA007CBB75 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +356,7 @@
 				BB8B3B3D29129B1500346D00 /* UIViewController+Extension.swift */,
 				BB2B9D742930AD9200892B4D /* UIImageView+Extension.swift */,
 				BB2760C82946FC44007CBB75 /* PhotoCacheService+Extension.swift */,
+				BB2760D1294884C8007CBB75 /* DateFormatter+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -517,6 +526,8 @@
 				BB2C1C07292E3721009D8198 /* Api.swift in Sources */,
 				BB2C1C04292E35AE009D8198 /* NetworkService.swift in Sources */,
 				BB8B3B6C2913FB2100346D00 /* Group.swift in Sources */,
+				BB2760D0294874CA007CBB75 /* LoginView.swift in Sources */,
+				BB2760D2294884C8007CBB75 /* DateFormatter+Extension.swift in Sources */,
 				BB186A612941D38800B43C20 /* ParseGroupData.swift in Sources */,
 				BB47E0E1291A70AD0019CF8F /* NewsCell.swift in Sources */,
 				BB6D84AD2934F0D700D9A91A /* Friends.swift in Sources */,
@@ -545,6 +556,7 @@
 				BB2760C72946F760007CBB75 /* PhotoCacheService.swift in Sources */,
 				BB6D84AA2934F0B700D9A91A /* FriendResult.swift in Sources */,
 				BB6D84B92934F13300D9A91A /* PhotoResponse.swift in Sources */,
+				BB2760D629490FE3007CBB75 /* Attachment.swift in Sources */,
 				BB6D84B62934F11C00D9A91A /* PhotoResult.swift in Sources */,
 				BB186A652941D7EC00B43C20 /* AsyncOperation.swift in Sources */,
 				BB6D84B02934F0F000D9A91A /* GroupResult.swift in Sources */,

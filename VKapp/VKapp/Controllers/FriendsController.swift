@@ -79,7 +79,7 @@ final class FriendsController: UITableViewController {
             let friends = friends
         else { return UITableViewCell() }
         let friend = friends[indexPath.row]
-        cell.configureCell(
+        cell.configure(
             upcomingFriend: friend,
             photoCacheService: photoCacheService ?? PhotoCacheService(container: tableView)
         )

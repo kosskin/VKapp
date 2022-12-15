@@ -11,10 +11,13 @@ struct NewsFeedResponse: Decodable {
     let groups: [Group]
     /// array of friends
     let friends: [Friend]
+    /// next page
+    let nextPage: String?
 
     enum CodingKeys: String, CodingKey {
         case news = "items"
         case friends = "profiles"
         case groups
+        case nextPage = "next_from"
     }
 }

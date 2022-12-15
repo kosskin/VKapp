@@ -15,24 +15,18 @@ final class NewsCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(news: NewsFeed, service: NetworkService) {
-        guard let photoUrl = news.avaratPath else { return }
-        senderImageView.loadImage(imageURL: photoUrl, service: service)
-        senderNameLabel.text = news.authorName
-        postTextLabel.text = news.text
-        postImageView.image = UIImage(named: news.postImage ?? "")
-        postDateLabel.text = formatData(timestamp: news.date)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        postImageView.image = nil
     }
 
-    // MARK: - Private Methods
-
-    private func formatData(timestamp: Int) -> String {
-        let date = NSDate(timeIntervalSince1970: TimeInterval(timestamp))
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.medium
-        dateFormatter.dateStyle = DateFormatter.Style.medium
-        dateFormatter.timeZone = .current
-        let localDate = dateFormatter.string(from: date as Date)
-        return String(localDate)
+    func configure(news: NewsFeed, service: PhotoCacheService) {
+        guard let photoUrl = news.avaratPath,
+              let photoNewsUrl = news.attachments?.first?.photo?.photos.last?.url else { return }
+        senderImageView.image = service.photo(byUrl: photoUrl)
+        postImageView.image = service.photo(byUrl: photoNewsUrl)
+        senderNameLabel.text = news.authorName
+        postTextLabel.text = news.text
+        postDateLabel.text = DateFormatter.convert(timestamp: news.date)
     }
 }

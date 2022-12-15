@@ -13,7 +13,7 @@ final class NetworkService {
         static let host = "oauth.vk.com"
         static let path = "/authorize"
         static let urlQueryItemClientName = "client_id"
-        static let urlQueryItemClientValue = "51484462"
+        static let urlQueryItemClientValue = "51503009"
         static let urlQueryItemDisplayName = "display"
         static let urlQueryItemDisplayValue = "mobile"
         static let urlQueryItemRedirectUriName = "redirect_uri"
@@ -82,16 +82,23 @@ final class NetworkService {
             }
     }
 
-    func fetchNews(urlString: String, completion: @escaping (Result<NewsFeedResponse, Error>) -> Void) {
-        AF.request(urlString).responseJSON { response in
-            guard let data = response.data else { return }
-            do {
-                let object = try JSONDecoder().decode(NewsFeedResult.self, from: data)
-                completion(.success(object.response))
-            } catch {
-                completion(.failure(error))
+    func fetchNews(
+        urlString: String,
+        nextPage: String? = "",
+        startTime: TimeInterval? = nil,
+        completion: @escaping (Result<NewsFeedResponse, Error>) -> Void
+    ) {
+        guard let nextPage = nextPage else { return }
+        AF.request(urlString + "\(Api.startTimeText)\(startTime ?? 0)\(Api.startFromText)\(nextPage)")
+            .responseJSON { response in
+                guard let data = response.data else { return }
+                do {
+                    let object = try JSONDecoder().decode(NewsFeedResult.self, from: data)
+                    completion(.success(object.response))
+                } catch {
+                    completion(.failure(error))
+                }
             }
-        }
     }
 
     func loadImageData(imageURL: String) -> Data? {

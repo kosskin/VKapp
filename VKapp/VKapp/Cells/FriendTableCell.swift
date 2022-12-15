@@ -13,7 +13,7 @@ final class FriendTableCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configureCell(upcomingFriend: Friend, photoCacheService: PhotoCacheService) {
+    func configure(upcomingFriend: Friend, photoCacheService: PhotoCacheService) {
         friendNameLabel.text = "\(upcomingFriend.firstName) \(upcomingFriend.lastName)"
         configureImageView()
         friendImageView.image = photoCacheService.photo(byUrl: upcomingFriend.imageName)
